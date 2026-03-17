@@ -1,0 +1,29 @@
+# =============================================================================
+# Big Star Collectibles — Application Container
+# Python FastAPI + python-oracledb + ML libraries
+# =============================================================================
+
+FROM docker.io/library/python:3.12-slim
+
+# Install system dependencies for Oracle Instant Client.
+# Debian trixie renamed libaio runtime package to libaio1t64.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends curl \
+    && (apt-get install -y --no-install-recommends libaio1 || apt-get install -y --no-install-recommends libaio1t64) \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install Python dependencies
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application files
+COPY main.py .
+COPY seeder.py .
+COPY templates/ ./templates/
+
+EXPOSE 8000
+
+# Start FastAPI with Uvicorn
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

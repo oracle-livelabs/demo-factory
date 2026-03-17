@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Big Star Collectibles — AI Agent Course</title>
+<meta name="description" content="Interactive course companion for AI agents with memory, planning, and governance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
+<style>
+:root{--bg:#0a0a14;--surface:#12121f;--card:#1a1a2e;--card-hover:#22223a;--border:#2a2a44;--text:#e8e8f0;--muted:#8888aa;--accent:#c74634;--accent-glow:rgba(199,70,52,.25);--gold:#f8c400;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--blue:#3b82f6;--font:'Inter',system-ui,sans-serif;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+a{color:var(--gold);text-decoration:none}a:hover{text-decoration:underline}
+button{font-family:var(--font);cursor:pointer;border:none;font-size:.875rem;font-weight:600;border-radius:8px;padding:.6rem 1.2rem;transition:all .2s}
+button:disabled{opacity:.45;cursor:not-allowed;filter:none;box-shadow:none}
+.btn-primary{background:var(--accent);color:#fff}.btn-primary:hover{filter:brightness(1.2);box-shadow:0 0 20px var(--accent-glow)}
+.btn-secondary{background:var(--card);color:var(--text);border:1px solid var(--border)}.btn-secondary:hover{background:var(--card-hover)}
+.btn-gold{background:var(--gold);color:#000}.btn-gold:hover{filter:brightness(1.1)}
+
+/* Layout */
+.app{display:flex;flex-direction:column;min-height:100vh}
+nav{background:var(--surface);border-bottom:1px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:1rem;position:sticky;top:0;z-index:100;backdrop-filter:blur(12px)}
+nav .logo{font-size:1.1rem;font-weight:800;color:var(--gold);white-space:nowrap}
+nav .nav-links{display:flex;gap:.25rem;flex-wrap:wrap;flex:1}
+nav .nav-link{padding:.35rem .65rem;border-radius:6px;font-size:.75rem;font-weight:500;color:var(--muted);transition:all .2s;white-space:nowrap}
+nav .nav-link:hover,nav .nav-link.active{background:var(--card);color:var(--text);text-decoration:none}
+nav .nav-link.active{border-bottom:2px solid var(--gold);color:var(--gold)}
+main{flex:1;max-width:1200px;width:100%;margin:0 auto;padding:2rem 1.5rem}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;transition:all .3s}
+.card:hover{border-color:var(--accent);box-shadow:0 0 30px var(--accent-glow)}
+.card h3{font-size:1.1rem;margin-bottom:.75rem;color:var(--gold)}
+
+/* Scene layout */
+.scene-header{margin-bottom:2rem}.scene-header h1{font-size:2rem;font-weight:800;margin-bottom:.5rem}
+.scene-header p{color:var(--muted);font-size:1rem;max-width:700px}
+.scene-actions{display:flex;gap:.75rem;margin:1.5rem 0}
+.panels{display:grid;gap:1.5rem}.panels-2{grid-template-columns:1fr 1fr}.panels-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:768px){.panels-2,.panels-3{grid-template-columns:1fr}}
+
+/* Steps */
+.step{display:flex;gap:.75rem;padding:.75rem;border-radius:8px;background:var(--surface);margin-bottom:.5rem;animation:fadeIn .4s ease}
+.step-num{width:28px;height:28px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.75rem;font-weight:700;flex-shrink:0}
+.step-content{flex:1}.step-label{font-weight:600;font-size:.85rem}.step-detail{color:var(--muted);font-size:.8rem;margin-top:.2rem}
+
+/* Response bubble */
+.response{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-top:1rem;white-space:pre-wrap;line-height:1.6;font-size:.9rem}
+
+/* Badges */
+.badge{display:inline-block;padding:.2rem .6rem;border-radius:20px;font-size:.7rem;font-weight:700;text-transform:uppercase}
+.badge-green{background:rgba(34,197,94,.15);color:var(--green)}.badge-yellow{background:rgba(234,179,8,.15);color:var(--yellow)}
+.badge-red{background:rgba(239,68,68,.15);color:var(--red)}.badge-blue{background:rgba(59,130,246,.15);color:var(--blue)}
+
+/* Loading */
+.loading{display:flex;align-items:center;gap:.75rem;padding:1rem;color:var(--muted)}
+.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* Dashboard lanes */
+.lane{border-radius:var(--radius);padding:1rem;margin-bottom:1rem}
+.lane-green{background:rgba(34,197,94,.06);border:1px solid rgba(34,197,94,.2)}
+.lane-yellow{background:rgba(234,179,8,.06);border:1px solid rgba(234,179,8,.2)}
+.lane-red{background:rgba(239,68,68,.06);border:1px solid rgba(239,68,68,.2)}
+.lane h3{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.wf-item{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:1rem;margin-bottom:.5rem}
+
+/* Memory grid */
+.mem-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:768px){.mem-grid{grid-template-columns:1fr}}
+.mem-card{border-radius:var(--radius);padding:1.25rem;border:1px solid var(--border);background:var(--surface)}
+.mem-card h4{color:var(--gold);margin-bottom:.5rem;font-size:.95rem}
+.mem-card .mem-record{background:var(--card);border-radius:8px;padding:.75rem;margin-top:.5rem;font-size:.8rem;line-height:1.5}
+
+/* Trace viewer */
+.trace-step{display:flex;gap:1rem;padding:1rem;border-left:3px solid var(--border);margin-left:1rem;margin-bottom:.25rem;opacity:0;animation:fadeIn .5s ease forwards}
+.trace-step.visible{opacity:1}
+
+/* Presenter panel */
+#presenter{position:fixed;bottom:0;right:0;width:360px;max-height:50vh;background:var(--surface);border:1px solid var(--gold);border-radius:var(--radius) var(--radius) 0 0;padding:1rem;z-index:200;display:none;overflow-y:auto;box-shadow:0 -4px 30px rgba(0,0,0,.5)}
+#presenter.open{display:block}
+#presenter h3{color:var(--gold);font-size:.9rem;margin-bottom:.5rem}
+#presenter .cue{font-size:.8rem;color:var(--muted);line-height:1.5;margin-bottom:.75rem}
+#presenter .nav-btn{background:var(--card);color:var(--text);border:1px solid var(--border);padding:.4rem .8rem;border-radius:6px;font-size:.75rem;margin-right:.25rem}
+
+/* Home */
+.hero{text-align:center;padding:3rem 0}.hero h1{font-size:2.8rem;font-weight:800;margin-bottom:1rem;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{color:var(--muted);font-size:1.15rem;max-width:600px;margin:0 auto 2rem}
+.chapters{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.chapter-card{cursor:pointer}.chapter-card:hover{transform:translateY(-3px)}
+.chapter-card .ch-num{font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;margin-bottom:.25rem}
+
+/* Toggle */
+.toggle-wrap{display:flex;gap:.5rem;background:var(--surface);border-radius:8px;padding:.25rem;border:1px solid var(--border)}
+.toggle-btn{padding:.4rem 1rem;border-radius:6px;font-size:.8rem;font-weight:600;background:transparent;color:var(--muted)}
+.toggle-btn.active{background:var(--accent);color:#fff}
+
+/* Sections hidden by default */
+.scene{display:none;animation:slideUp .4s ease}
+.scene.active{display:block}
+</style>
+</head>
+<body>
+<div class="app">
+<nav>
+  <div class="logo">★ Big Star Collectibles</div>
+  <div class="nav-links">
+    <a class="nav-link active" href="#home" onclick="go('home')">Home</a>
+    <a class="nav-link" href="#scene1" onclick="go('scene1')">1: Chatbot</a>
+    <a class="nav-link" href="#scene2" onclick="go('scene2')">2: Planning</a>
+    <a class="nav-link" href="#scene3" onclick="go('scene3')">3: Memory</a>
+    <a class="nav-link" href="#scene4" onclick="go('scene4')">4: Grounding</a>
+    <a class="nav-link" href="#scene6" onclick="go('scene6')">6: Types</a>
+    <a class="nav-link" href="#scene7" onclick="go('scene7')">7: Governance</a>
+    <a class="nav-link" href="#scene8" onclick="go('scene8')">8: Trace</a>
+    <a class="nav-link" href="#scene9" onclick="go('scene9')">9: Dashboard</a>
+    <a class="nav-link" href="#scene10" onclick="go('scene10')">10: Isolation</a>
+  </div>
+</nav>
+
+<main>
+<!-- HOME -->
+<section id="home" class="scene active">
+<div class="hero">
+  <h1>The AI Agent That Remembers</h1>
+  <p>Follow Marcus Webb as he discovers how AI agents with memory, planning, and governance transform customer service at Big Star Collectibles.</p>
+  <div style="display:flex;gap:.75rem;justify-content:center">
+    <button class="btn-primary" onclick="go('scene1')">Start the Journey →</button>
+    <button class="btn-secondary" onclick="go('scene9')">Jump to Dashboard</button>
+  </div>
+</div>
+<div class="chapters" id="chapters"></div>
+</section>
+
+<!-- SCENE 1 -->
+<section id="scene1" class="scene">
+<div class="scene-header"><h1>Scene 1: The Chatbot vs The Agent</h1><p>Elena's t-shirt print faded after one wash. See how a stateless chatbot fails — and a memory-enabled agent succeeds.</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene1('chatbot')">Run Chatbot</button><button class="btn-gold" onclick="runScene1('agent')">Run Agent</button><button class="btn-secondary" onclick="resetScene('s1')">Reset</button></div>
+<div class="panels panels-2"><div class="card" id="s1-chatbot"><h3>🤖 Stateless Chatbot</h3><div id="s1-chatbot-content"><p style="color:var(--muted)">Click "Run Chatbot" to see the response</p></div></div><div class="card" id="s1-agent"><h3>🧠 Memory-Enabled Agent</h3><div id="s1-agent-content"><p style="color:var(--muted)">Click "Run Agent" to see the response</p></div></div></div>
+</section>
+
+<!-- SCENE 2 -->
+<section id="scene2" class="scene">
+<div class="scene-header"><h1>Scene 2: Agent Planning</h1><p>Watch an agent decompose Elena's problem into ordered steps, then execute each one.</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene2()">Run Planner</button><button class="btn-gold" id="s2-exec-btn" onclick="runScene2Execute()" disabled>Run Execution</button><button class="btn-secondary" onclick="resetScene('s2')">Reset</button></div>
+<div class="panels panels-2"><div class="card"><h3>📋 Plan</h3><div id="s2-plan"><p style="color:var(--muted)">Click "Run Planner" to generate a plan</p></div></div><div class="card"><h3>⚡ Execution</h3><div id="s2-exec"><p style="color:var(--muted)">Execution results appear here</p></div></div></div>
+</section>
+
+<!-- SCENE 3 -->
+<section id="scene3" class="scene">
+<div class="scene-header"><h1>Scene 3: The Forgetting Problem</h1><p>Elena contacted support 3 times. Each time, the chatbot forgot everything. See how memory fixes this.</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene3()">Load Sessions</button><button class="btn-gold" onclick="runScene3Agent()">Try With Memory</button><button class="btn-secondary" onclick="resetScene('s3')">Reset</button></div>
+<div id="s3-sessions"></div>
+<div id="s3-agent" style="margin-top:1.5rem"></div>
+</section>
+
+<!-- SCENE 4 -->
+<section id="scene4" class="scene">
+<div class="scene-header"><h1>Scene 4: Hallucination vs Enterprise Data</h1><p>A generic LLM invents a refund policy. The grounded agent retrieves the real one.</p></div>
+<div class="scene-actions"><button class="btn-secondary" onclick="runScene4('without')">Run Without Data</button><button class="btn-gold" onclick="runScene4('with')">Run With Data</button><button class="btn-secondary" onclick="resetScene('s4')">Reset</button></div>
+<div class="panels panels-2"><div class="card"><h3>⚠️ Generic LLM</h3><div id="s4-without"><p style="color:var(--muted)">Click "Run Without Data"</p></div></div><div class="card"><h3>✅ Grounded Agent</h3><div id="s4-with"><p style="color:var(--muted)">Click "Run With Data"</p></div></div></div>
+</section>
+
+<!-- SCENE 6 -->
+<section id="scene6" class="scene">
+<div class="scene-header"><h1>Scene 6: The 4 Memory Types</h1><p>Elena's case mapped across sensory, working, episodic, semantic, and procedural memory.</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene6()">Load Memory Types</button><button class="btn-secondary" onclick="resetScene('s6')">Reset</button></div>
+<div class="mem-grid" id="s6-grid"></div>
+</section>
+
+<!-- SCENE 7 -->
+<section id="scene7" class="scene">
+<div class="scene-header"><h1>Scene 7: Governed Memory Writes</h1><p>What happens when a customer claims a fake policy? Governed vs ungoverned writes.</p></div>
+<div class="scene-actions">
+  <button class="btn-secondary" onclick="runScene7(false)">Ungoverned Write</button>
+  <button class="btn-gold" onclick="runScene7(true)">Governed Write</button>
+  <button class="btn-secondary" onclick="resetScene('s7')">Reset</button>
+</div>
+<div class="panels panels-2"><div class="card"><h3 id="s7-title">Result</h3><div id="s7-result"><p style="color:var(--muted)">Choose governed or ungoverned to see the difference</p></div></div><div class="card"><h3>Audit Entry</h3><div id="s7-audit"><p style="color:var(--muted)">Audit log appears here</p></div></div></div>
+</section>
+
+<!-- SCENE 8 -->
+<section id="scene8" class="scene">
+<div class="scene-header"><h1>Scene 8: Decision Trace</h1><p>Marcus investigates: Why did the agent approve a $400 refund on a Final Sale item?</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene8()">View Trace</button><button class="btn-secondary" onclick="resetScene('s8')">Reset</button></div>
+<div id="s8-header" class="card" style="margin-bottom:1.5rem;display:none"></div>
+<div id="s8-steps"></div>
+<div id="s8-narration" style="margin-top:1.5rem"></div>
+</section>
+
+<!-- SCENE 9 -->
+<section id="scene9" class="scene">
+<div class="scene-header"><h1>Scene 9: Marcus's Dashboard</h1><p>The approval dashboard — Green (auto), Yellow (review), Red (critical).</p></div>
+<div class="scene-actions"><button class="btn-primary" onclick="runScene9()">Load Dashboard</button><button class="btn-secondary" onclick="resetScene('s9')">Reset</button></div>
+<div id="s9-dashboard"></div>
+</section>
+
+<!-- SCENE 10 -->
+<section id="scene10" class="scene">
+<div class="scene-header"><h1>Scene 10: Lightweight Governance</h1><p>Validation, namespace isolation, and auto-expiry — three layers of memory protection.</p></div>
+<div class="scene-actions">
+  <button class="btn-primary" onclick="runScene10('support')">Access Support NS</button>
+  <button class="btn-secondary" onclick="runScene10('logistics')">Access Logistics NS</button>
+  <button class="btn-secondary" onclick="resetScene('s10')">Reset</button>
+</div>
+<div class="panels panels-3" id="s10-panels"></div>
+</section>
+</main>
+</div>
+
+<!-- PRESENTER PANEL -->
+<div id="presenter">
+<h3>🎤 Presenter Panel</h3>
+<div class="cue" id="pres-cue">Press ← → to navigate scenes. Press R to reset current scene.</div>
+<div><button class="nav-btn" onclick="prevScene()">← Prev</button><button class="nav-btn" onclick="nextScene()">Next →</button><button class="nav-btn" onclick="resetCurrentScene()">Reset</button></div>
+</div>
+
+<script>
+// =========================================================================
+// Navigation & State
+// =========================================================================
+const SCENES=['home','scene1','scene2','scene3','scene4','scene6','scene7','scene8','scene9','scene10'];
+const CUES={home:'Welcome! Set the stage — Marcus Webb, Big Star Collectibles.',scene1:'Demo the chatbot failure first, then the agent.',scene2:'Show the plan appearing step by step.',scene3:'Load the 3 sessions first. Then try with memory.',scene4:'Run without data first to show hallucination.',scene6:'Load all memory types. Walk through each quadrant.',scene7:'Run ungoverned first (scary!), then governed.',scene8:'Click View Trace. Steps appear one by one.',scene9:'Load dashboard. Walk through Green→Yellow→Red.',scene10:'Access support first, then try logistics (denied).'};
+let current='home';
+let s2ExecutionSteps=[];
+
+function go(id){
+  document.querySelectorAll('.scene').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(n=>n.classList.remove('active'));
+  const el=document.getElementById(id);
+  if(el){el.classList.add('active');current=id;}
+  const link=document.querySelector(`[href="#${id}"]`);
+  if(link)link.classList.add('active');
+  document.getElementById('pres-cue').textContent=CUES[id]||'';
+  window.location.hash=id;
+}
+
+function prevScene(){const i=SCENES.indexOf(current);if(i>0)go(SCENES[i-1]);}
+function nextScene(){const i=SCENES.indexOf(current);if(i<SCENES.length-1)go(SCENES[i+1]);}
+function resetCurrentScene(){const key=current.replace('scene','s');resetScene(key);}
+
+// Keyboard
+document.addEventListener('keydown',e=>{
+  if(e.key==='p'||e.key==='P'){document.getElementById('presenter').classList.toggle('open');e.preventDefault();}
+  if(e.key==='ArrowRight')nextScene();
+  if(e.key==='ArrowLeft')prevScene();
+  if(e.key==='r'||e.key==='R')resetCurrentScene();
+});
+
+// Hash routing
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1);if(SCENES.includes(h))go(h);});
+if(location.hash){const h=location.hash.slice(1);if(SCENES.includes(h))go(h);}
+
+// =========================================================================
+// Helpers
+// =========================================================================
+async function api(method,url,body){
+  const opts={method,headers:{'Content-Type':'application/json'}};
+  if(body)opts.body=JSON.stringify(body);
+  const r=await fetch(url,opts);
+  if(!r.ok)throw new Error(`API error: ${r.status}`);
+  return r.json();
+}
+
+function loading(el){el.innerHTML='<div class="loading"><div class="spinner"></div>Agent thinking...</div>';}
+function setScene2ExecEnabled(enabled){
+  const btn=document.getElementById('s2-exec-btn');
+  if(btn)btn.disabled=!enabled;
+}
+function resetScene(prefix){
+  if(prefix==='s2'){
+    const plan=document.getElementById('s2-plan');
+    const exec=document.getElementById('s2-exec');
+    s2ExecutionSteps=[];
+    setScene2ExecEnabled(false);
+    if(plan)plan.innerHTML='<p style="color:var(--muted)">Click "Run Planner" to generate a plan</p>';
+    if(exec)exec.innerHTML='<p style="color:var(--muted)">Execution results appear here</p>';
+    return;
+  }
+  document.querySelectorAll(`[id^="${prefix}-"]`).forEach(el=>{
+  if(el.id===`${prefix}-title`)return;
+  const isCard=el.classList.contains('card');
+  if(!isCard){el.innerHTML='';}
+  else{const h3=el.querySelector('h3');const content=el.querySelector(`[id$="-content"]`)||el.lastElementChild;
+    if(content&&content!==h3)content.innerHTML='<p style="color:var(--muted)">Ready</p>';}
+  });
+}
+
+function renderSteps(steps,container){
+  container.innerHTML='';
+  steps.forEach((s,i)=>{
+    setTimeout(()=>{
+      const d=document.createElement('div');d.className='step';
+      d.innerHTML=`<div class="step-num">${s.stepNumber||i+1}</div><div class="step-content"><div class="step-label">${s.label||s.description||''}</div><div class="step-detail">${s.detail||s.finding||''}</div></div>`;
+      container.appendChild(d);
+    },i*300);
+  });
+}
+
+// =========================================================================
+// Home — Chapter Cards
+// =========================================================================
+const chapters=[
+  {id:'scene1',num:'Scene 1',title:'The Chatbot vs The Agent',desc:'Stateless failure meets contextual intelligence.'},
+  {id:'scene2',num:'Scene 2',title:'Agent Planning',desc:'Goal decomposition and step-by-step execution.'},
+  {id:'scene3',num:'Scene 3',title:'The Forgetting Problem',desc:'Three sessions, zero memory — until now.'},
+  {id:'scene4',num:'Scene 4',title:'Hallucination vs Data',desc:'Generic guesses vs enterprise-grounded answers.'},
+  {id:'scene6',num:'Scene 6',title:'Memory Types',desc:'Sensory, working, episodic, semantic, procedural.'},
+  {id:'scene7',num:'Scene 7',title:'Governed Writes',desc:'Poisoned memory vs validated writes.'},
+  {id:'scene8',num:'Scene 8',title:'Decision Trace',desc:'Full reasoning audit for a $400 refund.'},
+  {id:'scene9',num:'Scene 9',title:'Approval Dashboard',desc:'Green, yellow, red — Marcus decides.'},
+  {id:'scene10',num:'Scene 10',title:'Namespace Isolation',desc:'Validation, isolation, auto-expiry.'},
+];
+document.getElementById('chapters').innerHTML=chapters.map(c=>`<div class="card chapter-card" onclick="go('${c.id}')"><div class="ch-num">${c.num}</div><h3>${c.title}</h3><p style="color:var(--muted);font-size:.85rem">${c.desc}</p></div>`).join('');
+
+// =========================================================================
+// Scene Handlers
+// =========================================================================
+async function runScene1(type){
+  const el=document.getElementById(`s1-${type}-content`);loading(el);
+  try{const d=await api('POST',`/api/scene1/${type}`);
+    let html=`<div class="response">${d.response}</div><div style="margin-top:1rem">`;
+    (d.steps||[]).forEach((s,i)=>{html+=`<div class="step" style="animation-delay:${i*.2}s"><div class="step-num">${i+1}</div><div class="step-content"><div class="step-label">${s.label}</div><div class="step-detail">${s.detail}</div></div></div>`;});
+    html+=`</div><div style="margin-top:.75rem"><span class="badge ${d.hasMemory?'badge-green':'badge-red'}">${d.hasMemory?'Memory Enabled':'No Memory'}</span> <span class="badge badge-blue">${d.agent}</span></div>`;
+    el.innerHTML=html;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene2(){
+  const plan=document.getElementById('s2-plan'),exec=document.getElementById('s2-exec');
+  s2ExecutionSteps=[];
+  setScene2ExecEnabled(false);
+  loading(plan);
+  exec.innerHTML='<p style="color:var(--muted)">Run planner first, then click "Run Execution".</p>';
+  try{const d=await api('POST','/api/scene2/decompose');
+    plan.innerHTML='';
+    (d.plan||[]).forEach((s,i)=>{setTimeout(()=>{plan.innerHTML+=`<div class="step"><div class="step-num">${s.stepNumber}</div><div class="step-content"><div class="step-label">${s.description}</div><div class="step-detail">Tool: ${s.tool||'—'}</div></div></div>`;},i*400);});
+    s2ExecutionSteps=d.execution||[];
+    exec.innerHTML=s2ExecutionSteps.length
+      ? '<p style="color:var(--muted)">Plan ready. Click "Run Execution".</p>'
+      : '<p style="color:var(--muted)">No execution steps returned.</p>';
+    setScene2ExecEnabled(s2ExecutionSteps.length>0);
+  }catch(e){plan.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene2Execute(){
+  const exec=document.getElementById('s2-exec');
+  if(!s2ExecutionSteps.length){
+    exec.innerHTML='<p style="color:var(--muted)">Run planner first.</p>';
+    return;
+  }
+  loading(exec);
+  setTimeout(()=>{
+    exec.innerHTML='';
+    s2ExecutionSteps.forEach((s,i)=>{
+      setTimeout(()=>{
+        exec.innerHTML+=`<div class="step"><div class="step-num">✓</div><div class="step-content"><div class="step-label">${s.description}</div></div></div>`;
+      },i*300);
+    });
+  },250);
+}
+
+async function runScene3(){
+  const el=document.getElementById('s3-sessions');loading(el);
+  try{const d=await api('GET','/api/scene3/sessions');
+    el.innerHTML=`<h3 style="margin-bottom:1rem;color:var(--gold)">Elena's Support Sessions</h3>`;
+    (d.sessions||[]).forEach((s,i)=>{
+      el.innerHTML+=`<div class="card" style="margin-bottom:.75rem;animation-delay:${i*.2}s"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem"><strong>${s.handledBy}</strong><span class="badge ${s.outcome==='resolved'?'badge-green':s.outcome==='partial'?'badge-yellow':'badge-red'}">${s.outcome}</span></div><p style="font-size:.85rem">${s.issueSummary}</p><div class="response" style="margin-top:.5rem;font-size:.8rem">${s.agentResponse}</div>${s.memoryWiped?'<div style="margin-top:.5rem;color:var(--red);font-size:.75rem">⚠ Memory wiped after session</div>':''}<div style="margin-top:.25rem;color:var(--muted);font-size:.75rem">${s.timeSpentMins} min · ${s.channel}</div></div>`;
+    });
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene3Agent(){
+  const el=document.getElementById('s3-agent');loading(el);
+  try{const d=await api('POST','/api/scene3/with-memory');
+    el.innerHTML=`<div class="card"><h3>🧠 With Memory</h3><div class="response">${d.response}</div><div style="margin-top:.75rem;display:flex;gap:.5rem"><span class="badge badge-green">Memory Enabled</span><span class="badge badge-blue">${d.resolutionTime}</span></div></div>`;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene4(type){
+  const el=document.getElementById(`s4-${type==='without'?'without':'with'}`);loading(el);
+  try{const d=await api('POST',`/api/scene4/${type==='without'?'without-data':'with-data'}`);
+    let html=`<div class="response">${d.response}</div>`;
+    if(d.citations?.length)html+=`<div style="margin-top:.75rem">${d.citations.map(c=>`<span class="badge badge-blue">${c.policyId}</span>`).join(' ')}</div>`;
+    if(d.problem)html+=`<div style="margin-top:.75rem;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:8px;padding:.75rem;font-size:.8rem;color:var(--red)">⚠ ${d.problem}</div>`;
+    html+=`<div style="margin-top:.5rem"><span class="badge ${d.isGrounded?'badge-green':'badge-red'}">${d.isGrounded?'Grounded':'Ungrounded'}</span></div>`;
+    el.innerHTML=html;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene6(){
+  const el=document.getElementById('s6-grid');loading(el);
+  try{const d=await api('GET','/api/scene6/memory-types');
+    el.innerHTML='';
+    (d.memoryTypes||[]).forEach(m=>{
+      let recs=(m.records||[]).map(r=>`<div class="mem-record">${r.content}</div>`).join('');
+      if(m.isTransient)recs=`<div class="mem-record" style="color:var(--muted);font-style:italic">Transient — not stored</div>`;
+      el.innerHTML+=`<div class="mem-card"><h4>${m.label}</h4><p style="font-size:.8rem;color:var(--muted);margin-bottom:.5rem">${m.subtitle}</p><p style="font-size:.85rem">${m.howItHelped}</p>${recs}</div>`;
+    });
+    if(d.together)el.innerHTML+=`<div class="card" style="grid-column:1/-1;margin-top:1rem"><h3>How They Worked Together</h3><p>${d.together}</p></div>`;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene7(governed){
+  const res=document.getElementById('s7-result'),aud=document.getElementById('s7-audit');
+  const title=document.getElementById('s7-title');
+  loading(res);aud.innerHTML='';
+  title.textContent=governed?'✅ Governed Write':'⚠️ Ungoverned Write';
+  try{const d=await api('POST','/api/scene7/write-memory',{governed});
+    let html=`<div class="response">${d.agentResponse||''}</div>`;
+    if(d.consequence)html+=`<div style="margin-top:1rem;padding:1rem;border-radius:8px;background:${d.consequence.severity==='critical'?'rgba(239,68,68,.1)':'rgba(34,197,94,.1)'};border:1px solid ${d.consequence.severity==='critical'?'rgba(239,68,68,.3)':'rgba(34,197,94,.3)'}"><strong>${d.consequence.label}</strong><p style="font-size:.85rem;margin-top:.25rem">${d.consequence.description}</p></div>`;
+    res.innerHTML=html;
+    if(d.auditEntry)aud.innerHTML=`<div style="font-size:.85rem"><p><strong>Operation:</strong> ${d.auditEntry.operation}</p><p><strong>Blocked:</strong> ${d.auditEntry.wasBlocked?'Yes':'No'}</p>${d.auditEntry.blockReason?`<p><strong>Reason:</strong> ${d.auditEntry.blockReason}</p>`:''}</div>`;
+  }catch(e){res.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene8(){
+  const header=document.getElementById('s8-header'),steps=document.getElementById('s8-steps'),narr=document.getElementById('s8-narration');
+  loading(steps);header.style.display='none';narr.innerHTML='';
+  try{const d=await api('GET','/api/scene8/trace');
+    header.style.display='block';
+    const c=d.caseHeader;
+    header.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center"><div><h3>${c.action}</h3><p style="color:var(--muted);font-size:.85rem">${c.alertReason}</p></div><span class="badge badge-red">${c.oversightTier?.toUpperCase()}</span></div><div style="margin-top:1rem;display:flex;gap:2rem;font-size:.85rem"><div><strong>Customer:</strong> ${c.customer?.name||'—'} (${c.customer?.tier||'—'})</div><div><strong>Refund:</strong> $${c.refundAmount}</div><div><strong>Status:</strong> ${c.status}</div></div>`;
+    steps.innerHTML='';
+    (d.traceSteps||[]).forEach((s,i)=>{setTimeout(()=>{steps.innerHTML+=`<div class="trace-step visible"><div class="step-num">${s.stepNumber}</div><div class="step-content"><div class="step-label">${s.label}</div><div class="step-detail">${s.finding}</div><div style="font-size:.7rem;color:var(--muted);margin-top:.2rem">Source: ${s.source}</div></div></div>`;},s.delayMs||i*800);});
+    setTimeout(()=>{narr.innerHTML=`<div class="card"><h3>Agent Narration</h3><div class="response">${d.agentNarration||''}</div></div><div class="card" style="margin-top:1rem;border-color:var(--green)"><h3 style="color:var(--green)">✓ ${d.conclusion?.marcusVerdict}</h3><p style="font-size:.9rem">${d.conclusion?.explanation||''}</p><p style="font-size:.85rem;color:var(--muted);margin-top:.5rem">${d.conclusion?.recommendedAction||''}</p></div>`;},5000);
+  }catch(e){steps.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function runScene9(){
+  const el=document.getElementById('s9-dashboard');loading(el);
+  try{const d=await api('GET','/api/scene9/dashboard');
+    let html=`<div style="display:flex;gap:1rem;margin-bottom:1.5rem"><span class="badge badge-blue">${d.summary?.total||0} Total</span><span class="badge badge-yellow">${d.summary?.pending||0} Pending</span><span class="badge badge-green">${d.summary?.auto||0} Auto</span></div>`;
+    ['green','yellow','red'].forEach(tier=>{
+      const items=d.lanes?.[tier]||[];
+      html+=`<div class="lane lane-${tier}"><h3><span class="badge badge-${tier}">${tier.toUpperCase()}</span> ${items.length} item${items.length!==1?'s':''}</h3>`;
+      items.forEach(w=>{html+=`<div class="wf-item"><div style="display:flex;justify-content:space-between;align-items:center"><strong>${w.action}</strong><span class="badge badge-${tier}">${w.status}</span></div><p style="font-size:.85rem;margin-top:.25rem">${w.proposedAction||''}</p><div style="font-size:.8rem;color:var(--muted);margin-top:.25rem">${w.customerName||''} · $${w.refundAmount||0} · ${w.agentTimeSecs||0}s</div>${w.status==='pending'?`<div style="margin-top:.5rem"><button class="btn-primary" style="font-size:.75rem;padding:.3rem .75rem" onclick="approveWF('${w.logId}','approved')">Approve</button> <button class="btn-secondary" style="font-size:.75rem;padding:.3rem .75rem" onclick="approveWF('${w.logId}','rejected')">Reject</button></div>`:''}</div>`;});
+      html+=`</div>`;
+    });
+    el.innerHTML=html;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+
+async function approveWF(logId,decision){
+  try{const d=await api('POST','/api/scene9/approve',{logId,decision});
+    if(d.cascade?.length){d.cascade.forEach((c,i)=>{setTimeout(()=>{const toast=document.createElement('div');toast.className='step';toast.style.cssText='position:fixed;bottom:'+(80+i*50)+'px;right:20px;z-index:300;background:var(--card);border:1px solid var(--green);max-width:300px;animation:fadeIn .3s';toast.innerHTML=`<div class="step-num" style="background:var(--green)">✓</div><div class="step-content"><div class="step-label">${c.action}</div></div>`;document.body.appendChild(toast);setTimeout(()=>toast.remove(),3000);},c.delay);});}
+    setTimeout(()=>runScene9(),4000);
+  }catch(e){alert('Error: '+e.message);}
+}
+
+async function runScene10(ns){
+  const el=document.getElementById('s10-panels');loading(el);
+  try{const d=await api('GET',`/api/scene10/namespace/${ns}`);
+    const p1=d.panel1,p2=d.panel2,p3=d.panel3;
+    let html=`<div class="card"><h3>🛡 ${p1.title}</h3><p style="font-size:.85rem;margin-bottom:.75rem">${p1.description}</p>`;
+    (p1.blockedWrites||[]).forEach(b=>{html+=`<div style="background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:.75rem;margin-bottom:.5rem;font-size:.8rem"><strong>${b.operation}</strong> — ${b.contentSummary||''}<div style="color:var(--red);margin-top:.25rem">${b.blockReason||''}</div></div>`;});
+    html+=`</div><div class="card"><h3>${p2.isGranted?'✅':'🚫'} ${p2.title}</h3><p style="font-size:.85rem;margin-bottom:.75rem">Namespace: <strong>${p2.namespace}</strong> · Role: <strong>${p2.requestedBy}</strong></p><div class="badge ${p2.isGranted?'badge-green':'badge-red'}" style="margin-bottom:.75rem">${p2.accessResult}</div>`;
+    if(p2.isGranted)(p2.memory||[]).forEach(m=>{html+=`<div class="mem-record" style="margin-bottom:.5rem">${m.content}</div>`;});
+    else (p2.deniedMemory||[]).forEach(m=>{html+=`<div style="background:rgba(239,68,68,.05);border:1px solid rgba(239,68,68,.2);border-radius:8px;padding:.75rem;margin-bottom:.5rem;font-size:.8rem;color:var(--muted)">${m.content}<div style="font-size:.7rem;margin-top:.25rem">${m.note||''}</div></div>`;});
+    if(p2.agentNarration)html+=`<div class="response" style="margin-top:.75rem;font-size:.8rem">${p2.agentNarration}</div>`;
+    html+=`</div><div class="card"><h3>⏰ ${p3.title}</h3><p style="font-size:.85rem;margin-bottom:.75rem">${p3.description}</p>`;
+    (p3.active||[]).forEach(m=>{html+=`<div style="background:rgba(34,197,94,.05);border:1px solid rgba(34,197,94,.2);border-radius:8px;padding:.75rem;margin-bottom:.5rem;font-size:.8rem"><strong>${m.memoryType}</strong> — ${m.content?.substring(0,80)}...<div class="badge badge-green" style="margin-top:.25rem">${m.ttlLabel}</div></div>`;});
+    (p3.expired||[]).forEach(m=>{html+=`<div style="background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:.75rem;margin-bottom:.5rem;font-size:.8rem;color:var(--muted);text-decoration:line-through">${m.content?.substring(0,80)}...</div>`;});
+    html+=`</div>`;
+    el.innerHTML=html;
+  }catch(e){el.innerHTML=`<p style="color:var(--red)">Error: ${e.message}</p>`;}
+}
+</script>
+</body>
+</html>
