@@ -4,7 +4,7 @@
 
 This scene connects technical quality to business readiness. Instead of looking at one response, you evaluate whether the operation is ready for scale.
 
-Estimated Time: 12 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

@@ -4,7 +4,9 @@
 
 This workshop walks through a customer-support story from a business point of view. Each lab follows one scene in the Big Star dashboard, focusing on what a user clicks, what appears on screen, and what business decision is made.
 
-Estimated Workshop Time: 3 hours 15 minutes
+Estimated Demo Time: 1 hour 30 minutes
+
+>Note: If you install demo in your environment, you should plan another 30 minutes.
 
 ### Objectives
 

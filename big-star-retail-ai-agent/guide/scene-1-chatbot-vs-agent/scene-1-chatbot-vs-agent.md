@@ -4,7 +4,7 @@
 
 In this scene, you compare two ways to handle the same customer issue. One path acts like a generic chatbot. The other path behaves like a memory-aware support agent.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

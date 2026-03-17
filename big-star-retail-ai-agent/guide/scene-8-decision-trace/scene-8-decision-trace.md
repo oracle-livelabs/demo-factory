@@ -4,7 +4,7 @@
 
 This scene presents a full decision trace for a high-value case. It helps business reviewers understand why a sensitive action was proposed.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

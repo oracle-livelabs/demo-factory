@@ -4,7 +4,7 @@
 
 This lab shows how to run the Big Star demo in your own environment using the portable stack package and Podman Compose.
 
-Estimated Time: 15 minutes
+Estimated Time: 30 minutes
 
 ### Objectives
 

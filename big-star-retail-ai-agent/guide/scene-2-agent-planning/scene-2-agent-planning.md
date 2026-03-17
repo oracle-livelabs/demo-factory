@@ -4,7 +4,7 @@
 
 This scene shows an agent that plans before it acts. You first generate the plan, then run execution so each step is visible to the user.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

@@ -4,7 +4,7 @@
 
 This scene breaks memory into clear business categories so users can understand why the agent made a decision. The UI presents memory cards and a combined outcome summary.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

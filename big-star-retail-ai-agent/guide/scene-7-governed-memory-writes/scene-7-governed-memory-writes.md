@@ -4,7 +4,7 @@
 
 This scene demonstrates why memory write controls matter. You will compare an ungoverned write, which accepts a risky claim, with a governed write, which blocks unverified content.
 
-Estimated Time: 20 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

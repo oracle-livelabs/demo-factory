@@ -4,7 +4,7 @@
 
 This scene gives managers a practical approval view with green, yellow, and red lanes. You can load the backlog, review risk tiering, and approve or reject pending items.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

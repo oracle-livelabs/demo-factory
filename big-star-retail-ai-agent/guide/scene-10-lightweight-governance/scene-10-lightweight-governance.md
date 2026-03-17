@@ -4,7 +4,7 @@
 
 This final scene demonstrates lightweight but effective governance: validation feedback, namespace isolation, and automatic expiry of temporary context.
 
-Estimated Time: 20 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

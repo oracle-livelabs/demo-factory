@@ -4,7 +4,7 @@
 
 This scene demonstrates a common support failure: customers repeat the same story across sessions. You then test a memory-aware path that continues the case without restarting the conversation.
 
-Estimated Time: 15 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 

@@ -4,7 +4,7 @@
 
 This scene compares an ungrounded answer with a grounded answer based on approved enterprise policy. You will see why grounded support responses are safer for the business.
 
-Estimated Time: 20 minutes
+Estimated Time: 10 minutes
 
 ### Objectives
 
