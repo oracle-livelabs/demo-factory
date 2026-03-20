@@ -50,7 +50,11 @@ No alternative names for these core files.
 
 Additional optional services are allowed (for example: VS Code dev container, Jupyter notebook, observability, reverse proxy) as long as core service names, ports, env contracts, and startup dependencies remain intact.
 
-A shared network (equivalent to `hub-net`) is required.
+Compose default networking is the standard. A custom named network is optional, not required.
+
+Service-to-service references must use Compose service names (`db`, `ords`, `ollama`) and must not require fixed `container_name` values.
+
+`db` and `app` should load `.env` via `env_file: .env` while keeping explicit `environment` keys for required runtime values/default overrides.
 
 Named persistent volumes are required for:
 
@@ -80,8 +84,9 @@ These are the canonical ports used by this architecture.
 
 - Oracle host mapping: `1521:1521`
 - ORDS host mapping: `8181:8080`
-- Ollama host mapping: `11434:11434`
 - App host mapping: `5500:8000`
+
+`ollama` is internal-by-default in the stack-kevin style. Exposing `11434:11434` is optional for local debugging only.
 
 ### 3.3 Required in-app defaults (`main.py`)
 
@@ -114,7 +119,12 @@ You must implement these health checks:
 
 - healthy `db`
 - healthy `ords`
+- healthy `ollama`
 - successful `init-brain`
+
+`ords` must depend on healthy `db`.
+
+`init-brain` must depend on healthy `ollama`.
 
 ---
 
@@ -197,8 +207,8 @@ Replication is valid only if **all checks pass**:
 2. Host port mappings are exactly:
    - `1521:1521`
    - `8181:8080`
-   - `11434:11434`
    - `5500:8000`
+   - (`11434:11434` optional only when intentionally exposing Ollama)
 3. App container exposes and serves on internal `8000`.
 4. `main.py` defaults include:
    - `localhost:1521/FREEPDB1`
@@ -212,12 +222,16 @@ Replication is valid only if **all checks pass**:
 7. Ollama helper supports both `/api/chat` and `/api/generate` fallback.
 8. `templates/index.html` exists, is served at `/`, and fully implements the Oracle Redwood Theme.
 9. `init-brain` waits for Ollama and pulls `gemma:2b`.
-10. `app` startup is blocked until db/ords/init-brain conditions pass.
+10. Startup sequencing is enforced with Compose dependency conditions:
+   - `ords` waits for healthy `db`
+   - `init-brain` waits for healthy `ollama`
+   - `app` waits for healthy `db`, healthy `ords`, healthy `ollama`, and successful `init-brain`
 11. App service `command` or entrypoint runs `seeder.py` prior to the main FastAPI server start.
 12. `compose.yaml` is usable by both `docker compose config` and `podman compose config` (when those CLIs are present).
 13. `templates/index.html` contains a scene-aware Presenter Script (`?`) and a scene-aware Database X-Ray mode toggle.
 14. Presenter help label/title is "What's happening here?".
 15. UI narrative (Presenter and/or X-Ray) includes explicit mentions of Priority Transactions and Oracle SQL Firewall.
+16. `db` and `app` load `.env` via `env_file`.
 
 ---
 

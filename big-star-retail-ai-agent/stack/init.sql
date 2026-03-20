@@ -1,16 +1,10 @@
 -- =============================================================================
--- Big Star Collectibles — Consolidated Database Init
+-- Big Star Collectibles - Consolidated Database Init
 -- File: init.sql
 -- Merges schema, seed data, AI profile, governance, and agents.
 -- Idempotent: safe to run multiple times (DROP/CREATE pattern).
 -- Run as SYSTEM or SYS on Oracle 26ai Free (FREEPDB1).
--- NOTE: APP_DB_ADMIN_PWD is read from environment via SQL*Plus HOST command.
 -- =============================================================================
-
--- Capture APP_DB_ADMIN_PWD from container environment into SQL*Plus define variable.
-HOST sh -c 'printf "DEFINE APP_DB_ADMIN_PWD='\''%s'\''\n" "$APP_DB_ADMIN_PWD" > /tmp/set_app_pwd.sql'
-@/tmp/set_app_pwd.sql
-HOST rm -f /tmp/set_app_pwd.sql
 
 -- Ensure all objects are created in the pluggable database, not CDB$ROOT.
 BEGIN
@@ -26,22 +20,21 @@ END;
 -- =============================================================================
 DECLARE
     v_count NUMBER;
-    v_app_pwd VARCHAR2(4000) := q'[&&APP_DB_ADMIN_PWD]';
-    v_app_pwd_escaped VARCHAR2(4000);
 BEGIN
-    IF v_app_pwd IS NULL OR TRIM(v_app_pwd) = '' THEN
-        RAISE_APPLICATION_ERROR(-20001, 'APP_DB_ADMIN_PWD is empty. Refusing to create/alter HUB_USER.');
-    END IF;
-    v_app_pwd_escaped := REPLACE(v_app_pwd, '"', '""');
-
     SELECT COUNT(*) INTO v_count FROM dba_users WHERE username = 'HUB_USER';
     IF v_count = 0 THEN
-        EXECUTE IMMEDIATE 'CREATE USER hub_user IDENTIFIED BY "' || v_app_pwd_escaped || '" DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS';
+        EXECUTE IMMEDIATE 'CREATE USER hub_user IDENTIFIED BY "BigStar2026!" DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS';
     END IF;
-    EXECUTE IMMEDIATE 'ALTER USER hub_user IDENTIFIED BY "' || v_app_pwd_escaped || '" ACCOUNT UNLOCK';
+    EXECUTE IMMEDIATE 'ALTER USER hub_user IDENTIFIED BY "BigStar2026!" ACCOUNT UNLOCK';
     EXECUTE IMMEDIATE 'ALTER USER hub_user DEFAULT TABLESPACE USERS QUOTA UNLIMITED ON USERS';
-    EXECUTE IMMEDIATE 'GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE SEQUENCE, CREATE PROCEDURE, CREATE TRIGGER TO hub_user';
+    EXECUTE IMMEDIATE 'GRANT CREATE SESSION, CREATE TABLE, CREATE VIEW, CREATE SEQUENCE, CREATE PROCEDURE, CREATE TRIGGER, CREATE JOB TO hub_user';
     EXECUTE IMMEDIATE 'GRANT RESOURCE TO hub_user';
+    BEGIN
+        EXECUTE IMMEDIATE 'GRANT CTXAPP TO hub_user';
+    EXCEPTION
+        WHEN OTHERS THEN
+            DBMS_OUTPUT.PUT_LINE('CTXAPP grant warning: ' || SQLERRM);
+    END;
 EXCEPTION
     WHEN OTHERS THEN
         DBMS_OUTPUT.PUT_LINE('User setup: ' || SQLERRM);
@@ -204,6 +197,27 @@ CREATE INDEX CC_WORKFLOW_STATUS_IDX    ON CC_WORKFLOW_LOG(STATUS);
 CREATE INDEX CC_WORKFLOW_TIER_IDX      ON CC_WORKFLOW_LOG(OVERSIGHT_TIER);
 CREATE INDEX CC_AUDIT_CUST_IDX         ON CC_AUDIT_LOG(CUSTOMER_ID);
 CREATE INDEX CC_AUDIT_NS_IDX           ON CC_AUDIT_LOG(NAMESPACE);
+CREATE INDEX CC_ORDERS_CUST_IDX        ON CC_ORDERS(CUSTOMER_ID);
+CREATE INDEX CC_WORKFLOW_ORDER_IDX     ON CC_WORKFLOW_LOG(ORDER_ID);
+CREATE INDEX CC_INTERACTIONS_CUST_TIME_IDX ON CC_INTERACTIONS(CUSTOMER_ID, INTERACTION_TIME);
+CREATE INDEX CC_MEMORY_CUST_NS_VER_CRT_IDX ON CC_MEMORY(CUSTOMER_ID, NAMESPACE, IS_VERIFIED, CREATED_AT);
+CREATE INDEX CC_MEMORY_EXPIRES_AT_IDX ON CC_MEMORY(EXPIRES_AT);
+CREATE INDEX CC_ORDERS_CUSTNAME_DATE_IDX ON CC_ORDERS(CUSTOMER_NAME, ORDER_DATE);
+CREATE INDEX CC_AUDIT_CUST_CREATED_IDX ON CC_AUDIT_LOG(CUSTOMER_ID, CREATED_AT);
+
+-- Oracle Text index for semantic retrieval over memory content.
+BEGIN
+    EXECUTE IMMEDIATE q'[
+        CREATE INDEX CC_MEMORY_CONTENT_CTX_IDX
+        ON CC_MEMORY(CONTENT)
+        INDEXTYPE IS CTXSYS.CONTEXT
+        PARAMETERS('SYNC (ON COMMIT)')
+    ]';
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Oracle Text index warning: ' || SQLERRM);
+END;
+/
 
 COMMIT;
 
@@ -226,16 +240,16 @@ VALUES ('STAFF-001', 'Marcus Webb', 'marcus.webb@bigstarcollectibles.com', 'INTE
 
 -- Orders
 INSERT INTO CC_ORDERS (ORDER_ID, CUSTOMER_ID, CUSTOMER_NAME, ITEM_NAME, ITEM_CATEGORY, SALE_TYPE, ORDER_VALUE, PAYMENT_METHOD, CARRIER_STATUS, ACTUAL_STATUS, POLICE_REPORT, ORDER_DATE)
-VALUES ('BSC-20260128-0847', 'CUST-001', 'Elena Vasquez', 'Limited Edition Vinyl — "Midnight Run" by The Cascade (sealed)', 'vinyl', 'FINAL_SALE', 400.00, 'credit_card', 'Delivered', 'Missing', 'SFPD-2026-14821', DATE '2026-01-28');
+VALUES ('BSC-20260128-0847', 'CUST-001', 'Elena Vasquez', 'Limited Edition Vinyl - "Midnight Run" by The Cascade (sealed)', 'vinyl', 'FINAL_SALE', 400.00, 'credit_card', 'Delivered', 'Missing', 'SFPD-2026-14821', DATE '2026-01-28');
 
 INSERT INTO CC_ORDERS (ORDER_ID, CUSTOMER_ID, CUSTOMER_NAME, ITEM_NAME, ITEM_CATEGORY, SALE_TYPE, ORDER_VALUE, PAYMENT_METHOD, CARRIER_STATUS, ACTUAL_STATUS, ORDER_DATE)
-VALUES ('BSC-20251105-0312', 'CUST-001', 'Elena Vasquez', 'Vintage Band T-Shirt — The Cascade 1987 Tour (Size M)', 'apparel', 'STANDARD', 85.00, 'credit_card', 'Delivered', 'Defective', DATE '2025-11-05');
+VALUES ('BSC-20251105-0312', 'CUST-001', 'Elena Vasquez', 'Vintage Band T-Shirt - The Cascade 1987 Tour (Size M)', 'apparel', 'STANDARD', 85.00, 'credit_card', 'Delivered', 'Defective', DATE '2025-11-05');
 
 INSERT INTO CC_ORDERS (ORDER_ID, CUSTOMER_ID, CUSTOMER_NAME, ITEM_NAME, ITEM_CATEGORY, SALE_TYPE, ORDER_VALUE, PAYMENT_METHOD, CARRIER_STATUS, ACTUAL_STATUS, ORDER_DATE)
-VALUES ('BSC-20260220-0561', 'CUST-001', 'Elena Vasquez', 'Vintage Band T-Shirt — Wrong Size Sent (ordered M, received L)', 'apparel', 'STANDARD', 85.00, 'credit_card', 'Delivered', 'Wrong Item', DATE '2026-02-20');
+VALUES ('BSC-20260220-0561', 'CUST-001', 'Elena Vasquez', 'Vintage Band T-Shirt - Wrong Size Sent (ordered M, received L)', 'apparel', 'STANDARD', 85.00, 'credit_card', 'Delivered', 'Wrong Item', DATE '2026-02-20');
 
 INSERT INTO CC_ORDERS (ORDER_ID, CUSTOMER_ID, CUSTOMER_NAME, ITEM_NAME, ITEM_CATEGORY, SALE_TYPE, ORDER_VALUE, PAYMENT_METHOD, CARRIER_STATUS, ACTUAL_STATUS, ORDER_DATE)
-VALUES ('BSC-20260214-1103', 'CUST-003', 'Sandra Cho', 'Flash-Sale Collector Pin Set — Limited Run (10 pins)', 'collectible', 'FLASH_SALE', 120.00, 'gift_card', 'Delivered', 'Delivered', DATE '2026-02-14');
+VALUES ('BSC-20260214-1103', 'CUST-003', 'Sandra Cho', 'Flash-Sale Collector Pin Set - Limited Run (10 pins)', 'collectible', 'FLASH_SALE', 120.00, 'gift_card', 'Delivered', 'Delivered', DATE '2026-02-14');
 
 -- Interactions (Elena's 3 sessions)
 INSERT INTO CC_INTERACTIONS (INTERACTION_ID, CUSTOMER_ID, CUSTOMER_NAME, ORDER_ID, SESSION_ID, CHANNEL, INTERACTION_TIME, ISSUE_SUMMARY, AGENT_RESPONSE, OUTCOME, MEMORY_WIPED, HANDLED_BY, TIME_SPENT_MINS, NOTES)
@@ -248,12 +262,12 @@ INSERT INTO CC_INTERACTIONS (INTERACTION_ID, CUSTOMER_ID, CUSTOMER_NAME, ORDER_I
 VALUES ('INT-002', 'CUST-001', 'Elena Vasquez', 'BSC-20260128-0847', 'SESSION-C3D4', 'chatbot', SYSTIMESTAMP - INTERVAL '2' DAY,
 'Customer called back. Provided police report number SFPD-2026-14821 for missing package. References previous conversation.',
 'I don''t have any context for a previous claim. Could you please describe your issue from the beginning so I can assist you?',
-'unresolved', 'Y', 'AutoBot v2', 6, 'New session — no memory of INT-001. Customer had to repeat everything. Provided police report, bot still could not process. Customer irate.');
+'unresolved', 'Y', 'AutoBot v2', 6, 'New session - no memory of INT-001. Customer had to repeat everything. Provided police report, bot still could not process. Customer irate.');
 
 INSERT INTO CC_INTERACTIONS (INTERACTION_ID, CUSTOMER_ID, CUSTOMER_NAME, ORDER_ID, SESSION_ID, CHANNEL, INTERACTION_TIME, ISSUE_SUMMARY, AGENT_RESPONSE, OUTCOME, MEMORY_WIPED, HANDLED_BY, TIME_SPENT_MINS, NOTES)
 VALUES ('INT-003', 'CUST-001', 'Elena Vasquez', 'BSC-20260128-0847', 'SESSION-HUMAN', 'human', SYSTIMESTAMP - INTERVAL '1' DAY,
 'Customer escalated after two failed chatbot sessions. Requested human agent. Has police report SFPD-2026-14821.',
-'I have reviewed your case manually. I can see the delivery issue and your police report. I am escalating this for a replacement or refund — pending manager approval.',
+'I have reviewed your case manually. I can see the delivery issue and your police report. I am escalating this for a replacement or refund - pending manager approval.',
 'partial', 'N', 'Marcus Webb', 45, 'Marcus manually read 3 system logs to reconstruct context. 45 minutes on a case that should have taken 5. Replacement offered, pending approval.');
 
 INSERT INTO CC_INTERACTIONS (INTERACTION_ID, CUSTOMER_ID, CUSTOMER_NAME, ORDER_ID, SESSION_ID, CHANNEL, INTERACTION_TIME, ISSUE_SUMMARY, AGENT_RESPONSE, OUTCOME, MEMORY_WIPED, HANDLED_BY, TIME_SPENT_MINS)
@@ -273,7 +287,7 @@ INSERT INTO CC_POLICIES (POLICY_ID, POLICY_NAME, CATEGORY, APPLIES_TO, RULE_TEXT
 VALUES ('POL-003', 'Flash-Sale Gift Card Store Credit', 'returns', 'gift_card', 'Flash-Sale items purchased with a gift card are not eligible for return or cash refund. A one-time store credit of 50% of the purchase value may be offered at CSM discretion.', 'N', 'N', 50.00, 0, 500.00, 'N', 'Y');
 
 INSERT INTO CC_POLICIES (POLICY_ID, POLICY_NAME, CATEGORY, APPLIES_TO, RULE_TEXT, ALLOWS_RETURN, ALLOWS_REFUND, MAX_REFUND_AUTO, MAX_REFUND_CSM, REQUIRES_EVIDENCE, IS_OFFICIAL)
-VALUES ('POL-004', 'Final Sale — Limited Edition Vinyl', 'returns', 'final_sale', 'Limited edition vinyl records marked Final Sale are not eligible for return or refund EXCEPT in cases of verified item defect or verified non-delivery (missing package with police report). CSM approval required.', 'N', 'Y', 0, 500.00, 'Y', 'Y');
+VALUES ('POL-004', 'Final Sale - Limited Edition Vinyl', 'returns', 'final_sale', 'Limited edition vinyl records marked Final Sale are not eligible for return or refund EXCEPT in cases of verified item defect or verified non-delivery (missing package with police report). CSM approval required.', 'N', 'Y', 0, 500.00, 'Y', 'Y');
 
 INSERT INTO CC_POLICIES (POLICY_ID, POLICY_NAME, CATEGORY, APPLIES_TO, RULE_TEXT, ALLOWS_RETURN, ALLOWS_REFUND, MAX_REFUND_AUTO, MAX_REFUND_CSM, REQUIRES_EVIDENCE, IS_OFFICIAL)
 VALUES ('POL-005', 'VIP Customer Exception Policy', 'vip', 'vip', 'VIP customers with 3+ years of membership and $3,000+ lifetime spend are eligible for one-time policy exceptions at CSM discretion. Full reasoning trace required before approval.', 'Y', 'Y', 0, 500.00, 'Y', 'Y');
@@ -289,19 +303,19 @@ INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, 
 VALUES ('MEM-001', 'CUST-001', 'support', 'episodic', 'Customer contacted support 3 days ago regarding missing vinyl record (Order BSC-20260128-0847). Chatbot denied claim citing carrier delivery status. Customer was frustrated. Issue unresolved.', 'INT-001', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS)
-VALUES ('MEM-002', 'CUST-001', 'support', 'episodic', 'Customer provided police report SFPD-2026-14821 during second contact. Report confirms package theft from doorstep. Previous chatbot session had no memory of this — customer had to repeat entire case history.', 'INT-002', 'high', 'Y', NULL);
+VALUES ('MEM-002', 'CUST-001', 'support', 'episodic', 'Customer provided police report SFPD-2026-14821 during second contact. Report confirms package theft from doorstep. Previous chatbot session had no memory of this - customer had to repeat entire case history.', 'INT-002', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS)
 VALUES ('MEM-003', 'CUST-001', 'support', 'episodic', 'Case escalated to Marcus Webb (CSM) after two failed chatbot interactions. Marcus spent 45 minutes manually reconstructing case from system logs. Replacement or refund offered pending approval. Customer sentiment: frustrated but remained loyal.', 'INT-003', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS)
-VALUES ('MEM-004', 'CUST-001', 'support', 'semantic', 'Elena Vasquez is a VIP customer with 4 years of membership and $4,200 lifetime spend across 23 orders. Preferred contact method: email. Long-term loyal customer — high retention value.', 'system', 'high', 'Y', NULL);
+VALUES ('MEM-004', 'CUST-001', 'support', 'semantic', 'Elena Vasquez is a VIP customer with 4 years of membership and $4,200 lifetime spend across 23 orders. Preferred contact method: email. Long-term loyal customer - high retention value.', 'system', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS)
 VALUES ('MEM-005', 'CUST-001', 'support', 'semantic', 'The original chatbot denial on Order BSC-20260128-0847 was a chatbot error, not a valid policy decision. Carrier showing Delivered does not override a filed police report. Policy POL-004 allows refund for verified missing Final Sale items with police report.', 'INT-003', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS)
-VALUES ('MEM-006', NULL, 'support', 'procedural', 'Process for missing high-value item with police report: (1) Verify police report number against CC_ORDERS. (2) Check policy POL-004 for Final Sale exception eligibility. (3) Check customer tier — VIP eligible for POL-005 override. (4) If refund > $50, create CC_WORKFLOW_LOG entry with oversight_tier=red. (5) Notify CSM for approval. (6) On approval, issue refund and update CC_ORDERS.', 'system', 'high', 'Y', NULL);
+VALUES ('MEM-006', NULL, 'support', 'procedural', 'Process for missing high-value item with police report: (1) Verify police report number against CC_ORDERS. (2) Check policy POL-004 for Final Sale exception eligibility. (3) Check customer tier - VIP eligible for POL-005 override. (4) If refund > $50, create CC_WORKFLOW_LOG entry with oversight_tier=red. (5) Notify CSM for approval. (6) On approval, issue refund and update CC_ORDERS.', 'system', 'high', 'Y', NULL);
 
 INSERT INTO CC_MEMORY (MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE, CONFIDENCE, IS_VERIFIED, TTL_DAYS, EXPIRES_AT)
 VALUES ('MEM-007', 'CUST-001', 'support', 'working', 'Customer mentioned her wedding is next weekend (approx March 8, 2026). She wanted the vinyl record as a gift for the occasion. Context relevant for urgency of resolution.', 'INT-003', 'high', 'Y', 14, SYSDATE + 14);
@@ -311,16 +325,16 @@ VALUES ('MEM-008', NULL, 'logistics', 'semantic', 'Warehouse override protocol: 
 
 -- Workflow Log
 INSERT INTO CC_WORKFLOW_LOG (LOG_ID, CUSTOMER_ID, ORDER_ID, AGENT_NAME, ACTION, OVERSIGHT_TIER, STATUS, PROPOSED_ACTION, REASONING, REFUND_AMOUNT, REVIEWED_BY, AGENT_TIME_SECS, REVIEW_TIME_SECS, CREATED_AT, RESOLVED_AT)
-VALUES ('WF-001', 'CUST-002', 'BSC-20260220-0561', 'MemoryAgent v1', 'Auto-resolve wrong item', 'green', 'auto', 'Send correct replacement (Size M). No return of wrong item required.', 'Standard tier customer. Wrong item shipped — warehouse error confirmed. Replacement value $85 — under $50 threshold for... wait, $85 exceeds auto threshold. Overridden: no monetary refund, replacement only — qualifies for green.', 0.00, 'AutoApproved', 12, 0, SYSTIMESTAMP - INTERVAL '1' DAY, SYSTIMESTAMP - INTERVAL '1' DAY);
+VALUES ('WF-001', 'CUST-002', 'BSC-20260220-0561', 'MemoryAgent v1', 'Auto-resolve wrong item', 'green', 'auto', 'Send correct replacement (Size M). No return of wrong item required.', 'Standard tier customer. Wrong item shipped - warehouse error confirmed. Replacement value $85 - under $50 threshold for... wait, $85 exceeds auto threshold. Overridden: no monetary refund, replacement only - qualifies for green.', 0.00, 'AutoApproved', 12, 0, SYSTIMESTAMP - INTERVAL '1' DAY, SYSTIMESTAMP - INTERVAL '1' DAY);
 
 INSERT INTO CC_WORKFLOW_LOG (LOG_ID, CUSTOMER_ID, ORDER_ID, AGENT_NAME, ACTION, OVERSIGHT_TIER, STATUS, PROPOSED_ACTION, REASONING, REFUND_AMOUNT, REVIEWED_BY, AGENT_TIME_SECS, REVIEW_TIME_SECS, CREATED_AT, RESOLVED_AT)
 VALUES ('WF-002', 'CUST-003', 'BSC-20260214-1103', 'MemoryAgent v1', 'Tracking update provided', 'green', 'auto', 'Provided tracking link and estimated delivery window. No financial action required.', 'Customer requested tracking update. Standard lookup. No policy issue. Auto-resolved.', 0.00, 'AutoApproved', 4, 0, SYSTIMESTAMP - INTERVAL '12' HOUR, SYSTIMESTAMP - INTERVAL '12' HOUR);
 
 INSERT INTO CC_WORKFLOW_LOG (LOG_ID, CUSTOMER_ID, ORDER_ID, AGENT_NAME, ACTION, OVERSIGHT_TIER, STATUS, PROPOSED_ACTION, REASONING, EVIDENCE, REFUND_AMOUNT, REVIEWED_BY, AGENT_TIME_SECS, CREATED_AT)
-VALUES ('WF-003', 'CUST-003', 'BSC-20260214-1103', 'MemoryAgent v1', 'Flash-Sale gift card store credit offer', 'yellow', 'pending', 'Offer one-time 50% store credit ($60) per POL-003. Customer is new — first Flash-Sale return.', 'Customer Sandra Cho asks to return Flash-Sale item purchased with gift card. Policy POL-003 applies: no return, no cash refund, eligible for 50% store credit one-time. Customer is Standard tier, no exception history.', 'Order BSC-20260214-1103. Policy POL-003 retrieved from CC_POLICIES.', 60.00, NULL, 18, SYSTIMESTAMP - INTERVAL '6' HOUR);
+VALUES ('WF-003', 'CUST-003', 'BSC-20260214-1103', 'MemoryAgent v1', 'Flash-Sale gift card store credit offer', 'yellow', 'pending', 'Offer one-time 50% store credit ($60) per POL-003. Customer is new - first Flash-Sale return.', 'Customer Sandra Cho asks to return Flash-Sale item purchased with gift card. Policy POL-003 applies: no return, no cash refund, eligible for 50% store credit one-time. Customer is Standard tier, no exception history.', 'Order BSC-20260214-1103. Policy POL-003 retrieved from CC_POLICIES.', 60.00, NULL, 18, SYSTIMESTAMP - INTERVAL '6' HOUR);
 
 INSERT INTO CC_WORKFLOW_LOG (LOG_ID, CUSTOMER_ID, ORDER_ID, AGENT_NAME, ACTION, OVERSIGHT_TIER, STATUS, PROPOSED_ACTION, REASONING, EVIDENCE, REFUND_AMOUNT, REVIEWED_BY, AGENT_TIME_SECS, CREATED_AT)
-VALUES ('WF-004', 'CUST-001', 'BSC-20260128-0847', 'MemoryAgent v1', 'Full refund — Final Sale missing vinyl with police report', 'red', 'pending', 'Issue full refund of $400 to Elena Vasquez for Order BSC-20260128-0847. Send confirmation email.', 'VIP customer Elena Vasquez (4 years, $4,200 spend) reports missing Final Sale vinyl record. Carrier shows Delivered but customer filed police report SFPD-2026-14821. Episodic memory confirms two prior chatbot failures — original denial was chatbot error. Policy POL-004: Final Sale refund permitted for verified missing with police report. Policy POL-005: VIP override eligible. Refund $400 exceeds auto-approve threshold — CSM approval required per POL-006.', 'Police report SFPD-2026-14821. Order BSC-20260128-0847. Interaction logs INT-001, INT-002, INT-003. VIP status confirmed CC_CUSTOMERS. Policies POL-004, POL-005, POL-006 retrieved.', 400.00, NULL, 47, SYSTIMESTAMP - INTERVAL '2' HOUR);
+VALUES ('WF-004', 'CUST-001', 'BSC-20260128-0847', 'MemoryAgent v1', 'Full refund - Final Sale missing vinyl with police report', 'red', 'pending', 'Issue full refund of $400 to Elena Vasquez for Order BSC-20260128-0847. Send confirmation email.', 'VIP customer Elena Vasquez (4 years, $4,200 spend) reports missing Final Sale vinyl record. Carrier shows Delivered but customer filed police report SFPD-2026-14821. Episodic memory confirms two prior chatbot failures - original denial was chatbot error. Policy POL-004: Final Sale refund permitted for verified missing with police report. Policy POL-005: VIP override eligible. Refund $400 exceeds auto-approve threshold - CSM approval required per POL-006.', 'Police report SFPD-2026-14821. Order BSC-20260128-0847. Interaction logs INT-001, INT-002, INT-003. VIP status confirmed CC_CUSTOMERS. Policies POL-004, POL-005, POL-006 retrieved.', 400.00, NULL, 47, SYSTIMESTAMP - INTERVAL '2' HOUR);
 
 -- Audit Log
 INSERT INTO CC_AUDIT_LOG (AUDIT_ID, OPERATION, NAMESPACE, MEMORY_ID, CUSTOMER_ID, PERFORMED_BY, CONTENT_SUMMARY, WAS_BLOCKED, CREATED_AT)
@@ -456,8 +470,13 @@ END CC_CHECK_NAMESPACE_ACCESS;
 CREATE OR REPLACE PROCEDURE CC_EXPIRE_MEMORY AS
     v_expired_count NUMBER := 0;
 BEGIN
-    UPDATE CC_MEMORY SET UPDATED_AT = SYSTIMESTAMP
-    WHERE EXPIRES_AT IS NOT NULL AND EXPIRES_AT <= SYSDATE AND TTL_DAYS IS NOT NULL;
+    -- Mark each row once when it crosses TTL to avoid repeated updates/redo.
+    UPDATE CC_MEMORY
+    SET UPDATED_AT = SYSTIMESTAMP
+    WHERE EXPIRES_AT IS NOT NULL
+      AND EXPIRES_AT <= SYSDATE
+      AND TTL_DAYS IS NOT NULL
+      AND (UPDATED_AT IS NULL OR UPDATED_AT < EXPIRES_AT);
     v_expired_count := SQL%ROWCOUNT;
     IF v_expired_count > 0 THEN
         CC_LOG_AUDIT('EXPIRE', 'system', NULL, NULL, 'System', v_expired_count || ' memory entries processed for TTL expiry.', 'N');
@@ -471,44 +490,56 @@ END CC_EXPIRE_MEMORY;
 COMMIT;
 
 -- =============================================================================
--- SECTION 5: AI Profile (Select AI — backed by Ollama gemma:2b)
+-- SECTION 5: Background Jobs
 -- =============================================================================
--- The DBMS_CLOUD_AI profile uses the Ollama container as its LLM provider.
--- This enables Oracle Select AI and Select AI Agent features (e.g. narrate,
--- chat, runsql) while routing all inference to the local Ollama instance.
--- =============================================================================
-
 BEGIN
-    DBMS_CLOUD_AI.DROP_PROFILE(profile_name => 'CC_PROFILE');
-EXCEPTION
-    WHEN OTHERS THEN NULL;
-END;
-/
-
-BEGIN
-    DBMS_CLOUD_AI.CREATE_PROFILE(
-        profile_name => 'CC_PROFILE',
-        attributes   => '{
-            "provider": "ollama",
-            "model": "gemma:2b",
-            "ollama_url": "http://bsc-ollama:11434",
-            "object_list": [
-                {"owner": "HUB_USER", "name": "CC_CUSTOMERS"},
-                {"owner": "HUB_USER", "name": "CC_ORDERS"},
-                {"owner": "HUB_USER", "name": "CC_INTERACTIONS"},
-                {"owner": "HUB_USER", "name": "CC_POLICIES"},
-                {"owner": "HUB_USER", "name": "CC_MEMORY"},
-                {"owner": "HUB_USER", "name": "CC_WORKFLOW_LOG"},
-                {"owner": "HUB_USER", "name": "CC_AUDIT_LOG"}
-            ]
-        }'
+    DBMS_SCHEDULER.DROP_JOB(
+        job_name => 'CC_MEMORY_TTL_JOB',
+        force    => TRUE
     );
+EXCEPTION
+    WHEN OTHERS THEN
+        NULL;
+END;
+/
+
+BEGIN
+    DBMS_SCHEDULER.CREATE_JOB(
+        job_name        => 'CC_MEMORY_TTL_JOB',
+        job_type        => 'STORED_PROCEDURE',
+        job_action      => 'CC_EXPIRE_MEMORY',
+        start_date      => SYSTIMESTAMP,
+        repeat_interval => 'FREQ=MINUTELY;INTERVAL=15',
+        enabled         => TRUE,
+        auto_drop       => FALSE,
+        comments        => 'Runs CC_EXPIRE_MEMORY every 15 minutes.'
+    );
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Scheduler setup warning: ' || SQLERRM);
 END;
 /
 
 COMMIT;
--- End of init.sql
 
-
+-- Gather fresh optimizer stats so plans remain stable as data grows.
+BEGIN
+    DBMS_STATS.GATHER_SCHEMA_STATS(
+        ownname          => 'HUB_USER',
+        estimate_percent => DBMS_STATS.AUTO_SAMPLE_SIZE,
+        method_opt       => 'FOR ALL COLUMNS SIZE AUTO',
+        cascade          => TRUE,
+        options          => 'GATHER'
+    );
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('Stats gather warning: ' || SQLERRM);
+END;
+/
 COMMIT;
+
+-- Note: database-side Select AI profile setup is intentionally omitted here
+-- because the current Oracle Free image used by this stack does not expose the
+-- required package, and the application calls Ollama directly.
+-- End of init.sql
 -- End of init.sql

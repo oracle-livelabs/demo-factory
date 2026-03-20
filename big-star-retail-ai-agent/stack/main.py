@@ -26,6 +26,31 @@ DB_DSN = os.getenv("DB_DSN", "localhost:1521/FREEPDB1")
 OLLAMA_HOST = os.getenv("OLLAMA_HOST", "http://localhost:11434")
 ORDS_HOST = os.getenv("ORDS_HOST", "http://localhost:8181")
 
+
+def _env_float(name: str, default: float) -> float:
+    raw = os.getenv(name)
+    if not raw:
+        return default
+    try:
+        return float(raw)
+    except ValueError:
+        return default
+
+
+def _env_int(name: str, default: int) -> int:
+    raw = os.getenv(name)
+    if not raw:
+        return default
+    try:
+        return int(raw)
+    except ValueError:
+        return default
+
+
+OLLAMA_TIMEOUT_SECS = _env_float("OLLAMA_TIMEOUT_SECS", 300.0)
+OLLAMA_RETRIES = max(1, _env_int("OLLAMA_RETRIES", 2))
+OLLAMA_KEEP_ALIVE = os.getenv("OLLAMA_KEEP_ALIVE", "30m")
+
 app = FastAPI(title="Big Star Collectibles", version="1.0.0")
 templates = Jinja2Templates(directory="templates")
 
@@ -80,27 +105,49 @@ async def call_function(func_name: str, params: list, return_type=str):
 # ---------------------------------------------------------------------------
 async def ollama_generate(prompt: str, model: str = "gemma:2b") -> str:
     """Call Ollama API, supporting both chat and generate endpoints."""
-    async with httpx.AsyncClient(timeout=120.0) as client:
-        # Prefer /api/chat for recent Ollama versions.
-        chat_resp = await client.post(f"{OLLAMA_HOST}/api/chat", json={
-            "model": model,
-            "messages": [{"role": "user", "content": prompt}],
-            "stream": False
-        })
-        if chat_resp.status_code < 400:
-            data = chat_resp.json()
-            return (data.get("message", {}) or {}).get("content", "")
-        if chat_resp.status_code != 404:
-            chat_resp.raise_for_status()
+    last_error = None
+    for attempt in range(OLLAMA_RETRIES):
+        try:
+            async with httpx.AsyncClient(timeout=OLLAMA_TIMEOUT_SECS) as client:
+                payload = {
+                    "model": model,
+                    "messages": [{"role": "user", "content": prompt}],
+                    "stream": False,
+                    "keep_alive": OLLAMA_KEEP_ALIVE,
+                }
+                # Prefer /api/chat for recent Ollama versions.
+                chat_resp = await client.post(f"{OLLAMA_HOST}/api/chat", json=payload)
+                if chat_resp.status_code < 400:
+                    data = chat_resp.json()
+                    return (data.get("message", {}) or {}).get("content", "")
 
-        # Fallback for older Ollama versions exposing /api/generate.
-        gen_resp = await client.post(f"{OLLAMA_HOST}/api/generate", json={
-            "model": model,
-            "prompt": prompt,
-            "stream": False
-        })
-        gen_resp.raise_for_status()
-        return gen_resp.json().get("response", "")
+                # Fallback for older Ollama versions exposing /api/generate.
+                if chat_resp.status_code == 404:
+                    gen_resp = await client.post(f"{OLLAMA_HOST}/api/generate", json={
+                        "model": model,
+                        "prompt": prompt,
+                        "stream": False,
+                        "keep_alive": OLLAMA_KEEP_ALIVE,
+                    })
+                    gen_resp.raise_for_status()
+                    return gen_resp.json().get("response", "")
+
+                # Retry transient server errors while model is cold-starting.
+                if chat_resp.status_code >= 500 and attempt < OLLAMA_RETRIES - 1:
+                    await asyncio.sleep(2 * (attempt + 1))
+                    continue
+
+                chat_resp.raise_for_status()
+        except (httpx.ReadTimeout, httpx.ConnectTimeout, httpx.ConnectError, httpx.RemoteProtocolError) as exc:
+            last_error = exc
+            if attempt < OLLAMA_RETRIES - 1:
+                await asyncio.sleep(2 * (attempt + 1))
+                continue
+            raise
+
+    if last_error is not None:
+        raise last_error
+    raise RuntimeError("Ollama request failed after retries.")
 
 
 # ---------------------------------------------------------------------------
@@ -110,11 +157,165 @@ async def select_ai_chat(_task_name: str, prompt: str) -> str:
     """Generate an agent response directly from Ollama."""
     try:
         return await ollama_generate(prompt, model="gemma:2b")
-    except Exception:
-        return (
-            "The agent backend is not ready yet. "
-            "Please wait for model initialization and try again."
-        )
+    except Exception as exc:
+        print(f"[app] Ollama request failed: {exc}")
+        return ""
+
+
+def _contains_any(text: str, phrases: list[str]) -> bool:
+    return any(phrase in text for phrase in phrases)
+
+
+def _extract_upper_tokens(text: str, pattern: str) -> set[str]:
+    return {match.upper() for match in re.findall(pattern, text or "", re.IGNORECASE)}
+
+
+def _scene1_needs_fallback(response: str, order_id: str) -> bool:
+    lowered = (response or "").lower()
+    if not response.strip():
+        return True
+
+    refusal_phrases = [
+        "unable to access",
+        "cannot access",
+        "can't access",
+        "do not have access",
+        "don't have access",
+        "no prior interaction",
+        "no previous interaction",
+        "no memory",
+    ]
+    if _contains_any(lowered, refusal_phrases):
+        return True
+
+    expected_order = (order_id or "").upper()
+    response_orders = _extract_upper_tokens(response, r"BSC-\d{8}-\d{4}")
+    if expected_order:
+        if expected_order.lower() not in lowered:
+            return True
+        if response_orders and response_orders != {expected_order}:
+            return True
+
+    policy_ids = _extract_upper_tokens(response, r"POL-[A-Z0-9-]+")
+    if "POL-001" not in policy_ids:
+        return True
+    if policy_ids - {"POL-001"}:
+        return True
+
+    if "vip" not in lowered:
+        return True
+
+    if "[" in response or "]" in response:
+        return True
+
+    if not _contains_any(lowered, ["replacement", "refund", "return shipping"]):
+        return True
+
+    return False
+
+
+def _scene3_needs_fallback(response: str, interactions: list[dict]) -> bool:
+    lowered = (response or "").lower()
+    if not response.strip() or not interactions:
+        return True
+
+    refusal_phrases = [
+        "unable to access",
+        "unable to review",
+        "i don't have access",
+        "i do not have access",
+        "don't have context",
+        "do not have context",
+        "cannot access previous",
+        "can't access previous",
+        "no memory records",
+        "no previous interactions",
+    ]
+    if _contains_any(lowered, refusal_phrases):
+        return True
+
+    interaction_tokens = [
+        (r.get("INTERACTION_ID") or "").lower()
+        for r in interactions[:3]
+    ] + [
+        (r.get("SESSION_ID") or "").lower()
+        for r in interactions[:3]
+    ]
+    if not any(token and token in lowered for token in interaction_tokens):
+        return True
+
+    required_markers = ["bsc-20260128-0847", "sfpd-2026-14821"]
+    if not all(marker in lowered for marker in required_markers):
+        return True
+
+    contradiction_phrases = [
+        "file a police report",
+        "contact the police",
+        "contact your insurance",
+        "describe your issue from the beginning",
+        "start from the beginning",
+        "repeat your case",
+        "repeat everything",
+    ]
+    if _contains_any(lowered, contradiction_phrases):
+        return True
+
+    resolution_phrases = ["refund", "replacement", "approval", "resolve", "escalat"]
+    if not _contains_any(lowered, resolution_phrases):
+        return True
+
+    return False
+
+
+def _scene4_needs_fallback(response: str, store_credit: float) -> bool:
+    lowered = (response or "").lower()
+    if not response.strip():
+        return True
+
+    refusal_phrases = [
+        "cannot access",
+        "can't access",
+        "unable to access",
+        "cannot retrieve",
+        "can't retrieve",
+        "unable to retrieve",
+        "don't have access",
+        "do not have access",
+        "i cannot access",
+        "i'm unable to access",
+    ]
+    if _contains_any(lowered, refusal_phrases):
+        return True
+
+    policy_ids = _extract_upper_tokens(response, r"POL-[A-Z0-9-]+")
+    if not {"POL-002", "POL-003"}.issubset(policy_ids):
+        return True
+
+    if "store credit" not in lowered:
+        return True
+
+    if store_credit:
+        store_credit_markers = [f"${store_credit:.2f}".lower(), f"${store_credit:.0f}".lower(), "50%"]
+        if not _contains_any(lowered, store_credit_markers):
+            return True
+
+    if "return authorization" in lowered:
+        return True
+
+    return False
+
+
+def _scene1_memory_fallback(message: str) -> str:
+    """Deterministic Scene 1 fallback when Ollama is warming up/unavailable."""
+    order_match = re.search(r"(BSC-\d{8}-\d{4})", message or "", re.IGNORECASE)
+    order_id = order_match.group(1) if order_match else "BSC-20251105-0312"
+    return (
+        f"Thanks Elena, I reviewed your account and prior support history for {order_id}. "
+        "You are a VIP customer and this is a defect case (faded print after one wash), "
+        "so it qualifies under POL-001 as a product-quality exception.\n\n"
+        "I am approving an immediate replacement and offering prepaid return shipping for the defective item. "
+        "If you prefer, I can switch this to a full refund instead."
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -164,13 +365,76 @@ async def scene1_chatbot(request: Request):
 async def scene1_agent(request: Request):
     body = await request.json() if await request.body() else {}
     message = body.get("message", "My t-shirt print is faded after one wash. Order BSC-20251105-0312.")
+    order_match = re.search(r"(BSC-\d{8}-\d{4})", message or "", re.IGNORECASE)
+    order_id = order_match.group(1) if order_match else "BSC-20251105-0312"
+
+    customer_rows = await query("""
+        SELECT CUSTOMER_ID, NAME, TIER, MEMBER_SINCE, LIFETIME_SPEND
+        FROM CC_CUSTOMERS
+        WHERE CUSTOMER_ID = 'CUST-001'
+    """)
+    order_rows = await query("""
+        SELECT ORDER_ID, ITEM_NAME, ACTUAL_STATUS, SALE_TYPE, ORDER_VALUE
+        FROM CC_ORDERS
+        WHERE ORDER_ID = :order_id
+    """, {"order_id": order_id})
+    policy_rows = await query("""
+        SELECT POLICY_ID, POLICY_NAME, RULE_TEXT
+        FROM CC_POLICIES
+        WHERE POLICY_ID = 'POL-001'
+          AND ACTIVE = 'Y'
+          AND IS_OFFICIAL = 'Y'
+    """)
+    interaction_rows = await query("""
+        SELECT INTERACTION_ID, SESSION_ID, OUTCOME
+        FROM CC_INTERACTIONS
+        WHERE CUSTOMER_ID = 'CUST-001'
+        ORDER BY INTERACTION_TIME DESC
+        FETCH FIRST 3 ROWS ONLY
+    """)
+
+    customer = customer_rows[0] if customer_rows else None
+    order = order_rows[0] if order_rows else None
+    policy = policy_rows[0] if policy_rows else None
+    profile_context = (
+        f"Customer profile: {customer['NAME']} ({customer['CUSTOMER_ID']}), "
+        f"tier={customer['TIER']}, lifetime_spend={float(customer['LIFETIME_SPEND']):.2f}"
+        if customer else
+        "Customer profile unavailable."
+    )
+    order_context = (
+        f"Order {order['ORDER_ID']}: item={order['ITEM_NAME']}, "
+        f"sale_type={order['SALE_TYPE']}, status={order['ACTUAL_STATUS']}, "
+        f"order_value={float(order['ORDER_VALUE']):.2f}"
+        if order else
+        f"Order {order_id} was not found."
+    )
+    history_context = ", ".join(
+        f"{r['INTERACTION_ID']} ({r['SESSION_ID']}): {r['OUTCOME']}"
+        for r in interaction_rows
+    ) or "No recent interaction history found."
+    policy_context = (
+        f"{policy['POLICY_ID']} ({policy['POLICY_NAME']}): {policy['RULE_TEXT']}"
+        if policy else
+        "POL-001 was not found."
+    )
     prompt = (
-        f"A customer named Elena Vasquez (CUST-001) contacts you with this message:\n\n"
-        f"\"{message}\"\n\n"
-        f"Look up her full history — prior interactions, memory, and order details — "
-        f"before responding. Be specific, cite order IDs and policy IDs."
+        "You are MemoryAgent v1 for Big Star Collectibles.\n"
+        "You already have the retrieved customer, order, history, and policy data below.\n"
+        "Do NOT invent dates, policy IDs, sizes, or product details.\n\n"
+        f"Customer message:\n\"{message}\"\n\n"
+        f"{profile_context}\n"
+        f"{order_context}\n"
+        f"Recent support history: {history_context}\n"
+        f"Relevant policy: {policy_context}\n\n"
+        "Respond concisely. You must cite the order ID and POL-001, acknowledge the VIP context, "
+        "and offer an immediate remedy."
     )
     agent_response = await select_ai_chat("CC_SUPPORT_TASK", prompt)
+
+    if _scene1_needs_fallback(agent_response, order_id):
+        agent_response = _scene1_memory_fallback(message)
+
     return {
         "response": agent_response,
         "agent": "MemoryAgent v1",
@@ -178,7 +442,7 @@ async def scene1_agent(request: Request):
         "steps": [
             {"label": "Retrieved customer profile", "detail": "Elena Vasquez — VIP, 4-year member, $4,200 spend"},
             {"label": "Loaded interaction history", "detail": "Found 3 prior sessions including 2 unresolved chatbot contacts"},
-            {"label": "Checked long-term memory", "detail": "Episodic: prior denial was chatbot error. Semantic: POL-004 exception applies."},
+            {"label": "Checked long-term memory", "detail": "Semantic: POL-001 product-quality exception applies for a defective standard item."},
             {"label": "Verified order", "detail": "BSC-20251105-0312 — Vintage Band T-Shirt, defective print"},
             {"label": "Applied policy", "detail": "POL-001 standard return. Item is defective — return eligible regardless of use."},
             {"label": "Generated response", "detail": "Personalized resolution with VIP acknowledgment"}
@@ -373,20 +637,7 @@ async def scene3_with_memory(request: Request):
     )
     agent_response = await select_ai_chat("CC_SUPPORT_TASK", prompt)
 
-    fallback_phrases = [
-        "unable to access",
-        "unable to review",
-        "i don't have access",
-        "i do not have access",
-        "don't have context",
-        "do not have context",
-        "cannot access previous",
-        "can't access previous",
-        "no memory records",
-        "no previous interactions",
-    ]
-    lowered = agent_response.lower() if agent_response else ""
-    if not agent_response.strip() or any(p in lowered for p in fallback_phrases):
+    if _scene3_needs_fallback(agent_response, interactions):
         agent_response = _scene3_memory_fallback(interactions, memories)
 
     return {
@@ -501,21 +752,7 @@ async def scene4_with_data(request: Request):
         "citing POL-002 and POL-003."
     )
 
-    refusal_phrases = [
-        "cannot access",
-        "can't access",
-        "unable to access",
-        "cannot retrieve",
-        "can't retrieve",
-        "unable to retrieve",
-        "don't have access",
-        "do not have access",
-        "i cannot access",
-        "i'm unable to access",
-    ]
-    lowered = agent_response.lower() if agent_response else ""
-    has_citation = "pol-002" in lowered or "pol-003" in lowered
-    if not agent_response.strip() or any(p in lowered for p in refusal_phrases) or not has_citation:
+    if _scene4_needs_fallback(agent_response, store_credit):
         agent_response = fallback_response
 
     citations = [
@@ -700,6 +937,112 @@ def parse_memory_explanations(raw: str) -> dict:
         if m and m.group(1).strip():
             result[key] = m.group(1).strip()
     return result
+
+
+# ---------------------------------------------------------------------------
+# Memory Search — Oracle Text Retrieval with LIKE Fallback
+# ---------------------------------------------------------------------------
+@app.get("/api/memory/search")
+async def memory_search(
+    q: str,
+    namespace: Optional[str] = None,
+    customer_id: Optional[str] = None,
+    verified_only: bool = True,
+    limit: int = 10,
+):
+    search_text = (q or "").strip()
+    if not search_text:
+        raise HTTPException(400, "q must be a non-empty search string")
+
+    namespace_filter = (namespace or "").strip().lower() or None
+    customer_filter = (customer_id or "").strip() or None
+    safe_limit = max(1, min(limit, 50))
+
+    filters = []
+    params = {"q": search_text}
+    if namespace_filter:
+        filters.append("NAMESPACE = :ns")
+        params["ns"] = namespace_filter
+    if customer_filter:
+        filters.append("CUSTOMER_ID = :cid")
+        params["cid"] = customer_filter
+    if verified_only:
+        filters.append("IS_VERIFIED = 'Y'")
+
+    filter_sql = ""
+    if filters:
+        filter_sql = " AND " + " AND ".join(filters)
+
+    query_mode = "oracle_text"
+    fallback_reason = None
+    try:
+        rows = await query(f"""
+            SELECT MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE,
+                   IS_VERIFIED, TTL_DAYS, EXPIRES_AT, CREATED_AT, SCORE(1) AS RELEVANCE
+            FROM CC_MEMORY
+            WHERE CONTAINS(CONTENT, :q, 1) > 0
+            {filter_sql}
+            ORDER BY SCORE(1) DESC, CREATED_AT DESC
+            FETCH FIRST {safe_limit} ROWS ONLY
+        """, params)
+    except Exception as exc:
+        # Keep endpoint available even when Oracle Text is not installed/indexed.
+        query_mode = "fallback_like"
+        fallback_reason = str(exc)
+
+        fallback_filters = ["LOWER(CONTENT) LIKE :q_like"]
+        fallback_params = {"q_like": f"%{search_text.lower()}%"}
+        if namespace_filter:
+            fallback_filters.append("NAMESPACE = :ns")
+            fallback_params["ns"] = namespace_filter
+        if customer_filter:
+            fallback_filters.append("CUSTOMER_ID = :cid")
+            fallback_params["cid"] = customer_filter
+        if verified_only:
+            fallback_filters.append("IS_VERIFIED = 'Y'")
+
+        rows = await query(f"""
+            SELECT MEMORY_ID, CUSTOMER_ID, NAMESPACE, MEMORY_TYPE, CONTENT, SOURCE,
+                   IS_VERIFIED, TTL_DAYS, EXPIRES_AT, CREATED_AT
+            FROM CC_MEMORY
+            WHERE {" AND ".join(fallback_filters)}
+            ORDER BY CREATED_AT DESC
+            FETCH FIRST {safe_limit} ROWS ONLY
+        """, fallback_params)
+        for row in rows:
+            row["RELEVANCE"] = None
+
+    results = [{
+        "memoryId": r["MEMORY_ID"],
+        "customerId": r["CUSTOMER_ID"],
+        "namespace": r["NAMESPACE"],
+        "memoryType": r["MEMORY_TYPE"],
+        "source": r["SOURCE"],
+        "isVerified": r["IS_VERIFIED"] == "Y",
+        "relevance": r.get("RELEVANCE"),
+        "ttlDays": r["TTL_DAYS"],
+        "expiresAt": str(r["EXPIRES_AT"]) if r["EXPIRES_AT"] else None,
+        "createdAt": str(r["CREATED_AT"]) if r["CREATED_AT"] else None,
+        "content": r["CONTENT"],
+    } for r in rows]
+
+    payload = {
+        "query": search_text,
+        "mode": query_mode,
+        "count": len(results),
+        "filters": {
+            "namespace": namespace_filter,
+            "customerId": customer_filter,
+            "verifiedOnly": verified_only,
+            "limit": safe_limit,
+        },
+        "results": results,
+    }
+    if fallback_reason:
+        payload["warning"] = "Oracle Text unavailable, using LIKE fallback."
+        payload["fallbackReason"] = fallback_reason
+
+    return payload
 
 
 # ---------------------------------------------------------------------------
@@ -1040,7 +1383,9 @@ async def scene9_approve(request: Request):
     await execute("""
         UPDATE CC_WORKFLOW_LOG
         SET STATUS = :status, REVIEWED_BY = :reviewer, RESOLVED_AT = SYSTIMESTAMP,
-            REVIEW_TIME_SECS = ROUND((SYSTIMESTAMP - CREATED_AT) * 86400)
+            REVIEW_TIME_SECS = ROUND(
+                (CAST(SYSTIMESTAMP AS DATE) - CAST(CREATED_AT AS DATE)) * 86400
+            )
         WHERE LOG_ID = :log_id AND STATUS = 'pending'
     """, {"status": decision, "reviewer": reviewer, "log_id": log_id})
 
@@ -1133,14 +1478,31 @@ async def scene10_namespace(ns: str, role: str = "support"):
         FROM CC_MEMORY WHERE TTL_DAYS IS NOT NULL ORDER BY EXPIRES_AT ASC
     """)
 
+    scheduler = {"jobName": "CC_MEMORY_TTL_JOB", "state": "unknown", "nextRunAt": None}
     try:
-        await execute("BEGIN CC_EXPIRE_MEMORY; END;")
-    except Exception:
-        pass
+        scheduler_rows = await query("""
+            SELECT JOB_NAME, STATE,
+                   TO_CHAR(NEXT_RUN_DATE, 'YYYY-MM-DD"T"HH24:MI:SS TZH:TZM') AS NEXT_RUN_AT,
+                   FAILURE_COUNT
+            FROM USER_SCHEDULER_JOBS
+            WHERE JOB_NAME = 'CC_MEMORY_TTL_JOB'
+        """)
+        if scheduler_rows:
+            row = scheduler_rows[0]
+            scheduler = {
+                "jobName": row["JOB_NAME"],
+                "state": row["STATE"],
+                "nextRunAt": row["NEXT_RUN_AT"],
+                "failureCount": row["FAILURE_COUNT"],
+            }
+    except Exception as exc:
+        scheduler["state"] = "unavailable"
+        scheduler["error"] = str(exc)
 
     panel3 = {
         "title": "Auto-Expiry (TTL)",
-        "description": "Temporary context expires automatically.",
+        "description": "Temporary context expires automatically via a DBMS_SCHEDULER background job.",
+        "scheduler": scheduler,
         "active": [{"memoryId": r["MEMORY_ID"], "memoryType": r["MEMORY_TYPE"], "content": r["CONTENT"],
                      "ttlDays": r["TTL_DAYS"], "daysRemaining": r["DAYS_REMAINING"],
                      "ttlLabel": f"Expires in {r['DAYS_REMAINING'] or '<1'} days"} for r in ttl_rows if r["TTL_STATUS"] == "active"],

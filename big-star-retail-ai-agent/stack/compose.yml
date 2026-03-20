@@ -1,21 +1,10 @@
 # =============================================================================
 # Big Star Collectibles — Course Companion App
-# Pod-in-Container (PinC) Architecture — Podman Compose
+# Single compose stack. No parent PinC wrapper.
 #
-# Services:
-#   db         — Oracle 26ai Free (converged database)
-#   ords       — Oracle REST Data Services
-#   ollama     — Local LLM engine
-#   init-brain — One-shot: waits for Ollama, pulls model
-#   app        — Python FastAPI backend + HTML dashboard
-#
-# Run:  podman-compose up -d
-# Stop: podman-compose down
+# Run:  podman compose up -d
+# Stop: podman compose down
 # =============================================================================
-
-networks:
-  hub-net:
-    driver: bridge
 
 volumes:
   oracle-data:
@@ -23,13 +12,8 @@ volumes:
   ollama-models:
 
 services:
-
-  # ---------------------------------------------------------------------------
-  # Oracle 26ai Free — Converged Database
-  # ---------------------------------------------------------------------------
   db:
     image: container-registry.oracle.com/database/free:latest
-    container_name: bsc-db
     env_file: .env
     environment:
       ORACLE_PWD: ${ORACLE_PWD}
@@ -39,8 +23,6 @@ services:
     volumes:
       - oracle-data:/opt/oracle/oradata
       - ./init.sql:/opt/oracle/scripts/startup/init.sql:ro,Z
-    networks:
-      - hub-net
     healthcheck:
       test: ["CMD-SHELL", "echo 'SELECT 1 FROM dual;' | sqlplus -s system/${ORACLE_PWD}@localhost:1521/FREEPDB1 || exit 1"]
       interval: 30s
@@ -49,15 +31,11 @@ services:
       start_period: 120s
     restart: unless-stopped
 
-  # ---------------------------------------------------------------------------
-  # Oracle REST Data Services (ORDS)
-  # ---------------------------------------------------------------------------
   ords:
     image: container-registry.oracle.com/database/ords:latest
-    container_name: bsc-ords
     environment:
-      CONN_STRING: bsc-db:1521/FREEPDB1
-      DBHOST: bsc-db
+      CONN_STRING: db:1521/FREEPDB1
+      DBHOST: db
       DBPORT: 1521
       DBSERVICENAME: FREEPDB1
       ORACLE_PWD: ${ORACLE_PWD}
@@ -65,8 +43,6 @@ services:
       - "8181:8080"
     volumes:
       - ords-config:/etc/ords/config
-    networks:
-      - hub-net
     depends_on:
       db:
         condition: service_healthy
@@ -78,79 +54,61 @@ services:
       start_period: 60s
     restart: unless-stopped
 
-  # ---------------------------------------------------------------------------
-  # Ollama — Local LLM Engine
-  # ---------------------------------------------------------------------------
   ollama:
     image: docker.io/ollama/ollama:latest
-    container_name: bsc-ollama
-    ports:
-      - "11434:11434"
     volumes:
       - ollama-models:/root/.ollama
-    networks:
-      - hub-net
     healthcheck:
-      test: ["CMD-SHELL", "ollama list >/dev/null 2>&1 || exit 1"]
+      test: ["CMD-SHELL", "ollama list > /dev/null 2>&1 || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 15
-      start_period: 30s
+      retries: 12
+      start_period: 20s
     restart: unless-stopped
 
-  # ---------------------------------------------------------------------------
-  # Init Brain — One-Shot: Wait for Ollama, Pull Model
-  # ---------------------------------------------------------------------------
   init-brain:
     image: docker.io/curlimages/curl:latest
-    container_name: bsc-init-brain
-    networks:
-      - hub-net
-    depends_on:
-      ollama:
-        condition: service_healthy
     entrypoint: ["sh", "-c"]
     command:
       - |
         echo ">>> Waiting for Ollama API..."
-        until curl -sf http://bsc-ollama:11434/api/tags > /dev/null 2>&1; do
+        until curl -sf http://ollama:11434/api/tags > /dev/null 2>&1; do
           sleep 2
         done
         echo ">>> Ollama ready. Pulling gemma:2b..."
-        curl -sfS http://bsc-ollama:11434/api/pull \
+        curl -sfS http://ollama:11434/api/pull \
           -H 'Content-Type: application/json' \
           -d '{"name":"gemma:2b","stream":false}' > /dev/null
-        curl -sfS http://bsc-ollama:11434/api/tags | grep -q '"name":"gemma:2b"'
+        curl -sfS http://ollama:11434/api/tags | grep -q '"name":"gemma:2b"'
+        echo ">>> Warming up gemma:2b..."
+        curl -sfS http://ollama:11434/api/chat \
+          -H 'Content-Type: application/json' \
+          -d '{"model":"gemma:2b","messages":[{"role":"user","content":"ping"}],"stream":false,"keep_alive":"30m"}' > /dev/null
         echo ">>> Model pull complete."
+    depends_on:
+      ollama:
+        condition: service_healthy
     restart: "no"
 
-  # ---------------------------------------------------------------------------
-  # FastAPI App — Backend + Dashboard
-  # ---------------------------------------------------------------------------
   app:
     build:
       context: .
       dockerfile: Containerfile
-    container_name: bsc-app
     env_file: .env
     environment:
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
-      DB_DSN: ${DB_DSN:-bsc-db:1521/FREEPDB1}
-      OLLAMA_HOST: ${OLLAMA_HOST:-http://bsc-ollama:11434}
-      ORDS_HOST: ${ORDS_HOST:-http://bsc-ords:8080}
+      DB_DSN: ${DB_DSN:-db:1521/FREEPDB1}
+      OLLAMA_HOST: ${OLLAMA_HOST:-http://ollama:11434}
+      ORDS_HOST: ${ORDS_HOST:-http://ords:8080}
     ports:
       - "5500:8000"
-    volumes:
-      - ./main.py:/app/main.py:ro,Z
-      - ./seeder.py:/app/seeder.py:ro,Z
-      - ./templates:/app/templates:ro,Z
-    networks:
-      - hub-net
     depends_on:
       db:
         condition: service_healthy
       ords:
+        condition: service_healthy
+      ollama:
         condition: service_healthy
       init-brain:
         condition: service_completed_successfully
