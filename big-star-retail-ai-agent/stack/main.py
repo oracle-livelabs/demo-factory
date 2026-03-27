@@ -323,7 +323,7 @@ def _scene1_memory_fallback(message: str) -> str:
 # ---------------------------------------------------------------------------
 @app.get("/", response_class=HTMLResponse)
 async def serve_dashboard(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
+    return templates.TemplateResponse(request, "index.html")
 
 
 @app.get("/api/health")
