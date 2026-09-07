@@ -1,0 +1,2 @@
+center_id,center_name,center_type,address_line1,city,state_province,postal_code,country,latitude,longitude,capacity_units,current_load_pct,is_active,operating_hours,created_at
+1,Edison Wealth Service Center,Regional Processing,100 Financial Services Way,Edison,NJ,08817,US,40.5187,-74.4121,500000,63.5,1,08:00-18:00,2026-04-01T06:00:00Z

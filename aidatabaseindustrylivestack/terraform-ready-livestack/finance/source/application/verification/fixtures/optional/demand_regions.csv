@@ -1,0 +1,2 @@
+region_id,region_name,region_type,boundary,population,avg_income,social_density,demand_index,updated_at
+1,"Bay Area (SF)",metro,"POLYGON((-122.5 37.7,-122.3 37.7,-122.3 37.9,-122.5 37.9,-122.5 37.7))",4700000,112000,24.7,95,2026-04-12T12:00:00Z

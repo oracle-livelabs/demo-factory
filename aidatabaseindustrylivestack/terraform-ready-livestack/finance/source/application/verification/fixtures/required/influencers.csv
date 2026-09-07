@@ -1,0 +1,3 @@
+influencer_id,handle,display_name,platform,follower_count,engagement_rate,influence_score,niche,city,region,country,is_verified,created_at
+1,@sec_updates_01,Regulatory Intelligence Stream - SEC 01,instagram,54000,0.045,72,SEC,New York,NY,US,1,2026-01-01T08:00:00Z
+2,@finra_watch_01,FINRA Monitoring Feed 01,tiktok,88000,0.051,81,FINRA,Los Angeles,CA,US,1,2026-02-20T10:00:00Z

@@ -1,0 +1,296 @@
+title: Finance LiveStack on OCI
+description: Deploy the Finance LiveStack with Autonomous Database 26ai Select AI, OCI Generative AI, and one Podman application VM.
+stackDescription: One Resource Manager stack creates the network, ADB, application VM, Finance schema and data, an ADB Select AI profile, native read-only agent teams, and the running application.
+informationalText: Run Plan first. Select the identity domain that contains the Resource Manager operator. Apply remains in progress while the VM creates a stack-specific API signing key, Terraform registers only its public key through that domain's self-service MyApiKey API, and ADB completes live Select AI acceptance checks. The user must have permission to call OCI Generative AI and one free API-key slot in that domain. The application is an unauthenticated demo, so its ingress must remain restricted to a trusted IPv4 CIDR. Destroy removes the registered public key with the stack.
+schemaVersion: 1.1.0
+version: "20260904-v12"
+locale: en
+
+variableGroups:
+  - title: Location and access
+    visible: true
+    variables:
+      - region
+      - compartment_ocid
+      - identity_domain_ocid
+      - availability_domain
+      - stack_name
+      - ssh_public_key
+      - ssh_ingress_cidr
+      - app_ingress_cidr
+      - bootstrap_generation
+
+  - title: Compute sizing
+    visible: true
+    variables:
+      - vm_shape
+      - vm_ocpus
+      - vm_memory_gbs
+
+  - title: Database and AI
+    visible: true
+    variables:
+      - adb_license_model
+      - adb_compute_count
+      - adb_storage_tbs
+      - adb_admin_password
+      - model_object_uri
+      - oci_genai_region
+      - oci_genai_model
+
+variables:
+  # Resource Manager prepopulates these standard variables from the stack
+  # execution identity. They are hidden because users must not paste alternate
+  # tenancy or user OCIDs into the API-key registration flow.
+  tenancy_ocid:
+    type: string
+    required: true
+    visible: false
+
+  current_user_ocid:
+    type: string
+    required: true
+    visible: false
+
+  region:
+    type: oci:identity:region:name
+    required: true
+    title: Region
+    description: OCI region where the complete LiveStack will be created.
+
+  compartment_ocid:
+    type: oci:identity:compartment:id
+    required: true
+    title: Compartment
+    description: All resources created by this stack stay in this compartment.
+
+  identity_domain_ocid:
+    type: oci:identity:domains:id
+    required: true
+    title: Operator identity domain
+    description: Select the identity domain that contains the OCI user running this stack (for example, Oracle-SSO). Plan verifies self-service API-key access and an available key slot.
+    dependsOn:
+      compartmentId: ${tenancy_ocid}
+
+  availability_domain:
+    type: oci:identity:availabilitydomain:name
+    required: true
+    title: Availability domain
+    description: Availability domain for the application VM.
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  stack_name:
+    type: string
+    required: true
+    title: Resource name prefix
+    description: Short name used to identify every resource created by this stack.
+    default: finance-livestack
+    pattern: ^[A-Za-z][A-Za-z0-9-]{2,29}$
+
+  ssh_public_key:
+    type: oci:core:ssh:publickey
+    required: true
+    title: SSH public key
+    description: Public key used for opc access to the application VM.
+    maxLength: 4096
+    additionalProps:
+      allowMultiple: false
+
+  ssh_ingress_cidr:
+    type: string
+    required: true
+    title: SSH source CIDR
+    description: From the computer, VPN, or bastion you will SSH from, run curl -4 https://api.ipify.org and append /32 (for example, 203.0.113.10/32). Only /24 through /32 are accepted.
+    pattern: '^[0-9.]+/(2[4-9]|3[0-2])$'
+
+  app_ingress_cidr:
+    type: string
+    required: true
+    title: Application source CIDR
+    description: Security boundary for the unauthenticated Finance demo on port 8505. For normal Internet access, use the trusted client's public egress IPv4 plus /32 (run curl -4 https://api.ipify.org). An RFC1918 address such as 192.168.x.x works only when traffic really arrives through a connected private network.
+    pattern: '^([0-9]{1,3}\.){3}[0-9]{1,3}/(2[4-9]|3[0-2])$'
+
+  bootstrap_generation:
+    type: number
+    required: true
+    title: Bootstrap repair generation
+    description: Leave at 1. Increment only to rotate expired object-scoped callbacks and rebuild the one-shot application VM after drift or a failed repair.
+    default: 1
+    minimum: 1
+    maximum: 9999
+
+  vm_shape:
+    type: oci:core:instanceshape:name
+    required: true
+    title: Application VM shape
+    description: Flexible shape for the VM that runs the Finance application container and Apply-time ADB bootstrap.
+    default: VM.Standard.E4.Flex
+    pattern: ^VM\..*\.Flex$
+    dependsOn:
+      compartmentId: ${compartment_ocid}
+
+  vm_ocpus:
+    type: number
+    required: true
+    title: VM OCPUs
+    description: OCPUs assigned to the flexible application VM.
+    default: 2
+    minimum: 1
+    maximum: 64
+
+  vm_memory_gbs:
+    type: number
+    required: true
+    title: VM memory in GB
+    description: Memory assigned to the application VM. OCI Generative AI removes the need for local model-serving memory.
+    default: 16
+    minimum: 8
+    maximum: 1024
+
+  adb_license_model:
+    type: enum
+    required: true
+    title: Autonomous Database license model
+    description: Choose the license model available in the target tenancy.
+    default: LICENSE_INCLUDED
+    enum:
+      - LICENSE_INCLUDED
+      - BRING_YOUR_OWN_LICENSE
+
+  adb_compute_count:
+    type: number
+    required: true
+    title: Autonomous Database ECPUs
+    description: ECPU count for the Oracle AI Database 26ai Autonomous Database.
+    default: 2
+    minimum: 2
+    maximum: 512
+
+  adb_storage_tbs:
+    type: number
+    required: true
+    title: Autonomous Database storage in TB
+    default: 1
+    minimum: 1
+
+  adb_admin_password:
+    type: string
+    sensitive: true
+    required: false
+    title: Autonomous Database ADMIN password
+    description: Optional. Leave blank to generate a password. If supplied, use 12-30 characters with an uppercase letter, lowercase letter, and number; do not use quotes, spaces, or the word admin.
+    # This JavaScript-compatible pattern intentionally accepts blank input so
+    # Terraform can select the generated-password fallback.
+    pattern: '^(?:$|(?=.{12,30}$)(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?!.*[aA][dD][mM][iI][nN])[^\s''"]+)$'
+
+  model_object_uri:
+    type: string
+    sensitive: true
+    required: true
+    title: ADB embedding model URI
+    description: Bundled default for all-MiniLM-L12-v2.onnx. This value is prefilled; customers do not need to change it.
+    default: "https://adwc4pm.objectstorage.us-ashburn-1.oci.customer-oci.com/p/eLddQappgBJ7jNi6Guz9m9LOtYe2u8LWY19GfgU8flFK4N9YgP4kTlrE9Px3pE12/n/adwc4pm/b/OML-Resources/o/all_MiniLM_L12_v2.onnx"
+    # Resource Manager evaluates this in the browser, where POSIX classes such
+    # as [:space:] are not supported. Keep it JavaScript-compatible so direct
+    # Object Storage/PAR URLs validate before Plan.
+    pattern: '^https://[^\s''"]+$'
+
+  oci_genai_region:
+    type: enum
+    required: true
+    title: OCI Generative AI region
+    description: Destination region for ADB Select AI calls. Only regions offering Cohere Command A in on-demand mode are listed.
+    default: us-chicago-1
+    enum:
+      - us-chicago-1
+      - eu-frankfurt-1
+      - uk-london-1
+      - sa-saopaulo-1
+      - ap-osaka-1
+      - ap-hyderabad-1
+      - me-riyadh-1
+
+  oci_genai_model:
+    type: enum
+    required: true
+    title: OCI Generative AI model
+    description: On-demand chat model used by the ADB Select AI profile.
+    default: cohere.command-a-03-2025
+    enum:
+      - cohere.command-a-03-2025
+
+outputs:
+  application_url:
+    type: link
+    title: Finance LiveStack
+    displayText: Open the Finance application (port 8505 included)
+    visible: true
+
+  next_step:
+    type: string
+    title: Next step
+    visible: true
+
+  application_health_url:
+    type: link
+    title: Application health
+    displayText: Open the database-backed health endpoint
+    visible: true
+
+  application_ssh_command:
+    type: string
+    title: SSH command
+    visible: true
+
+  first_boot_status_command:
+    type: string
+    title: Bootstrap status command
+    visible: true
+
+  bootstrap_log_command:
+    type: string
+    title: Bootstrap log command
+    visible: true
+
+  autonomous_database_name:
+    type: string
+    title: Autonomous Database
+    visible: true
+
+  autonomous_database_service:
+    type: string
+    title: Database service
+    visible: true
+
+  select_ai_api_key_fingerprint:
+    type: string
+    title: Stack-created OCI API-key fingerprint
+    visible: true
+
+  first_boot_note:
+    type: string
+    title: Next step
+    visible: true
+
+outputGroups:
+  - title: Application access
+    outputs:
+      - next_step
+      - application_url
+      - application_health_url
+      - application_ssh_command
+
+  - title: Deployment verification
+    outputs:
+      - first_boot_note
+      - first_boot_status_command
+      - bootstrap_log_command
+      - select_ai_api_key_fingerprint
+
+  - title: Database details
+    outputs:
+      - autonomous_database_name
+      - autonomous_database_service
+
+primaryOutputButton: application_url

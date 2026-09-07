@@ -1,0 +1,15 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tfvars
+*.generated.zip
+finance-wallet.generated.zip
+payload/
+dist/
+node_modules/
+__pycache__/
+*.pyc
+application/frontend/public/jet/
+application/frontend/dist/
+.DS_Store

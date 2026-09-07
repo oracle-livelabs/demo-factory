@@ -1,0 +1,2 @@
+shipment_id,order_id,center_id,carrier,tracking_number,ship_status,distance_km,estimated_hours,ship_cost,routed_at,completed_at,created_at
+1,1,1,SecureCourier,FIN000000000001,in_transit,12.5,1.5,9.99,2026-04-12T08:00:00Z,,2026-04-12T08:00:00Z

@@ -1,0 +1,2 @@
+forecast_id,product_id,region,forecast_date,predicted_demand,confidence_low,confidence_high,social_factor,model_version,explanation,created_at
+1,1,Bay Area (SF),2026-04-14,150,120,180,1.25,signal_aware_v2,"{""model"":""signal_aware_v2"",""drivers"":[""rate_move"",""client_exposure_shift"",""branch_capacity_pressure""],""top_signal_source"":""Regulatory Intelligence Stream - SEC 01"",""criticality_score"":68,""confidence"":""medium"",""trend"":""accelerating""}",2026-04-12T12:00:00Z
