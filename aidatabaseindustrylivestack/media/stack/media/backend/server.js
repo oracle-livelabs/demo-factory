@@ -36,6 +36,8 @@ const {
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+const frontendUrl = String(process.env.FRONTEND_URL || '').trim();
+const frontendUsesHttps = /^https:\/\//i.test(frontendUrl);
 const serveBuiltFrontend = ['production', 'test'].includes(
   String(process.env.NODE_ENV || '').toLowerCase()
 );
@@ -64,6 +66,7 @@ function setNoStoreHeaders(res) {
 
 // ── Middleware ──────────────────────────────────────────────
 app.use(helmet({
+  strictTransportSecurity: frontendUsesHttps,
   contentSecurityPolicy: {
     directives: {
       defaultSrc: ["'self'"],
@@ -75,6 +78,7 @@ app.use(helmet({
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       frameAncestors: ["'none'"],
+      ...(frontendUsesHttps ? {} : { upgradeInsecureRequests: null }),
     },
   },
 }));

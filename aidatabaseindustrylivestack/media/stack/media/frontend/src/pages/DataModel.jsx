@@ -210,15 +210,11 @@ export default function DataModel() {
   const [demoProgress, setDemoProgress] = useState(0);
   const [demoMessage, setDemoMessage] = useState('');
   const [restoreCounts, setRestoreCounts] = useState(null);
-  const [nativeJsonAuditEvidence, setNativeJsonAuditEvidence] = useState(null);
   const [statusError, setStatusError] = useState(null);
-  const [evidenceError, setEvidenceError] = useState(null);
   const [loadedGroupPage, setLoadedGroupPage] = useState(0);
   const { beginRequest, isCurrent, boundaryKey } = useGenerationRequestGuard(() => {
     setStatus(null);
-    setNativeJsonAuditEvidence(null);
     setStatusError(null);
-    setEvidenceError(null);
     setRestoreCounts(null);
     setDemoDone(false);
   });
@@ -244,22 +240,10 @@ export default function DataModel() {
       if (!isCurrent(requestToken)) return null;
       setStatus(data);
       setStatusError(null);
-      try {
-        const evidence = await api.dashboard.nativeJsonAuditEvidence();
-        if (!isCurrent(requestToken)) return data;
-        setNativeJsonAuditEvidence(evidence);
-        setEvidenceError(null);
-      } catch (evidenceFailure) {
-        if (isCurrent(requestToken)) {
-          setNativeJsonAuditEvidence(null);
-          setEvidenceError(evidenceFailure);
-        }
-      }
       return data;
     } catch (statusFailure) {
       if (!isCurrent(requestToken)) return null;
       setStatus(null);
-      setNativeJsonAuditEvidence(null);
       setStatusError(statusFailure);
       return null;
     }
@@ -296,12 +280,6 @@ export default function DataModel() {
     }
     return restoreCountsToStatus(null, status);
   }, [demoRunning, restoreCounts, status]);
-  const evidenceUnavailableTitle = evidenceError?.feature === 'NATIVE_JSON'
-    ? 'Native JSON evidence is unavailable'
-    : evidenceError?.feature === 'UNIFIED_AUDIT'
-      ? 'Unified Audit evidence is unavailable'
-      : 'Current-generation JSON and audit evidence is unavailable';
-
   const showingProjectedCounts = demoRunning && hasCountData(restoreCounts);
 
   const totalArtifacts = useMemo(() => {
@@ -464,45 +442,6 @@ export default function DataModel() {
           </p>
         </div>
       )}
-
-      <div className="glass-card p-4" data-testid="native-json-audit-evidence">
-        <h3 className="font-semibold mb-2">Current-generation JSON and audit evidence</h3>
-        {nativeJsonAuditEvidence ? (
-          <div className="text-sm text-[var(--color-text-dim)] space-y-1">
-            <p>Generation: <code>{nativeJsonAuditEvidence.generationId}</code></p>
-            <p>
-              Native JSON: {nativeJsonAuditEvidence.nativeJson.productCount} product documents,
-              {' '}{nativeJsonAuditEvidence.nativeJson.eventCount} serialized event documents,
-              and {nativeJsonAuditEvidence.nativeJson.socialPayloadCount} governed social payloads
-              via {nativeJsonAuditEvidence.nativeJson.executedOperator}.
-            </p>
-            <p>
-              Unified Audit: {nativeJsonAuditEvidence.unifiedAudit.allowedAction} allowed and
-              {' '}{nativeJsonAuditEvidence.unifiedAudit.deniedAction} execution-backed VPD denial
-              for <code>fm_west_maria</code>, with exact
-              {' '}<code>{nativeJsonAuditEvidence.unifiedAudit.denialOracle}</code>
-              {' '}(return code {nativeJsonAuditEvidence.unifiedAudit.unifiedAuditDeniedReturnCode}).
-              The existing Admin target remained unchanged:
-              {' '}{String(nativeJsonAuditEvidence.unifiedAudit.unifiedAuditTargetUnchanged)}.
-            </p>
-          </div>
-        ) : (
-          evidenceError ? (
-            <div role="alert">
-              <p className="text-sm font-semibold tone-red">
-                {evidenceUnavailableTitle}
-              </p>
-              <p className="text-xs text-[var(--color-text-dim)] mt-1">
-                {evidenceError.message}
-              </p>
-            </div>
-          ) : (
-            <p className="text-sm text-[var(--color-text-dim)]">
-              Current-generation evidence is loading.
-            </p>
-          )
-        )}
-      </div>
 
       <SceneStoryPanel scene="datamodel" />
 
