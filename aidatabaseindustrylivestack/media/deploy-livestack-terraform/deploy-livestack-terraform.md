@@ -55,7 +55,9 @@ The diagram below shows the main deployment and runtime paths.
 
 2. Select the following button to open the stack-creation page with the Media Terraform package already selected:
 
-    [![Deploy to Oracle Cloud](https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg)](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/media/media-livestack-terraform.zip)
+    <a href="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/media/media-livestack-terraform.zip" target="_blank" rel="noopener">
+      <img src="https://oci-resourcemanager-plugin.plugins.oci.oraclecloud.com/latest/deploy-to-oracle-cloud.svg" alt="Deploy to Oracle Cloud">
+    </a>
 
 3. On the **Create stack** page, confirm that the **Package URL** identifies `media-livestack-terraform.zip`. No local download or ZIP upload is required.
 
