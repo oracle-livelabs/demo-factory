@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The LiveStack can run locally with Podman, but the same demo can also run in your own OCI tenancy. In this lab, you use a **Deploy to Oracle Cloud** link to open an approved Terraform package directly in **OCI Resource Manager**, review the proposed infrastructure, deploy the application, and open it from the Resource Manager outputs.
+The LiveStack can run locally with Podman, but the same demo can also run in your own OCI tenancy. In this lab, you use a **Deploy to Oracle Cloud** button to open an approved Terraform package directly in **OCI Resource Manager**, review the proposed infrastructure, deploy the application, and open it from the Resource Manager outputs.
 
 The Terraform package creates the network, an Oracle Linux application VM, a private Object Storage delivery bucket, and an Oracle Autonomous AI Database 26ai instance. During first boot, the VM loads the application schema and synthetic demo data, configures native Select AI with OCI Generative AI, and starts the application on port **8505**.
 
@@ -14,7 +14,7 @@ Estimated time: **45-90 minutes**, including database provisioning and applicati
 
 In this lab, you will:
 
-- Open a Resource Manager stack from the approved Deploy to Oracle Cloud link.
+- Open a Resource Manager stack from the approved Deploy to Oracle Cloud button.
 - Configure the stack variables for your tenancy, network access, VM, database, and AI region.
 - Review the configured variables before running Apply.
 - Run Apply and wait for the application health check to pass.
@@ -47,15 +47,15 @@ The diagram below shows the main deployment and runtime paths.
 
 ![Powtoon-style generic LiveStack architecture showing OCI Resource Manager, networking, an application VM, Autonomous AI Database, Object Storage, and OCI Generative AI](images/livestack-architecture.png)
 
-## Task 1: Open the Resource Manager deployment link
+## Task 1: Open the Resource Manager deployment button
 
-> **Release note:** The Deploy to Oracle Cloud link below references the approved Resource Manager package for this lab. Each lab variant must use its own release-owner-approved package URL. Keep the package URL stable and accessible to OCI Resource Manager.
+> **Release note:** The Deploy to Oracle Cloud button below references the approved Resource Manager package for this lab. Each lab variant must use its own release-owner-approved package URL. Keep the package URL stable and accessible to OCI Resource Manager.
 
 1. Sign in to the OCI Console, if prompted.
 
-2. Select the following link to open the stack-creation page with the Finance Terraform package already selected:
+2. Select the following button to open the stack-creation page with the Finance Terraform package already selected:
 
-    [Deploy the Finance LiveStack with OCI Resource Manager](https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/finance/finance-livestack-terraform.zip)
+    <a href="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/finance/finance-livestack-terraform.zip" target="_blank" rel="noopener" style="display: inline-block; padding: 8px 14px; background: #312d2a; border: 1px solid #312d2a; border-radius: 3px; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px; font-weight: 600; line-height: 20px; text-decoration: none;">Deploy to Oracle Cloud</a>
 
 3. On the **Create stack** page, confirm that the **Package URL** identifies `finance-livestack-terraform.zip`. No local download or ZIP upload is required.
 
@@ -189,7 +189,7 @@ Expected result:
 
 3. Review the job log and resource list. Confirm that the API key, application VM, Autonomous Database, VCN, callback objects, and private delivery bucket are removed.
 
-4. If you need the demo again later, use the deployment link again and run Plan before Apply.
+4. If you need the demo again later, use the deployment button again and run Plan before Apply.
 
 Expected result:
 

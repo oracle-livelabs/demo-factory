@@ -189,7 +189,7 @@ Expected result:
 
 3. Review the job log and resource list. Confirm that the API key, application VM, Autonomous Database, VCN, callback objects, and private delivery bucket are removed.
 
-4. If you need the demo again later, use the deployment link again and run Plan before Apply.
+4. If you need the demo again later, use the deployment button again and run Plan before Apply.
 
 Expected result:
 
