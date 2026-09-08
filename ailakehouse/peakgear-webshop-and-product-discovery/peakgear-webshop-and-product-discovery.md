@@ -2,11 +2,13 @@
 
 ## Introduction
 
-**PeakGear** customers do not always shop with clean product names, SKUs, or catalog categories. This scene moves from internal business users to a customer-facing AI experience.
+**PeakGear** customers do not always search with a product name, SKU, or catalog category. This scene shows a customer-facing experience built on prepared product, image, inventory, and order data.
 
-The **AI Lakehouse** changes that experience. The shopper sees search and support features, but those features depend on prepared product, image, inventory, and order data behind the scenes.
+The shopper can search by intent, search with an image, and resolve an order issue with **Ask PeakGear**.
 
-The business outcome is a better retail experience: shoppers can find products by intent, use images as a search input, and resolve product issues through an agent workflow that can verify order context and recommend a replacement path.
+These features help shoppers find relevant products and give support teams order context when a product issue needs a replacement.
+
+**Oracle AI Vector Search** uses in-database embeddings for text and image searches. **Ask PeakGear** uses the prepared product and order data to suggest a replacement.
 
 Estimated Time: **10 minutes**
 
@@ -14,29 +16,28 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open **PeakGear Webshop** from the **Serve AI** menu.
-- Search for products by shopper intent.
-- Use image similarity to find visually related products.
-- Use **Ask PeakGear** for a product-support and replacement scenario.
-- Connect the webshop experience to the medallion process and Gold-layer product data.
+- Find products with a plain-language search.
+- Use an image to find similar products.
+- Use **Ask PeakGear** to resolve an order issue.
+- See how prepared product data supports the shopper experience.
 
 ## Task 1: Open PeakGear Webshop
 
 ![Sidebar navigation showing Serve AI and PeakGear Webshop](images/task-1-open-peakgear-webshop.png)
 
-Perform the following set of steps to open **PeakGear Webshop**:
+Open **PeakGear Webshop**:
 
 1. In the left sidebar, expand **Serve AI**.
 2. Select **PeakGear Webshop**.
 3. Confirm that the page title is **PeakGear Webshop**.
 
-This page is a Serve AI outcome because the shopper experience uses governed product, image, inventory, and order data that has already been prepared through the AI Lakehouse process.
+This page is a Serve AI experience built on product, image, inventory, and order data prepared through the AI Lakehouse process.
 
 ## Task 2: Search by shopper intent
 
 ![PeakGear Webshop semantic search field with trail running query](images/task-2-semantic-search.png)
 
-Perform the following set of steps to search by shopper intent:
+Search by shopper intent:
 
 1. In **Meaning Search**, enter:
 
@@ -48,20 +49,20 @@ Perform the following set of steps to search by shopper intent:
 3. Review the ranked product cards.
 4. Explain that the shopper did not need to know an exact product name or SKU.
 
-Semantic search turns product discovery into an intent-based experience. The webshop can compare the shopper's language to curated catalog descriptions and product embeddings served from the lakehouse foundation.
+The webshop compares the shopper's words with product descriptions and uses in-database embeddings and vector search to rank relevant products.
 
 ## Task 3: Search with a product image
 
 ![PeakGear Webshop visual search upload and similar product results](images/task-3-visual-search.png)
 
-Perform the following set of steps to search with a product image:
+Search with a product image:
 
 1. In **Visual Search**, click **Upload JPG or PNG**.
 2. Upload a product image, such as the Ironkinetic grip tape image used in this demo.
 3. Click **Find Similar**.
 4. Review the visual matches.
 
-Visual search shows how images can become part of the same governed product discovery experience. Product images are not just static assets; after the medallion process prepares the catalog and image metadata, embeddings can help customers find similar items from a photo.
+Visual Search uses product-image embeddings to find similar items. It uses the same prepared product data as the text search.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
@@ -69,7 +70,7 @@ Visual search shows how images can become part of the same governed product disc
 
 ![Ask PeakGear product support flow for order 7820](images/task-4-ask-peakgear-order-7820.png)
 
-Perform the following set of steps to use Ask PeakGear for an order issue:
+Use Ask PeakGear for an order issue:
 
 1. Click **Ask PeakGear** in the lower-right corner.
 2. Enter:
@@ -92,17 +93,15 @@ Perform the following set of steps to use Ask PeakGear for an order issue:
 
 5. Review the final response confirming that the replacement will be processed for order **7820**.
 
-Ask PeakGear demonstrates why the webshop is more than a search page. A support agent can use order context, product context, and replacement logic from the governed AI Lakehouse foundation to move from a customer problem to an actionable service outcome.
+Ask PeakGear uses order and product context to suggest a replacement as part of the support flow.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 ## Conclusion: Business Outcome
 
-The PeakGear Webshop shows how AI Lakehouse data products can become a customer-facing AI experience. Bronze captures product, image, order, inventory, and demand data. Silver standardizes and enriches those records. Gold serves the trusted product and order foundation used by semantic search, visual search, and the Ask PeakGear support agent.
+The PeakGear Webshop uses AI Lakehouse data in a customer-facing experience. Bronze captures product, image, order, inventory, and demand data. Silver standardizes and enriches those records. Gold provides the product and order data used by text search, Visual Search, and Ask PeakGear.
 
-For the business, this means product discovery can become more relevant, customer-service workflows can become more automated, and ecommerce teams can build AI experiences without copying catalog, image, and order data into disconnected systems.
-
-You can move to the next scene.
+For the business, shoppers can find products in more than one way, while support teams can work from the same product and order context.
 
 
 ## Acknowledgements

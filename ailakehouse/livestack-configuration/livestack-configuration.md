@@ -2,9 +2,11 @@
 
 ## Introduction
 
-Before you run the **PeakGear** business scenarios, confirm that the LiveStack services are connected and the demo data has been initialized. These readiness checks prevent confusing failures later because the demo can look broken when a required service or seeded dataset is not ready.
+Before you run the **PeakGear** business scenarios, check that the LiveStack services are connected and the demo data is ready. These checks prevent failures caused by a missing service or incomplete data.
 
-The fastest check is the **LiveStack Demo ready** indicator in the lower-left sidebar. The four green lights are the demo health check: they confirm that the required services and seeded data are ready before you begin the business walkthrough.
+The fastest check is the **LiveStack Demo ready** indicator in the lower-left sidebar. Its four green lights show whether the required services and demo data are ready.
+
+The readiness panel checks the Autonomous Database, **GoldenGate Stream Analytics**, and **OCI GenAI** connections before you start the other scenes.
 
 Estimated Time: **5 minutes**
 
@@ -12,16 +14,15 @@ Estimated Time: **5 minutes**
 
 In this scene, you will:
 
-- Open **LiveStack Configuration** from **LiveStack Admin**.
-- Double-check the Autonomous Database, GoldenGate Stream Analytics, and OCI GenAI connections.
-- Run the mandatory demo data refresh before starting the business walkthrough.
-- Reset the Ask PeakGear conversation state only when the return and exchange flow needs to be replayed.
+- Confirm that the required services are connected.
+- Refresh the demo data before starting the business scenes.
+- Reset the Ask PeakGear conversation only when you need to replay the return and exchange scenario.
 
 ## Task 1: Double-check LiveStack Configuration
 
 ![LiveStack Configuration page showing the configured ADB connection and service status cards](images/task-2-livestack-configuration.png)
 
-Perform the following set of steps to double-check the LiveStack service connections before starting the business walkthrough:
+Check the LiveStack service connections before starting the business walkthrough:
 
 1. Open **LiveStack Admin** from the sidebar and select **LiveStack Configuration**.
 2. Review **AI Data Lakehouse Connections**.
@@ -34,11 +35,11 @@ Perform the following set of steps to double-check the LiveStack service connect
 
 ## Task 2: Refresh and load demo data
 
-**Important:** This step is mandatory before running the demo.
+**Important:** Complete this step before running the demo.
 
 ![Demo Maintenance section with Verify & Refresh Demo highlighted](images/task-3-demo-maintenance-refresh.png)
 
-Perform the following set of steps to refresh and load the seeded demo data before running the scenes:
+Refresh and load the demo data before running the scenes:
 
 1. In **LiveStack Configuration**, go to **Demo Maintenance**.
 2. Click **Verify & Refresh Demo** or **Load Demo Data**, depending on the button label shown by the current environment.
@@ -52,7 +53,7 @@ Perform the following set of steps to refresh and load the seeded demo data befo
 
 ![Ask PeakGear conversation reset section with Clear Return Conversation highlighted](images/task-4-return-reset.png)
 
-Perform the following set of steps to reset the return workflow only when you need a clean replay:
+Reset the return workflow when you need a clean replay:
 
 1. Use **Clear Return Conversation** in the **Reset customer\_order\_status table** section only when you need to replay the Ask PeakGear return and exchange scenario.
 2. After resetting, rerun the relevant Ask PeakGear scene from the beginning so the conversation state is clean.
@@ -61,11 +62,9 @@ Perform the following set of steps to reset the return workflow only when you ne
 
 The readiness checks protect the rest of the LiveStack Demo. Before PeakGear can trust dashboards, streaming ingest, CDC, product discovery, predictions, or agents, the shared services and seeded business data need to be available.
 
-When the readiness lights are green and the demo data refresh has completed, users know the AI Lakehouse foundation is ready. The Autonomous Database connection, GoldenGate Stream Analytics connection, OCI GenAI connection, and seeded demo data are all in place, so later scenes can focus on business outcomes instead of troubleshooting missing dependencies.
+When the readiness lights are green and the demo data refresh is complete, the AI Lakehouse environment is ready. The required connections and demo data are in place for the later scenes.
 
-For PeakGear, this means the demo starts from a reliable operating baseline: the same governed data and connected services can support ingest, processing, Serve Data dashboards, and Serve AI experiences.
-
-You can move to the next scene.
+For PeakGear, the same environment can support ingest, processing, Serve Data dashboards, and Serve AI experiences.
 
 ## Acknowledgements
 

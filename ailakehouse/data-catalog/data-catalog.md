@@ -2,11 +2,13 @@
 
 ## Introduction
 
-PeakGear has many useful retail datasets, but useful data is not automatically reusable data. **Catalog** helps users find trusted data before they build dashboards, AI features, reports, or reusable business views from it.
+PeakGear has many retail datasets. **Catalog** helps users find the right table before they build dashboards, AI features, reports, or business views from it.
 
-The Catalog stage makes trusted data assets discoverable and understandable before they are reused. In this scene, **Data Studio Catalog** is where a technical table becomes a documented business asset that other teams can inspect and reuse.
+In the Catalog stage, **Oracle Data Studio Catalog** adds context to a technical table so users can inspect it and reuse it.
 
-This scene is intentionally simple. Focus on the pattern: find a trusted table, understand what it contains, create a reusable view, and verify that the new view is available as another cataloged asset.
+**AI Table Explain** uses **AI Assist** to describe the table and help create a reusable view with business meaning.
+
+This scene follows a simple pattern: find a product table, review its contents, create a view with a business column, and confirm that the view is available in Catalog.
 
 Estimated Time: **10 minutes**
 
@@ -14,43 +16,41 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open **Data Catalog** from the **Catalog** menu.
-- Open **Catalog** in Oracle Data Studio.
-- Search for the curated `DIM_PRODUCT` table.
-- Review the `DIM_PRODUCT` catalog details and launch **AI Assist**.
-- Use the AI-assisted explanation to identify a useful derived business column.
-- Create a reusable view named `DIM_PRODUCT_VIEW`.
-- Verify that the new view includes `MARGIN_AMOUNT`.
+- Explore PeakGear product data in the catalog.
+- Review what the data contains and how it can be used.
+- Ask AI Assist to explain the data in business terms.
+- Create a reusable version of the product data with margin information.
+- Confirm that the updated product data is available for reuse.
 
 ## Task 1: Open the Data Catalog demo
 
 ![Sidebar navigation showing Catalog and Data Catalog](images/task-1-open-data-catalog.png)
 
-Perform the following set of steps to open the Data Catalog demo from the LiveStack sidebar:
+Open the Data Catalog demo from the LiveStack sidebar:
 
 1. In the left sidebar, expand **Catalog**.
 2. Select **Data Catalog**.
 3. A new browser tab opens Oracle Data Studio.
 
-This is the Catalog step of the AI Lakehouse workflow. The user is not loading data or building a pipeline yet. The user is finding and understanding trusted data assets that can later be served as dashboards, applications, APIs, machine learning features, or AI agent context.
+This is the Catalog stage of the AI Lakehouse. You are not loading data or building a pipeline here. You are finding and understanding a table that can later support dashboards, applications, APIs, machine learning features, or AI agents.
 
 ## Task 2: Open Catalog in Data Studio
 
 ![Data Studio Overview with Catalog highlighted in the left navigation](images/task-2-open-data-studio-catalog.png)
 
-Perform the following set of steps to open **Catalog** in **Oracle Data Studio**:
+Open **Catalog** in **Oracle Data Studio**:
 
 1. If prompted, sign in with the `PG` username and password shown in **LiveStack Configuration**.
 2. In Data Studio, select **Catalog** from the left navigation.
 3. Confirm that the Catalog page opens.
 
-Data Studio Catalog gives PeakGear a searchable inventory of database objects. For the demo, this is where the technical object becomes a business asset that users can inspect, explain, and reuse.
+Data Studio Catalog provides a searchable list of database objects. In this demo, use it to inspect a product table, ask AI Assist to explain it, and reuse the result as a view.
 
-## Task 3: Find the DIM_PRODUCT dataset
+## Task 3: Find the DIM_PRODUCT table
 
 ![Data Studio Catalog search filtered to PRODUCTS](images/task-3-search-products-table.png)
 
-Perform the following set of steps to find the **DIM_PRODUCT** dataset in Catalog:
+Find the **DIM_PRODUCT** table in Catalog:
 
 1. In the Catalog search field, enter:
 
@@ -63,7 +63,14 @@ Perform the following set of steps to find the **DIM_PRODUCT** dataset in Catalo
 4. Confirm that the table shows **20,000 rows** in the reference environment.
 5. Select `DIM_PRODUCT` to open the table details.
 
-The `DIM_PRODUCT` table is a good catalog demo object because it is easy to understand and relevant to many business outcomes: product catalog browsing, merchandising decisions, semantic search, operations dashboards, webshop discovery, and AI agents.
+The `DIM_PRODUCT` table is useful for this demo because several PeakGear experiences use product data:
+
+- Product catalog browsing
+- Merchandising
+- Semantic search
+- Operations dashboards
+- Webshop discovery
+- AI agents
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
@@ -71,7 +78,7 @@ The `DIM_PRODUCT` table is a good catalog demo object because it is easy to unde
 
 ![PRODUCTS table detail showing AI Assist](images/task-4-open-products-ai-assist.png)
 
-Perform the following set of steps to review the DIM_PRODUCT table and launch AI Assist:
+Review the `DIM_PRODUCT` table and launch AI Assist:
 
 1. Review the `DIM_PRODUCT` overview.
 2. Confirm that the table is owned by `PG`, belongs to the `LOCAL` catalog, and has a row count of **20,000**.
@@ -82,7 +89,7 @@ Perform the following set of steps to review the DIM_PRODUCT table and launch AI
 
 ![Table AI Assist showing PRODUCTS as the source table and Create View as the target type](images/task-5-review-table-ai-assist-view.png)
 
-Perform the following set of steps to review the Table AI Assist create-view workspace:
+Review the Table AI Assist create-view workspace:
 
 1. Confirm that **Source Table Name** is `DIM_PRODUCT`.
 2. Confirm that **Target Type** is **Create View**.
@@ -92,10 +99,10 @@ Perform the following set of steps to review the Table AI Assist create-view wor
     DIM_PRODUCT_VIEW
     ```
 
-4. Review **Add Step**. This is where Table AI Assist can help build a recipe to add, update, remove, or rename columns without changing the source table.
-5. Click **Add or replace column**
+4. Review **Add Step**. Use this workspace to add, update, remove, or rename columns in the new view without changing the source table.
+5. Click **Add or replace column**.
 
-The system will analyze the table and metadata and give you suggestions.
+AI Assist analyzes the table and its metadata, then suggests changes.
 
 You can also use your own prompt:
 
@@ -105,24 +112,24 @@ Explain this DIM_PRODUCT table in business terms and suggest one simple derived 
 
 ![Table AI Assist](images/task-5-ask-ai.png)
 
-A practical answer is `MARGIN_AMOUNT`, because PeakGear can use it to understand the profitability of each product, enabling better decision-making on pricing, promotions, and inventory management 
+A useful column to add is `MARGIN_AMOUNT`. PeakGear can use it to review product profitability when evaluating pricing, promotions, and inventory.
 
 ![Table AI Assist](images/task-5-margin.png)
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
 
-The important point is that the source table is not modified. PeakGear can create a reusable view that adds business meaning on top of the trusted product dataset.
+The source table stays unchanged. PeakGear can create a reusable view that adds business meaning to the product data.
 
 ## Task 6: Create and review the margin-enriched product view
 
-Perform the following set of steps to create and verify the margin-enriched product view:
+Create and verify the margin-enriched product view:
 
-1. Click **Save** to create the enhanced view.
+1. Click **Save** to save the view configuration.
 
-2. Click **Create View** and then confirm with **Yes**.
+2. Click **Create View**, then confirm with **Yes**.
 
-2. Open SQL from Data Studio
+3. Open SQL from Data Studio.
 
   ![Table AI Assist](images/task-6-sql.png)
 
@@ -137,15 +144,13 @@ Perform the following set of steps to create and verify the margin-enriched prod
   ![Table AI Assist](images/task-6-view.png)
   
 
-This closes the Catalog loop: the user discovered a trusted table, understood it, enriched it as a view, and made the result available as another cataloged data asset.
+This completes the Catalog workflow: find a product table, understand it, add a business column in a view, and make the result available in Catalog.
 
 ## Conclusion: Business Outcome
 
-The Data Catalog scene shows how PeakGear can move from technical database objects to reusable business data products. Instead of asking every team to rediscover product data and rebuild the same margin logic, the AI Lakehouse provides a cataloged place to find the asset, understand it, and publish a governed view.
+The Data Catalog scene shows how PeakGear can turn a technical database object into a reusable data product. Users can find product data in the catalog, understand its columns, add margin logic in a view, and make that view available to other teams.
 
-For the business, this reduces duplicated interpretation, improves trust in downstream dashboards and AI features, and helps teams turn curated Gold-layer data into reusable products. The same pattern can be applied to inventory, orders, demand signals, returns, fulfillment sites, and customer datasets before they are served through analytics, applications, APIs, or agents.
-
-You can move to the next scene.
+The same approach can be used for inventory, orders, demand, returns, fulfillment sites, and customer data. Those assets can then support analytics, applications, APIs, or AI agents.
 
 
 ## Acknowledgements

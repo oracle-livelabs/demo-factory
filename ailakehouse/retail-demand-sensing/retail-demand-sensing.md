@@ -2,11 +2,13 @@
 
 ## Introduction
 
-**PeakGear** has already captured source data into the **AI Lakehouse** and transformed it through the medallion process. Demand sensing is where prepared data becomes an early-warning view for planners and merchandisers.
+**PeakGear** has captured source data in the **AI Lakehouse** and processed it through the medallion process. Demand sensing gives planners and merchandisers an early view of changing demand.
 
-The business challenge is timing. Retail demand can shift before traditional planning reports catch up. A product can trend because of social activity, product-page traffic, commerce behavior, store activity, or partner feeds. If those signals remain disconnected, PeakGear may react too late: inventory is not moved, campaigns miss the moment, substitutes are not prepared, and fulfillment teams only see pressure after customers are already affected.
+Retail demand can shift before planning reports catch up. Signals from social activity, product pages, commerce, stores, and partners can show where demand is changing. If those signals stay separate, PeakGear may move inventory or prepare substitutes too late.
 
-**Retail Demand Sensing** shows the **Serve Data** outcome of the AI Lakehouse. Semantic search means matching by meaning, not only by exact words, so users can find related products and signals even when the wording differs.
+**Retail Demand Sensing** shows a **Serve Data** outcome of the AI Lakehouse. Semantic search matches by meaning as well as exact words, so users can find related products and signals when the wording differs.
+
+**Oracle AI Vector Search** supports this search with embeddings for products and demand signals.
 
 Estimated Time: **10 minutes**
 
@@ -14,29 +16,28 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open **Retail Demand Sensing** from the **Serve Data** menu.
-- Search demand patterns by business intent.
-- Review demand signal cards and filters.
-- Search demand signals semantically by product need and market.
-- Connect demand sensing to Gold-layer Serve Data outcomes.
+- Search for demand patterns by business intent.
+- Review demand signals, filters, and related products.
+- Search signals by product need and market.
+- See how prepared demand data supports planning.
 
 ## Task 1: Open Retail Demand Sensing
 
 ![Sidebar navigation showing Serve Data and Retail Demand Sensing](images/task-1-open-retail-demand-sensing.png)
 
-Perform the following set of steps to open **Retail Demand Sensing**:
+Open **Retail Demand Sensing**:
 
 1. In the left sidebar, expand **Serve Data**.
 2. Select **Retail Demand Sensing**.
 3. Confirm that the page title is **Retail Demand Sensing**.
 
-This page is a Serve Data experience. The user is no longer ingesting or transforming raw events. They are using the demand intelligence that the AI Lakehouse has already prepared.
+This page is a Serve Data experience. It uses demand data that the AI Lakehouse has already prepared.
 
 ## Task 2: Search by demand intent
 
 ![Find Demand Patterns semantic search with trail running shoe demand results](images/task-2-search-demand-patterns.png)
 
-Perform the following set of steps to search by demand intent:
+Search by demand intent:
 
 1. In **Find Demand Patterns**, enter:
 
@@ -48,26 +49,26 @@ Perform the following set of steps to search by demand intent:
 3. Review the ranked products returned by the search.
 4. Review the product names, categories, mention counts, and match scores.
 
-This search is semantic. The user describes the business intent rather than typing an exact SKU or product name. The Gold-layer product and demand data can be searched by meaning because the medallion process has already standardized the product catalog and connected demand signals to products.
+This search uses meaning rather than an exact SKU or product name. The medallion process connects standardized product data with demand signals so users can search both by intent.
 
 ## Task 3: Review the demand signal feed
 
 ![Demand Signal Feed showing filters, priority scores, reach, and recommended actions](images/task-3-review-demand-signal-feed.png)
 
-Perform the following set of steps to review the demand signal feed:
+Review the demand signal feed:
 
 1. Review the **Demand Signal Feed**.
 2. Review the filters for **Signal Intensity**, **Signal Sources**, and **Signal Feeds**.
 3. Review the first demand signal cards.
 4. Look for the business fields on each card: **Category**, **Market**, **Recommended Action**, **Demand Priority**, **Reach**, and **Signal Tone**.
 
-The feed translates source activity into business-readable demand intelligence. A merchandiser or operations user does not need to inspect the original event stream. The served view already connects the signal to products, markets, priority, reach, and action guidance.
+The feed turns source activity into demand context. A merchandiser or operations user can review the signal with its products, markets, priority, reach, and recommended action without inspecting the original event stream.
 
 ## Task 4: Search demand signals by intent
 
 ![Demand signal embedding search with waterproof jacket texas query results](images/task-4-search-demand-signals.png)
 
-Perform the following set of steps to search demand signals by intent:
+Search demand signals by intent:
 
 1. In the feed search field, enter:
 
@@ -79,17 +80,15 @@ Perform the following set of steps to search demand signals by intent:
 3. Review the returned signal cards and their match percentages.
 4. Review how the results include related outdoor products, Texas market signals, recommended actions, reach, and signal tone.
 
-This second search shows semantic search over the demand signals themselves. The user can ask for a market condition or customer need and find relevant signals even when the exact words do not match perfectly. That is valuable because demand often appears in messy language across many source systems.
+This search applies semantic search to the demand signals themselves. Users can ask for a market condition or customer need and find related signals even when the exact words differ.
 
 ## Conclusion: Business Outcome
 
-Retail Demand Sensing shows how PeakGear can move from passive reporting to active demand awareness. Instead of waiting for the next planning cycle, business users can search emerging demand by intent, inspect the signals behind that demand, and understand which products or markets need attention.
+Retail Demand Sensing shows how PeakGear can see changing demand before the next planning cycle. Business users can search by intent, inspect the signals behind the demand, and see which products or markets need attention.
 
-The medallion process is what makes this reliable. Bronze captures raw source activity, Silver standardizes and enriches signals, and Gold serves consistent product and demand data that semantic search can rank and explain. Without that foundation, PeakGear would be searching disconnected event streams and inconsistent product references.
+Bronze captures source activity, Silver standardizes and enriches signals, and Gold provides product and demand data that semantic search can rank. This keeps the search connected to consistent product references.
 
-For the business, this means merchandisers and operations teams can identify demand surges earlier, prepare substitute products, adjust allocation, and coordinate fulfillment before customer experience is affected.
-
-You can move to the next scene.
+For the business, merchandisers and operations teams can identify demand changes earlier, prepare substitute products, adjust allocation, and coordinate fulfillment.
 
 
 ## Acknowledgements

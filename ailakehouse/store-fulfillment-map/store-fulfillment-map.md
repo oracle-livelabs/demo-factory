@@ -2,11 +2,13 @@
 
 ## Introduction
 
-**PeakGear** has already moved fulfillment, inventory, customer, order, and demand data through the **AI Lakehouse** medallion process. This scene shows how location becomes part of the governed data story, not a separate map-only exercise.
+**PeakGear** has prepared fulfillment, inventory, customer, order, and demand data through the **AI Lakehouse** medallion process. This scene adds location to that same data flow.
 
-The business challenge is location. A product may be available somewhere in the network, but PeakGear still needs to know which store or distribution site can serve the customer, how much capacity is available, where pending transfers are building up, and which service zones are under pressure. Without a governed spatial layer, teams would have to export coordinates into separate mapping tools, reconcile those results with inventory reports, and then manually translate the answer back into fulfillment actions.
+A product may be available somewhere in the network, but planners also need to know which site can serve the customer, how much capacity is available, and where transfers or demand are building.
 
-**Store Fulfillment Map** shows how spatial data becomes a Serve Data outcome. Spatial data is location-aware data, such as sites, routes, zones, and demand regions.
+**Store Fulfillment Map** presents this location context as a Serve Data experience. Spatial data describes sites, routes, zones, and demand regions.
+
+**Oracle Spatial** keeps location data with the operational data, while H3 density grids show regional patterns.
 
 Estimated Time: **10 minutes**
 
@@ -14,29 +16,28 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open **Store Fulfillment Map** from the **Serve Data** menu.
-- Review fulfillment capacity across active store sites.
-- Inspect spatial layers such as store locations, routes, service zones, customer tiers, H3 density, and demand regions.
-- Use a concrete fulfillment site to connect spatial context to operational decisions.
-- Connect spatial analytics to Gold-layer business outcomes.
+- Review capacity across fulfillment sites.
+- Explore locations, routes, service zones, and demand regions.
+- Compare two sites using capacity and transfer data.
+- See how location data supports fulfillment decisions.
 
 ## Task 1: Open Store Fulfillment Map
 
 ![Sidebar navigation showing Serve Data and Store Fulfillment Map](images/open-store-fulfillment-map.png)
 
-Perform the following set of steps to open Store Fulfillment Map:
+Open Store Fulfillment Map:
 
 1. In the left sidebar, expand **Serve Data**.
 2. Select **Store Fulfillment Map**.
 3. Confirm that the page title is **Store Fulfillment Map**.
 
-This page is a Serve Data experience. The user is not preparing raw location data. They are consuming spatial intelligence that has already been curated through the AI Lakehouse process.
+This page belongs to Serve Data. It uses location and operational data prepared through the AI Lakehouse process.
 
 ## Task 2: Review fulfillment capacity
 
 ![Store Fulfillment Sites table with live capacity and pending transfer counts](images/fulfillment-sites-table.png)
 
-Perform the following set of steps to learn how to navigate the **Store Fulfillment Map**:
+Review fulfillment capacity:
 
 1. Review the summary cards at the top of the page: **50 Active Sites**, **995.2K Total Capacity**, **1.7K Pending Transfers**, and **50 Capacity Alerts**.
 2. Scroll to **Store Fulfillment Sites**.
@@ -44,7 +45,7 @@ Perform the following set of steps to learn how to navigate the **Store Fulfillm
 4. Review its live values: **172 Products**, **24.5K Inventory**, **71 Pending**, and **30.3% Load**.
 5. Compare that site with **PeakGear Dallas Store 001**, which shows **184 Products**, **27.1K Inventory**, and **1,057 Pending**.
 
-The table turns spatial fulfillment data into operational context. A user can see where capacity exists, where transfers are accumulating, and which sites may need attention before a fulfillment problem becomes visible to customers.
+The table puts site capacity, inventory, and pending transfers together. A planner can see where capacity exists and where transfers are accumulating.
 
 **Note:** Sample values may change after data refreshes or rebuilds. Focus on the expected result pattern and the business takeaway, not the exact values.
 
@@ -52,18 +53,18 @@ The table turns spatial fulfillment data into operational context. A user can se
 
 ![Store Fulfillment Map spatial layer controls](images/spatial-layer-controls.png)
 
-Perform the following set of steps to inspect spatial layers:
+Inspect spatial layers:
 
 1. Use **Map Layers** to review the available spatial overlays.
 2. Toggle layers such as **Store and DC Sites**, **Transfer Routes**, **Service Zones**, **H3 Density Grid**, and **Demand Regions**.
 3. Explain that these overlays represent different spatial questions: where sites are located, where customers cluster, how routes connect nodes, and where demand regions are heating up.
 4. Keep the demo focused on business interpretation rather than configuring the map.
 
-The important point is that spatial is not an isolated add-on. Oracle Spatial lets PeakGear keep location data with the governed operational data. That allows the Gold layer to serve a map, a dashboard, a routing query, or a machine-learning feature from the same trusted foundation.
+Oracle Spatial lets PeakGear keep location data with the operational data. The Gold layer can then provide the data for maps, dashboards, routes, and other business views.
 
 ## Task 4: Connect the map to fulfillment decisions
 
-Perform the following set of steps to connect the map to fulfillment decisions:
+Connect the map to fulfillment decisions:
 
 1. Use **PeakGear Austin Store 004** and **PeakGear Dallas Store 001** as comparison points.
 2. Explain that a fulfillment planner can evaluate capacity, pending transfers, and nearby demand before deciding where to route or rebalance.
@@ -73,17 +74,17 @@ Perform the following set of steps to connect the map to fulfillment decisions:
 - **Silver** standardized locations, store identifiers, region labels, and operational relationships.
 - **Gold** serves a spatial fulfillment data product that the map can use directly.
 
-This is the architecture pattern repeated throughout the demo: source data enters the AI Lakehouse, the medallion process turns it into trusted data, and Serve Data experiences expose it as a business workflow.
+The same pattern appears across the demo: source data enters the AI Lakehouse, the medallion process prepares it, and Serve Data presents it for a business task.
 
 ## Conclusion: Business Outcome
 
-Store Fulfillment Map shows how PeakGear can turn location into an operational advantage. Instead of exporting data to separate GIS tools and manually reconciling the result with inventory reports, users can inspect capacity, demand regions, service zones, routes, and customer density from one governed data product.
+Store Fulfillment Map shows how PeakGear can use location and operational data together. Users can review capacity, demand regions, service zones, routes, and customer density in one view.
 
-The medallion process makes the spatial view reliable. Bronze captures source records, Silver standardizes them, and Gold serves curated spatial and operational data together. Oracle Spatial then lets the business analyze points, routes, zones, and regions natively inside the Oracle AI Database foundation.
+Bronze captures source records, Silver standardizes them, and Gold provides the spatial and operational data used by the map. Oracle Spatial supports analysis of points, routes, zones, and regions inside the Oracle AI Database.
 
-For the business, this means fulfillment teams can route orders more effectively, identify regional pressure earlier, rebalance inventory with better context, and reduce the cost and complexity of disconnected spatial integration.
+For the business, fulfillment teams can compare sites, spot regional pressure, and make routing or inventory decisions with more context.
 
-You can move to the next scene.
+The Store Fulfillment Map scene is complete.
 
 ## Acknowledgements
 
