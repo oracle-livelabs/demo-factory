@@ -95,6 +95,10 @@
       "filename": "../../livestack-configuration/livestack-configuration.md"
     },
     {
+      "title": "Take It Home (OCI): Deploy with Resource Manager",
+      "filename": "../../deploy-livestack-terraform/deploy-livestack-terraform.md"
+    },
+    {
       "title": "Need Help?",
       "filename": "https://livelabs.oracle.com/cdn/common/labs/need-help/need-help-livelabs.md"
     }
