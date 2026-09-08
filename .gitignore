@@ -9,3 +9,5 @@ sample-workshop/workshops/.DS_Store
 /aidatabaseindustrylivestack/finance/.omx
 /.vscode
 /.vscode
+/ailakehouse/_deploy/auto_build/terraform/03-automation/.terraform
+*.tfvars

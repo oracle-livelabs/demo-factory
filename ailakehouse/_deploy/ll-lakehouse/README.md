@@ -105,6 +105,11 @@ The standalone permanent-deployment configuration must provide `adbwallet`,
 Gravitino distribution; provide your own read-only build and GoldenGate URLs.
 A base-image build uses the same artifact inputs, but LiveLabs initialization is
 now explicit rather than implicit.
+The custom image fixes the AIHUB choice made in `/home/opc/.env` during
+`inst.sh`; Terraform metadata does not override it. PostgreSQL, Loyalty MySQL,
+Data Sources, and the AWS Glue catalog integration are always included.
+Set `AIHUB=true` only to include the optional MongoDB catalog source. With the
+default `false`, MongoDB is neither started nor returned by Data Sources.
 When OCI metadata is unavailable, `adbwallet` may be either a read-only HTTPS
 PAR URL (recommended for unattended installs) or an absolute path to a wallet ZIP
 already copied to the server, such as `/home/opc/Wallet_lakehousepg.zip`. The

@@ -89,7 +89,7 @@ export default function DataSources() {
           <p className="section-kicker">AI Lakehouse tools</p>
           <h2>Data Sources</h2>
           <p>
-            Reuse these connection details in the next tutorial or integration. All three services use the PG account and the shared DBPASSWORD.
+            Reuse these connection details in the next tutorial or integration. PostgreSQL and MySQL use the PG account and the shared DBPASSWORD. MongoDB is included when the custom image was built with AIHUB=true.
           </p>
         </div>
         <JetButton

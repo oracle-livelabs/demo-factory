@@ -98,6 +98,7 @@ require_entry "ingestion/frontend/src/components/ImportanceModal.jsx"
 require_entry "ingestion/frontend/src/content/importanceContent.js"
 require_entry "ingestion/frontend/src/styles/index.css"
 require_entry "ingestion/frontend/src/pages/BronzeDataLoadGuide.jsx"
+require_entry "ingestion/backend/routes/awsGlue.js"
 require_entry "ingestion/gravitino/Dockerfile"
 require_entry "ingestion/gravitino/entrypoint.sh"
 require_entry "ingestion/iceberg-seeder/Dockerfile"
@@ -112,6 +113,7 @@ require_entry "scripts/build-rc-zip.sh"
 require_entry "scripts/verify-rc-zip.sh"
 require_entry "tests/test-custom-image-preparation.sh"
 require_entry "tests/test-source-database-compose.sh"
+require_entry "tests/test-aws-glue-catalog.sh"
 require_entry "tests/test-data-transforms-connection-provisioning.sh"
 require_entry "tests/test-wallet-hardening.sh"
 require_entry "tests/test-osa-streaming-restart-safety.sh"
@@ -244,6 +246,8 @@ require_text "init/setenv.sh" 'MONGODB_CATALOG_PORT=${MONGODB_CATALOG_PORT:-2701
 require_text "init/setenv.sh" 'SOURCE_PUBLIC_HOST=${SOURCE_PUBLIC_HOST:-${PUBLIC_IP}}'
 require_text "ingestion/frontend/src/pages/DataSources.jsx" "Data Sources"
 require_text "ingestion/backend/routes/dataSources.js" 'postgresql://${host}'
+require_text "ingestion/backend/routes/awsGlue.js" "DBMS_CATALOG.MOUNT_DATA_CATALOG"
+require_text "ingestion/backend/routes/awsGlue.js" "data_catalog_type       => 'AWS_GLUE'"
 require_text "ingestion/backend/lib/customerCdcSetup.js" 'const STUDIO_TOKEN_CACHE_TTL_MS = 50 * 60 * 1000'
 require_text "ingestion/backend/lib/customerCdcSetup.js" 'activeToken = await studioLogin(config, { force: true })'
 
@@ -262,6 +266,7 @@ if [[ "${RUN_BUILD}" -eq 1 ]]; then
   unzip -q "${ZIP_PATH}" -d "${tmp_dir}"
   bash "${tmp_dir}/tests/test-custom-image-preparation.sh"
   bash "${tmp_dir}/tests/test-source-database-compose.sh"
+  bash "${tmp_dir}/tests/test-aws-glue-catalog.sh"
   bash "${tmp_dir}/tests/test-data-transforms-connection-provisioning.sh"
   bash "${tmp_dir}/tests/test-wallet-hardening.sh"
   bash "${tmp_dir}/tests/test-osa-streaming-restart-safety.sh"

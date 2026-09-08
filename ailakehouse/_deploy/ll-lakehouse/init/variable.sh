@@ -229,6 +229,20 @@ fi
 
 export_metadata_or_default "GRAVITINO_REST_PORT" "gravitino_rest_port" "1525"
 export_metadata_or_default "GRAVITINO_HTTP_PORT" "gravitino_http_port" "1525"
+
+# AI Hub is an immutable custom-image choice. The installer writes this
+# non-secret file before image capture; Terraform metadata must not override it.
+AIHUB_IMAGE_DEFAULT_FILE="${AIHUB_IMAGE_DEFAULT_FILE:-/home/opc/init/aihub-image-default.env}"
+AIHUB=false
+if [[ -r "${AIHUB_IMAGE_DEFAULT_FILE}" ]]; then
+  source "${AIHUB_IMAGE_DEFAULT_FILE}"
+fi
+
+case "${AIHUB,,}" in
+  1|true|yes|on) export AIHUB=true ;;
+  *) export AIHUB=false ;;
+esac
+
 export_metadata_or_default "GRAVITINO_CATALOG_BACKEND_NAME" "gravitino_catalog_backend_name" "${GRAVITINO_CATALOG_BACKEND_NAME:-TEST_ICEBERG}"
 export_metadata_or_default "GRAVITINO_JDBC_USER" "gravitino_jdbc_user" "${GRAVITINO_JDBC_USER:-PG}"
 export_metadata_or_default "GRAVITINO_JDBC_PASSWORD" "gravitino_jdbc_password" "${GRAVITINO_JDBC_PASSWORD:-${DBPASSWORD:-}}"

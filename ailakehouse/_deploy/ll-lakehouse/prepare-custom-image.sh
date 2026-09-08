@@ -178,7 +178,8 @@ ollama_model_is_cached() {
 }
 
 preflight_offline_artifacts() {
-  local config_file
+  local seed_config_file
+  local aihub_config_file
   local project_volumes_file
   local image
   local image_count=0
@@ -197,11 +198,13 @@ preflight_offline_artifacts() {
 
   resolve_runtime_commands
   resolve_compose_project
-  config_file="$(mktemp "${TMPDIR:-/tmp}/ll-lakehouse-compose-config.XXXXXX")"
+  seed_config_file="$(mktemp "${TMPDIR:-/tmp}/ll-lakehouse-compose-seed-config.XXXXXX")"
+  aihub_config_file="$(mktemp "${TMPDIR:-/tmp}/ll-lakehouse-compose-aihub-config.XXXXXX")"
   project_volumes_file="$(mktemp "${TMPDIR:-/tmp}/ll-lakehouse-project-volumes.XXXXXX")"
 
-  if ! run_compose --profile seed config > "${config_file}"; then
-    rm -f "${config_file}" "${project_volumes_file}"
+  if ! run_compose --profile seed config > "${seed_config_file}" \
+    || ! run_compose --profile aihub config > "${aihub_config_file}"; then
+    rm -f "${seed_config_file}" "${aihub_config_file}" "${project_volumes_file}"
     echo "Unable to render the compose configuration. No cleanup was performed." >&2
     exit 1
   fi
@@ -215,7 +218,8 @@ preflight_offline_artifacts() {
       echo "Missing offline container image: ${image}" >&2
       missing=1
     fi
-  done < <(awk '$1 == "image:" && !seen[$2]++ { print $2 }' "${config_file}")
+  done < <(awk '$1 == "image:" && !seen[$2]++ { print $2 }' \
+    "${seed_config_file}" "${aihub_config_file}")
 
   if [[ "${image_count}" -eq 0 ]]; then
     echo "No container images were found in the rendered compose configuration." >&2
@@ -282,7 +286,7 @@ preflight_offline_artifacts() {
     fi
   fi
 
-  rm -f "${config_file}" "${project_volumes_file}"
+  rm -f "${seed_config_file}" "${aihub_config_file}" "${project_volumes_file}"
   if [[ "${missing}" -ne 0 ]]; then
     echo "Offline artifact preflight failed. No cleanup was performed." >&2
     exit 1

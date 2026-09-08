@@ -18,7 +18,7 @@ ExecStartPre=/usr/local/bin/podman-compose down
 #ExecStartPre=/usr/bin/podman-compose down
 
 # Start the compose app
-ExecStart=/usr/local/bin/podman-compose up
+ExecStart=/bin/bash -lc 'set -a; source /home/opc/ingestion/.env; set +a; if [[ "$${AIHUB:-false}" == "true" ]]; then exec /usr/local/bin/podman-compose --profile aihub up; fi; exec /usr/local/bin/podman-compose up'
 #ExecStart=/usr/bin/podman-compose up
 
 [Install]

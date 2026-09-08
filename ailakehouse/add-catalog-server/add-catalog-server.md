@@ -2,13 +2,15 @@
 
 ## Introduction
 
-**PeakGear** has raw and curated data in the **AI Lakehouse**, but that data only becomes reusable across engines when users can discover the same Iceberg tables through a shared catalog.
+**PeakGear** stores raw and curated data in the **AI Lakehouse**. A shared catalog lets different data tools find and use the same Iceberg tables.
 
-**Apache Iceberg** is an open table format for large analytical datasets stored in object storage. It adds a reliable metadata layer around files such as Parquet, enabling capabilities including ACID table changes, schema and partition evolution, and time travel without locking data into one processing engine. This interoperability is why it has become so important: platforms such as Oracle AI Data Platform or Databricks support Iceberg tables and the Iceberg REST catalog, while Snowflake supports Iceberg tables and can act as an Iceberg catalog. Teams can therefore keep one table definition and use it from compatible engines such as Spark, Flink, Trino, and cloud data platforms instead of creating fragile copies for each tool.
+**Apache Iceberg** is an open table format for analytical data stored in object storage. It manages table metadata separately from the data files, which lets compatible tools handle transactional updates, schema and partition changes, and older table versions. Multiple tools can work with the same table instead of each maintaining a separate copy.
 
-An Apache Iceberg catalog separates table metadata from individual processing tools. Instead of every team configuring object-storage paths and table details independently, **Oracle Data Transforms** can connect to one REST catalog and use the namespaces and tables it publishes.
+An Apache Iceberg catalog gives tools one place to find table metadata. Without it, each team would need to manage object-storage paths and table details separately. In this scene, **Oracle Data Transforms** connects to the REST catalog and uses the namespaces and tables it publishes.
 
-This scene shows the **Process** stage of the AI Lakehouse. You add a new **Apache Iceberg** catalog server connection in Oracle Data Transforms using the values supplied by the LiveStack. The catalog is backed by the LiveStack Iceberg REST service and points Data Transforms at the same governed Iceberg metadata used by the demo.
+The connection can also use **OCI Object Storage** credentials when Data Transforms requests access to the table files.
+
+This scene covers the **Catalog** stage of the AI Lakehouse. You add a new **Apache Iceberg** catalog server connection in Oracle Data Transforms using the values shown in the LiveStack. The connection points Data Transforms to the Iceberg REST service and the tables used by the demo.
 
 Estimated Time: **10 minutes**
 
@@ -18,13 +20,13 @@ In this scene, you will:
 
 - Open the **Add Iceberg Catalog Server** demo from the **Process** menu.
 - Open Oracle Data Transforms and sign in with the displayed PG credentials.
-- Create a new Apache Iceberg catalog-server connection.
+- Create a new Apache Iceberg catalog server connection.
 - Configure the connection with the LiveStack REST URL and OCI Object Storage credentials.
 - Test the connection and confirm that the Iceberg namespace is available.
 
 ## Task 1: Open the Add Iceberg Catalog Server demo
 
-Perform the following set of steps to open the **Add Iceberg Catalog Server** demo:
+Open the **Add Iceberg Catalog Server** demo from the **Process** menu:
 
 1. In the left sidebar, expand **Process**.
 2. Select **Add Iceberg Catalog Server**.
@@ -32,24 +34,22 @@ Perform the following set of steps to open the **Add Iceberg Catalog Server** de
 
 ![1](images/1.png)
 
-The page explains the purpose of the catalog server and shows the values required for the connection. Keep this tab open while you configure Data Transforms.
+The page explains the catalog server and shows the values required for the connection. Keep this tab open while you configure Data Transforms.
 
 ## Task 2: Review and copy the connection values
 
-The **Login information** panel contains the environment-specific values for this demo.
+The **Login Information** panel shows the values you need:
 
-Note that all required information are displated in the **Login Information** panel:
-
-1. The **Username** and **Password**. These are the PG credentials for Data Transforms.
-2. The **REST URL**. This is the URL of the LiveStack Iceberg REST catalog.
-3. The **OCI Access ID** and **OCI Secret Key**. Use them only when Data Transforms prompts for OCI Object Storage credentials.
+1. The **Username** and **Password** for Data Transforms.
+2. The **REST URL** for the LiveStack Iceberg REST catalog.
+3. The **OCI Access ID** and **OCI Secret Key**. Use these only when Data Transforms prompts for OCI Object Storage credentials.
 
 ![2](images/2.png)
 
 
 ## Task 3: Open and sign in to Data Transforms
 
-Perform the following set of steps to open **Data Transforms**:
+Open **Data Transforms**:
 
 1. Click **Open Data Transforms**.
 2. Enter the PG username and password copied from the LiveStack page.
@@ -60,7 +60,7 @@ Perform the following set of steps to open **Data Transforms**:
 
 ## Task 4: Create an Apache Iceberg connection
 
-Perform the following set of steps to create the catalog-server connection:
+Create the catalog server connection:
 
 1. From the Data Transforms home page, open **Connections**.
 2. Click **Create Connection**.
@@ -86,7 +86,7 @@ Perform the following set of steps to create the catalog-server connection:
 
 ## Task 5: Test and save the connection
 
-Perform the following set of steps to test the catalog-server connection:
+Test and save the catalog server connection:
 
 1. Click **Test Connection**.
 2. Confirm that Data Transforms reports a successful connection.
@@ -98,31 +98,31 @@ Perform the following set of steps to test the catalog-server connection:
 
 ## Task 6: Verify catalog server content
 
-Perform the following set of steps to verify that Data Transforms can discover the catalog:
+Verify the catalog contents:
 
-1. In a new browser enter the following URL: **REST URL** from the LiveStack page + `iceberg/v1/namespaces` to display available namespaces on the catalog server
+1. Open a new browser tab. Enter the **REST URL** from the LiveStack page followed by `iceberg/v1/namespaces`. Confirm that the response lists the available namespaces on the catalog server.
 
 ![7](images/7.png)
 
 
-2. Explore the content of the namespace by appending `/bronze/tables` to the URL. This will display the current tables available in the namespace
+2. Append `/bronze/tables` to the URL. Confirm that the response lists the tables in the namespace.
 
 ![8](images/8.png)
 
-3. Append the table name to the URL, so the complete URL is:  **REST URL** from the LiveStack page + `iceberg/v1/namespaces/bronze/tables/product_master_raw`. This will display all metadata of our Iceberg table
+3. Append the table path to the URL. The complete URL is the **REST URL** from the LiveStack page followed by `iceberg/v1/namespaces/bronze/tables/product_master_raw`. Confirm that the response shows the metadata for the Iceberg table.
 
 
 ![9](images/9.png)
 
 
 
-The exact list of tables can change as the demo data is refreshed. The important result is that the connection can discover the shared Iceberg namespace successfully.
+The table list can change when the demo data is refreshed. The key result is that the connection can discover the shared Iceberg namespace.
 
 ## Conclusion: Business Outcome
 
-The Apache Iceberg catalog server gives PeakGear a shared metadata entry point for Iceberg tables. Data Transforms can discover governed Iceberg data through the REST catalog instead of each project rebuilding table locations and storage configuration.
+The Apache Iceberg catalog server gives PeakGear one place to find Iceberg table metadata. Data Transforms can use the REST catalog instead of each project maintaining its own table locations and storage settings.
 
-That makes new processing flows faster to create, keeps table definitions reusable, and gives compatible lakehouse tools a consistent way to work with the same Iceberg data products.
+This keeps table definitions reusable and lets compatible tools work with the same Iceberg data.
 
 ## Acknowledgements
 

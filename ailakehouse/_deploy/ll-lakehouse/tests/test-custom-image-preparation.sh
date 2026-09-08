@@ -173,6 +173,7 @@ setup_case() {
   mkdir -p "${case_dir}/ingestion/logs"
   mkdir -p "${case_dir}/ingestion/gravitino/dist"
   mkdir -p "${case_dir}/ingestion/ggsa"
+  mkdir -p "${case_dir}/init"
   mkdir -p "${case_dir}/home/.oci"
   mkdir -p "${case_dir}/home/.config/containers"
   mkdir -p "${case_dir}/home/.docker"
@@ -196,6 +197,7 @@ setup_case() {
   printf 'tls-private-key\n' > "${case_dir}/ingestion/cdc/goldengate/cert/ogg.key"
   printf 'DBPASSWORD=base-image-secret\n' > "${case_dir}/ingestion/logs/adb-load.log"
   printf 'download https://example.invalid/private-par-token\n' > "${case_dir}/home/inst.log"
+  printf 'AIHUB=true\n' > "${case_dir}/init/aihub-image-default.env"
   printf 'staged-gravitino-archive\n' > "${case_dir}/ingestion/gravitino/dist/gravitino.zip"
   printf 'staged-osa-archive\n' > "${case_dir}/ingestion/ggsa/osa.zip"
 
@@ -334,6 +336,9 @@ assert_file_exists "${prepare_dir}/ingestion/.oci_wallet_required"
 assert_file_exists "${prepare_dir}/ingestion/keep-me"
 assert_file_absent "${prepare_dir}/ingestion/.env"
 assert_file_absent "${prepare_dir}/home/.env"
+assert_file_exists "${prepare_dir}/init/aihub-image-default.env"
+grep -qxF 'AIHUB=true' "${prepare_dir}/init/aihub-image-default.env" \
+  || fail "Image AI Hub default was not preserved"
 assert_file_absent "${prepare_dir}/home/inst.log"
 assert_file_absent "${prepare_dir}/ingestion/.oci"
 assert_file_absent "${prepare_dir}/home/.oci"
@@ -377,6 +382,8 @@ if grep -q -- 'disable user-podman.service' "${prepare_dir}/systemctl-args.log";
 fi
 grep -q -- 'down --remove-orphans' "${prepare_dir}/compose-args.log" \
   || fail "Image preparation did not remove compose containers"
+grep -q -- '--profile aihub config' "${prepare_dir}/compose-args.log" \
+  || fail "Image preparation did not preflight the AI Hub compose profile"
 if grep -q -- 'down --volumes' "${prepare_dir}/compose-args.log"; then
   fail "Image preparation removed reusable dependency volumes"
 fi

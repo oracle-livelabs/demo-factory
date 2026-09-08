@@ -230,6 +230,20 @@ wget -O /home/opc/build_dev.zip "${BUILD_ARCHIVE_URL}"
 unzip -oq /home/opc/build_dev.zip -d /home/opc/
 rm /home/opc/build_dev.zip
 
+# AI Hub is selected when this custom image is built. Persist only this
+# non-secret boolean so VMs created from the image do not need Terraform
+# metadata or a runtime .env setting to make the same selection.
+AIHUB_IMAGE_DEFAULT_FILE="/home/opc/init/aihub-image-default.env"
+AIHUB_IMAGE_DEFAULT=false
+if is_enabled "${AIHUB:-false}"; then
+  AIHUB_IMAGE_DEFAULT=true
+fi
+AIHUB_IMAGE_DEFAULT_TMP="${AIHUB_IMAGE_DEFAULT_FILE}.tmp"
+printf 'AIHUB=%s\n' "${AIHUB_IMAGE_DEFAULT}" > "${AIHUB_IMAGE_DEFAULT_TMP}"
+chmod 600 "${AIHUB_IMAGE_DEFAULT_TMP}"
+mv -f "${AIHUB_IMAGE_DEFAULT_TMP}" "${AIHUB_IMAGE_DEFAULT_FILE}"
+unset AIHUB_IMAGE_DEFAULT AIHUB_IMAGE_DEFAULT_FILE AIHUB_IMAGE_DEFAULT_TMP
+
 OSA_ARCHIVE_NAME="${GGSA_OSA_ARCHIVE:-V1054826-01.zip}"
 OSA_ARCHIVE_URL="${GGSA_OSA_ARCHIVE_URL}"
 OSA_ARCHIVE_DIR="/home/opc/ingestion/ggsa"

@@ -11,76 +11,88 @@
       "filename": "../../introduction/introduction.md"
     },
     {
-      "title": "Scene: Confirm LiveStack Readiness",
-      "filename": "../../livestack-configuration/livestack-configuration.md"
+      "title": "10 Minute Recommended Path",
+      "filename": "../../quickstart/quickstart.md"
     },
     {
-      "title": "Scene: Data Catalog and AI Table Explain",
-      "filename": "../../data-catalog/data-catalog.md"
+      "title": "30 Minute Recommended Path",
+      "filename": "../../highlevel/highlevel.md"
     },
     {
-      "title": "Scene: Real-Time Streaming Ingest",
-      "filename": "../../ingest-real-time-and-batch-data/ingest-real-time-and-batch-data.md"
+      "title": "60 Minute Recommended Path",
+      "filename": "../../extended/extended.md"
     },
     {
-      "title": "Scene: Change Data Capture Ingest",
-      "filename": "../../change-data-capture/change-data-capture.md"
-    },
-    {
-      "title": "Scene: Batch and File Loading Ingest",
-      "filename": "../../batch-and-file-loading/batch-and-file-loading.md"
-    },
-    {
-      "title": "Scene: Add an Apache Iceberg Catalog Server",
+      "title": "Catalog: Add an Apache Iceberg Catalog Server",
       "filename": "../../add-catalog-server/add-catalog-server.md"
     },
     {
-      "title": "Scene: Transform Iceberg Data",
-      "filename": "../../process-bronze-to-silver/process-bronze-to-silver.md"
+      "title": "Catalog: Data Catalog and AI Table Explain",
+      "filename": "../../data-catalog/data-catalog.md"
     },
     {
-      "title": "Scene: Load Data to an Apache Iceberg Catalog Server",
+      "title": "Process: Load Data to an Apache Iceberg Catalog Server",
       "filename": "../../load-to-icerberg/load-to-iceberg.md"
     },
     {
-      "title": "Scene: Operations Dashboard",
-      "filename": "../../operations-dashboard/operations-dashboard.md"
+      "title": "Process: Transform Iceberg Data",
+      "filename": "../../process-bronze-to-silver/process-bronze-to-silver.md"
     },
     {
-      "title": "Scene: Product Catalog",
-      "filename": "../../product-catalog/product-catalog.md"
+      "title": "Ingest: Batch and File Loading Ingest",
+      "filename": "../../batch-and-file-loading/batch-and-file-loading.md"
     },
     {
-      "title": "Scene: Retail Demand Sensing",
-      "filename": "../../retail-demand-sensing/retail-demand-sensing.md"
+      "title": "Ingest: Change Data Capture Ingest",
+      "filename": "../../change-data-capture/change-data-capture.md"
     },
     {
-      "title": "Scene: Returns Risk Network",
-      "filename": "../../returns-risk-network/returns-risk-network.md"
+      "title": "Ingest: Real-Time Streaming Ingest",
+      "filename": "../../ingest-real-time-and-batch-data/ingest-real-time-and-batch-data.md"
     },
     {
-      "title": "Scene: Store Fulfillment Map",
-      "filename": "../../store-fulfillment-map/store-fulfillment-map.md"
-    },
-    {
-      "title": "Scene: Orders and Fulfillment Flow",
-      "filename": "../../orders-and-fulfillment-flow/orders-and-fulfillment-flow.md"
-    },
-    {
-      "title": "Scene: Demand, Revenue, and Inventory Predictions",
-      "filename": "../../demand-revenue-and-inventory-predictions/demand-revenue-and-inventory-predictions.md"
-    },
-    {
-      "title": "Scene: PeakGear Webshop and Product Discovery",
-      "filename": "../../peakgear-webshop-and-product-discovery/peakgear-webshop-and-product-discovery.md"
-    },
-    {
-      "title": "Scene: Ask Your Data",
+      "title": "Serve AI: Ask Your Data",
       "filename": "../../ask-your-data/ask-your-data.md"
     },
     {
-      "title": "Scene: Retail Operations Agents",
+      "title": "Serve AI: Demand, Revenue, and Inventory Predictions",
+      "filename": "../../demand-revenue-and-inventory-predictions/demand-revenue-and-inventory-predictions.md"
+    },
+    {
+      "title": "Serve AI: PeakGear Webshop and Product Discovery",
+      "filename": "../../peakgear-webshop-and-product-discovery/peakgear-webshop-and-product-discovery.md"
+    },
+    {
+      "title": "Serve AI: Retail Operations Agents",
       "filename": "../../retail-operations-agents/retail-operations-agents.md"
+    },
+    {
+      "title": "Serve Data: Operations Dashboard",
+      "filename": "../../operations-dashboard/operations-dashboard.md"
+    },
+    {
+      "title": "Serve Data: Orders and Fulfillment Flow",
+      "filename": "../../orders-and-fulfillment-flow/orders-and-fulfillment-flow.md"
+    },
+    {
+      "title": "Serve Data: Product Catalog",
+      "filename": "../../product-catalog/product-catalog.md"
+    },
+    {
+      "title": "Serve Data: Retail Demand Sensing",
+      "filename": "../../retail-demand-sensing/retail-demand-sensing.md"
+    },
+    {
+      "title": "Serve Data: Returns Risk Network",
+      "filename": "../../returns-risk-network/returns-risk-network.md"
+    },
+    {
+      "title": "Serve Data: Store Fulfillment Map",
+      "filename": "../../store-fulfillment-map/store-fulfillment-map.md"
+    },
+    {
+      "title": "LiveStack Admin",
+      "filename": "../../livestack-configuration/livestack-configuration.md"
     },
     {
       "title": "Need Help?",

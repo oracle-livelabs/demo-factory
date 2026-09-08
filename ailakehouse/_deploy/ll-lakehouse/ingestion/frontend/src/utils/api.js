@@ -370,6 +370,13 @@ export const api = {
   dataSources: {
     list: () => apiFetch('/data-sources'),
   },
+  awsGlue: {
+    configure: ({ accessKeyId, secretAccessKey, region }) =>
+      apiFetch('/aws-glue', {
+        method: 'POST',
+        body: JSON.stringify({ accessKeyId, secretAccessKey, region }),
+      }),
+  },
   streamingAnalytics: {
     status: () => apiFetch('/streaming-analytics/status'),
   },

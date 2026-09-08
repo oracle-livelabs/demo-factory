@@ -2,11 +2,13 @@
 
 ## Introduction
 
-**PeakGear** sells in a market where demand can change before traditional reporting catches up. Real-time streaming lets the demo capture demand signals as they happen instead of waiting for a later batch report.
+**PeakGear** needs to see changing demand before the next report. Real-time streaming captures demand signals as they happen and writes them to Bronze.
 
-Without real-time streaming, PeakGear risks reacting too late. In this scene, the Bronze layer receives the raw live demand events first, so later processing can clean and enrich them before they become business-ready signals.
+Bronze receives the raw demand events first. Later processing can clean and enrich them before they become business-ready signals.
 
-This scene shows how PeakGear can move from delayed awareness to live business sensing. By capturing demand signals as they happen, the business creates an early-warning system for planners, merchandisers, fulfillment teams, and customer-facing AI. Those signals become the starting point for later processing, where raw observations are refined into trusted data products that support demand sensing, product discovery, dashboards, predictions, and AI agents.
+Apache Kafka carries the generated events to **Oracle GoldenGate Stream Analytics**, which provides the interface for this flow. It lets you start the prepared stream and monitor events as they move toward the Bronze layer.
+
+This scene shows the first step in that flow. The live events can later support demand sensing, product discovery, dashboards, predictions, and AI agents after Silver and Gold processing.
 
 Estimated Time: **10 minutes**
 
@@ -14,18 +16,16 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open the **Real-Time Streaming** demo from the **Ingest** menu.
-- Review where GoldenGate Stream Analytics access and readiness status are shown.
-- Confirm the Kafka, ADB connection, and Bronze target values used by the stream.
-- Start the live demand-signal generator.
-- Monitor events as they land in the Bronze layer.
-- Connect Bronze streaming ingest to later Silver and Gold data products.
+- Start a prepared real-time demand stream.
+- See where the events are sent.
+- Watch events arrive in the Bronze layer.
+- See how streaming data can continue through Silver and Gold.
 
 ## Task 1: Open the Real-Time Streaming demo
 
 ![Sidebar navigation showing Ingest and Real-Time Streaming](images/task-1-open-real-time-streaming.png)
 
-Perform the following set of steps to open the Real-Time Streaming demo:
+Open the Real-Time Streaming demo:
 
 1. In the left sidebar, expand **Ingest**.
 2. Select **Real-Time Streaming**.
@@ -35,7 +35,7 @@ Perform the following set of steps to open the Real-Time Streaming demo:
 
 ![Real-Time Streaming page showing OSA access and readiness status](images/task-2-osa-access-and-status.png)
 
-Perform the following set of steps to review GoldenGate Stream Analytics access without changing the prepared pipeline:
+Review GoldenGate Stream Analytics access without changing the prepared pipeline:
 
 1. Click **Open OSA** if you want to inspect GoldenGate Stream Analytics in a new tab.
 2. Use the displayed OSA credentials to sign in when prompted.
@@ -46,7 +46,7 @@ Perform the following set of steps to review GoldenGate Stream Analytics access 
 
 ![OSA Pipeline Inputs showing Kafka topic and Bronze target table](images/task-3-pipeline-inputs.png)
 
-Perform the following set of steps to confirm the Kafka-to-Bronze pipeline values:
+Confirm the Kafka-to-Bronze pipeline values:
 
 1. Review **OSA Pipeline Inputs**.
 2. Confirm the Kafka bootstrap value and the Kafka topic **peakgear.demand.signals.raw**.
@@ -58,7 +58,7 @@ Perform the following set of steps to confirm the Kafka-to-Bronze pipeline value
 
 ![Generator Control section showing Prepare Topic and Start Stream](images/task-4-start-stream.png)
 
-Perform the following set of steps to start the live demand-signal stream and watch events reach Bronze:
+Start the live demand-signal stream and watch events reach Bronze:
 
 1. Click **Prepare Topic** to confirm that the Kafka topic is available.
 2. Click **Start Stream**.
@@ -70,7 +70,7 @@ Perform the following set of steps to start the live demand-signal stream and wa
 
 ![Recent Demand Signals section showing live events landed through the streaming path](images/task-5-monitor-bronze-events.png)
 
-Perform the following set of steps to monitor recent Bronze demand events:
+Monitor recent Bronze demand events:
 
 1. Review **Recent Demand Signals**.
 2. Point out that each **LIVE-** event came from the generator, moved through Kafka, was processed by GoldenGate Stream Analytics, and landed in **PG.BRONZE\_DEMAND\_SIGNALS**.
@@ -81,11 +81,9 @@ Perform the following set of steps to monitor recent Bronze demand events:
 
 Real-time streaming gives PeakGear earlier awareness of demand changes. Instead of waiting for delayed reports, planners and operations teams can see live demand signals land in the Bronze layer as they happen.
 
-The value is not only the stream itself. The stream becomes part of the AI Lakehouse medallion process: Bronze preserves the source-shaped event, Silver can standardize and enrich it, and Gold can serve demand-aware data products to dashboards, fulfillment planning, predictions, and AI agents.
+The stream becomes part of the AI Lakehouse medallion process. Bronze preserves the source-shaped event. Silver can standardize and enrich it. Gold can serve demand-aware data products to dashboards, fulfillment planning, predictions, and AI agents.
 
-For PeakGear, this means the business can detect product demand sooner, react before inventory pressure becomes a customer problem, and ground downstream operational decisions in live governed data.
-
-You can move to the next scene.
+For PeakGear, the business can see product demand sooner and use the new signals in downstream operational decisions.
 
 ## Acknowledgements
 

@@ -139,6 +139,8 @@ services:
   mongodb-catalog:
     hostname: mongodb-catalog
     image: ${MONGODB_CATALOG_IMAGE:-docker.io/library/mongo:8.0.29}
+    profiles:
+      - aihub
     environment:
       MONGO_INITDB_DATABASE: ${MONGODB_CATALOG_DATABASE:-catalog}
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_CATALOG_ROOT_USERNAME:-PG}
@@ -553,6 +555,7 @@ services:
       ADB_SERVICE_NAME: ${SERVICE_NAME:-}
       ADB_DB_ACTIONS_URL: ${ORDSURL:-}
       DBPASSWORD: ${DBPASSWORD:-}
+      AIHUB: ${AIHUB:-false}
       SOURCE_PUBLIC_HOST: ${SOURCE_PUBLIC_HOST:-}
       POSTGRES_SOURCE_PORT: ${POSTGRES_SOURCE_PORT:-8504}
       POSTGRES_SOURCE_DB: ${POSTGRES_SOURCE_DB:-sportswear}

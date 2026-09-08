@@ -425,6 +425,105 @@ function LiveStackMaintenanceSection({
   );
 }
 
+function AwsGlueCatalogSection() {
+  const [accessKeyId, setAccessKeyId] = useState('');
+  const [secretAccessKey, setSecretAccessKey] = useState('');
+  const [region, setRegion] = useState('us-east-1');
+  const [submitting, setSubmitting] = useState(false);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    setSubmitting(true);
+    setResult(null);
+    setError('');
+
+    try {
+      const request = api.awsGlue.configure({ accessKeyId, secretAccessKey, region });
+      setAccessKeyId('');
+      setSecretAccessKey('');
+      const response = await request;
+      setResult(response);
+    } catch (err) {
+      setError(err.message || 'AWS Glue catalog configuration failed.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
+  return (
+    <section className="glass-card p-5 space-y-4" aria-labelledby="aws-glue-catalog-heading">
+      <div>
+        <p className="section-kicker">Experimental catalog integration</p>
+        <h3 id="aws-glue-catalog-heading" className="text-lg font-bold mt-1">AWS Glue Data Catalog</h3>
+        <p className="text-sm text-[var(--color-text-dim)] mt-1">
+          Mount an AWS Glue catalog in the configured Autonomous Database as <code>GLUE_CAT</code>.
+        </p>
+      </div>
+
+      <form className="space-y-4" onSubmit={handleSubmit}>
+        <div className="lakehouse-form-grid">
+          <label className="lakehouse-field" htmlFor="aws-glue-access-key-id">
+            <span>AWS Access Key ID</span>
+            <input
+              id="aws-glue-access-key-id"
+              className="lakehouse-input"
+              type="text"
+              value={accessKeyId}
+              autoComplete="off"
+              required
+              onChange={(event) => setAccessKeyId(event.target.value)}
+            />
+          </label>
+          <label className="lakehouse-field" htmlFor="aws-glue-secret-access-key">
+            <span>AWS Secret Access Key</span>
+            <input
+              id="aws-glue-secret-access-key"
+              className="lakehouse-input"
+              type="password"
+              value={secretAccessKey}
+              autoComplete="new-password"
+              required
+              onChange={(event) => setSecretAccessKey(event.target.value)}
+            />
+          </label>
+          <label className="lakehouse-field" htmlFor="aws-glue-region">
+            <span>AWS Region</span>
+            <input
+              id="aws-glue-region"
+              className="lakehouse-input"
+              type="text"
+              value={region}
+              placeholder="us-east-1"
+              required
+              onChange={(event) => setRegion(event.target.value)}
+            />
+          </label>
+        </div>
+
+        <p className="text-xs text-[var(--color-text-dim)]">
+          Credentials are submitted once to create the ADB credential <code>AWS_CRED</code>. They are not stored in this browser, the custom image, Terraform, or application configuration.
+        </p>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <button type="submit" className="btn-primary" disabled={submitting}>
+            {submitting ? 'Configuring AWS Glue...' : 'Configure AWS Glue Catalog'}
+          </button>
+          {submitting && <Loader2 size={16} className="animate-spin text-[var(--color-accent)]" />}
+        </div>
+      </form>
+
+      {result && (
+        <div className="lakehouse-message is-success">
+          <p>AWS Glue catalog <code>{result.catalogName}</code> is mounted for region <code>{result.region}</code>.</p>
+        </div>
+      )}
+      {error && <div className="lakehouse-message is-error"><p>{error}</p></div>}
+    </section>
+  );
+}
+
 export default function AIDataLakehouse({ liveStackReadiness, liveStackStatus }) {
   const initialState = useMemo(readStoredState, []);
   const [connections, setConnections] = useState(initialState.connections);
@@ -1179,6 +1278,7 @@ FROM dual;`}
         cleanupError={returnConversationCleanupError}
         onClearReturnAgentConversation={handleClearReturnAgentConversation}
       />
+      <AwsGlueCatalogSection />
     </div>
   );
 }

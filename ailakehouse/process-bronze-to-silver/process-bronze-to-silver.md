@@ -2,11 +2,11 @@
 
 ## Introduction
 
-**PeakGear** stores its raw product master data as an **Apache Iceberg** table managed by an external Iceberg Catalog Server. This is the **Bronze** layer: the original source data remains in the Iceberg table, governed by its catalog, and is available to the lakehouse without first copying or ingesting it into another processing store.
+**PeakGear** keeps its raw product data in an **Apache Iceberg** table. In the Medallion process, this table serves as the **Bronze** layer and preserves the source data for later processing.
 
-This scene shows that Iceberg tables are not only external data that PeakGear can query. **Oracle Data Transforms** can use the Iceberg-backed Bronze data directly in a transformation pipeline. A preconfigured data flow reads the product master source, applies a simple business transformation, and writes the result to a new transformed table. The original Bronze data remains unchanged.
+The table is registered in an Iceberg Catalog Server, so **Oracle Data Transforms** can read it directly. A prepared data flow applies a simple business rule and writes the result to a separate product table. The Bronze source remains unchanged.
 
-**Key message:** Transform Iceberg Data Where It Lives.
+The flow changes `SUBCATEGORY` values from `NetSuite` to `Databricks`. This makes the path from source data to a prepared product table visible.
 
 Estimated Time: **10 minutes**
 
@@ -14,16 +14,15 @@ Estimated Time: **10 minutes**
 
 In this scene, you will:
 
-- Open the **Data Processing & Pipelines** demo from the **Process** menu.
-- Open Oracle Data Transforms and sign in with the displayed PG credentials.
-- Open the preconfigured `peakgear` project and its `dataFlow`.
-- Inspect the Iceberg-backed Bronze source and the `SUBCATEGORY` transformation.
-- Execute the flow and confirm that it writes to `GOLD_PRODUCTS` while leaving Bronze unchanged.
+- See how raw product data can move from Bronze to a prepared product table.
+- Review the source data and the result of a simple business rule.
+- Run the prepared transformation.
+- Confirm that the source remains unchanged and the new table contains the transformed values.
 
 
 ## Task 1: Open and sign in to Data Transforms
 
-Perform the following set of steps to open **Data Transforms**:
+Open **Data Transforms**:
 
 1. Click **Open Data Transforms**.
 2. Copy the displayed PG username and password from the **Login information** panel.
@@ -32,7 +31,7 @@ Perform the following set of steps to open **Data Transforms**:
 
 ## Task 2: Open the preconfigured PeakGear flow
 
-The environment provisions the project and flow for this demo. You do not need to create a project, connection, source, target, or mapping.
+The environment already contains the project and flow for this scene. You do not need to create them manually.
 
 1. From the Data Transforms home page, open **Projects**.
 2. Open the project named `peakgear`.
@@ -45,25 +44,25 @@ The environment provisions the project and flow for this demo. You do not need t
 
 ![2026-08-17-004684](images/2026-08-17-004684.png)
 
-If the project or flow is not visible yet, wait briefly and refresh the page. The first-boot provisioning service creates these objects after the Data Transforms service and the Iceberg catalog are ready.
+If the project or flow is not visible, wait a moment and refresh the page. The environment may still be finishing its setup.
 
-## Task 3: Inspect the Iceberg Bronze source and transformed target
+## Task 3: Inspect the source and target
 
-The flow canvas shows the two data entities already connected:
+The flow canvas shows the source, transformation, and target already connected:
 
 | Flow element                     | Purpose                                                            |
 | ----------------------------------| --------------------------------------------------------------------|
-| `PRODUCT_MASTER_RAW_ICEBERG_EXT` | The Iceberg-backed Bronze product master source.                   |
-| `Substitution`                   | The expression step that applies the demonstration transformation. |
-| `GOLD_PRODUCTS`                  | The new transformed output table.                                  |
+| `PRODUCT_MASTER_RAW_ICEBERG_EXT` | Raw product data stored in an Iceberg table.        |
+| `Substitution`                   | The rule that changes the demonstration values.    |
+| `GOLD_PRODUCTS`                  | The prepared product table.                        |
 
 
 ![2026-08-17-004685](images/2026-08-17-004685.png)
 
 1. Select `PRODUCT_MASTER_RAW_ICEBERG_EXT` on the canvas.
-2. This the Bronze product data exposed through the Iceberg Catalog Server. The flow uses this source directly; it does not first create a second Bronze copy for the transformation.
+2. This is the Bronze product data registered in the Iceberg Catalog Server. The flow reads it directly and does not create another Bronze copy.
 3. Select `GOLD_PRODUCTS`.
-4. Explain that this is a separate target table. The original Iceberg-backed Bronze source remains untouched.
+4. Confirm that this is a separate target table. The Iceberg-backed Bronze source remains unchanged.
 
 ## Task 4: Inspect the transformation
 
@@ -77,13 +76,13 @@ The flow canvas shows the two data entities already connected:
 
 ![2026-08-17-004686](images/2026-08-17-004686.png)
 
-This deliberately small transformation makes the point easy to see: the pipeline can apply business logic to data that originates in an externally managed Iceberg table and produce a new result without modifying the Bronze source.
+This small rule shows that the flow can process data stored in an Iceberg table and write a new result without changing the Bronze source.
 
-> Our source data is stored externally as an Iceberg table and exposed through the Iceberg Catalog Server. We use that table as our Bronze layer. This flow reads the Iceberg-backed data, applies a simple transformation to the subcategory, and writes the result to a new table. We can incorporate Iceberg-managed data directly into our transformation workflow instead of moving the source somewhere else first.
+The source remains in Iceberg as the Bronze layer. Data Transforms reads it, changes `SUBCATEGORY`, and writes the result to a separate table. No copy of the Bronze source is required.
 
 ## Task 5: Run the preconfigured data flow
 
-Perform the following set of steps to execute the transformation:
+Run the prepared transformation:
 
 1. Click **Save** if Data Transforms shows unsaved changes.
 2. Click **Validate** and confirm that the flow is valid.
@@ -99,12 +98,11 @@ Perform the following set of steps to execute the transformation:
 
 ![2026-08-17-004690](images/2026-08-17-004689.png)
 
-The target uses an append integration pattern. For a clean, repeatable demonstration, run the flow once in a freshly provisioned environment. Do not repeatedly start the flow merely to refresh the same result, because each successful execution can add another set of target rows.
+The target uses an append pattern. Run the flow once in a freshly provisioned environment. Start it again only if you intend to add another set of target rows.
 
 ## Bonus Task: Verify the transformed output
 
-Open a SQL Worksheet using the PG schema and run the following queries. You can find the link to SQL Developer Web in the AI Lakehouse tools section: 
->Username and password are the same as for the Data Transforms demo!
+Open a SQL Worksheet using the `PG` schema. You can find SQL Developer Web in the AI Lakehouse tools section. Use the same credentials as the Data Transforms demo.
 
 ![2026-08-17-004690](images/2026-08-17-004690.png)
 
@@ -133,7 +131,7 @@ GROUP BY subcategory
 ORDER BY subcategory;
 ```
 
-To make the business rule visible, compare the source and target values:
+Then compare the source and target values for the changed subcategory:
 
 ```sql
 SELECT raw_sku, subcategory
@@ -147,15 +145,13 @@ WHERE subcategory = 'Databricks'
 FETCH FIRST 10 ROWS ONLY;
 ```
 
-The exact number of rows can vary if the flow has been run previously. Focus on the pattern: Bronze remains an Iceberg-backed source, while the transformed result appears in `GOLD_PRODUCTS` with the substitution applied.
+The row counts can vary if the flow has been run previously. The result is that Bronze remains an Iceberg-backed source, while `GOLD_PRODUCTS` contains the transformed values.
 
 ## Conclusion: Business Outcome
 
-PeakGear can treat externally managed Iceberg tables as active participants in its data engineering workflows, not as isolated data that must be copied before it can be transformed.
+PeakGear can process product data stored in an Iceberg table without first copying it into another store.
 
-The Iceberg Catalog Server provides the governed Bronze table definition. Data Transforms reads that source, applies a repeatable business rule, and writes a new transformed table while preserving the original Bronze data. This short flow demonstrates a practical lakehouse pattern: retain the source where it is governed, transform it through the pipeline, and make the resulting data product available for downstream analytics, applications, and AI.
-
-You can move to the next scene.
+The flow keeps the Bronze source unchanged and writes a separate table with the business rule applied. PeakGear can then use the prepared table for dashboards, analytics, and AI experiences.
 
 ## Acknowledgements
 
