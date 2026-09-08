@@ -10,7 +10,10 @@ The application covers more than Medicaid. The eligibility metric motivates one 
 
 Estimated Time: **5 minutes**
 
-![Welcome page establishing the Colorado statewide operating decision](images/scene-1-sled-operations-brief.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/State and Local Government_Intro_Scene1_with-CC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

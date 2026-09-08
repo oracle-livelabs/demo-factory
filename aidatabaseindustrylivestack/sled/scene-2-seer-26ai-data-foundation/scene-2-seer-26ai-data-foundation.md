@@ -6,7 +6,10 @@ Before **Jessica Chen** acts on the eligibility-risk signal, she verifies that r
 
 Estimated Time: **5 minutes**
 
-![Data Foundation with the governed Colorado service domains](images/scene-2-seer-26ai-data-foundation.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/State and Local Government_Intro_Scene2_with-CC.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

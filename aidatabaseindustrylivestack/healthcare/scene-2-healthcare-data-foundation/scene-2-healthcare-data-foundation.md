@@ -8,7 +8,10 @@ Use this scene to show that later pages are not separate demos. They are differe
 
 Estimated Time: **5 minutes**
 
-![Healthcare Data Foundation page with dataset restore controls and loaded data domains](images/scene-2-healthcare-data-foundation.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Seer Health_Scene-1_with-CC_.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

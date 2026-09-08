@@ -8,7 +8,10 @@ Healthcare teams struggle when the information needed for one decision lives in 
 
 Estimated Time: **12 minutes**
 
-![Risk and Capacity Analytics page with KPI cards and five analytics tabs](images/scene-8-risk-and-capacity-analytics.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Seer Health_Scene-7_with-CC_.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

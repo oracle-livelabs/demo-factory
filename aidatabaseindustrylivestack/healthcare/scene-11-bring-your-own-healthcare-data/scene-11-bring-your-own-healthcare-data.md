@@ -10,8 +10,6 @@ This scene matters because a healthcare LiveStack is most useful when teams can 
 
 Estimated Time: **10 minutes**
 
-![Bring Your Own Healthcare Data modal with template, upload, validation, and restore controls](images/scene-11-bring-your-own-healthcare-data.png)
-
 ### Objectives
 
 In this scene, you will learn what healthcare decision the page supports, what evidence the user should inspect, and what action the team may take next.

@@ -6,7 +6,10 @@ Eligibility and resident-service resolution can cross program, county, partner, 
 
 Estimated Time: **10 minutes**
 
-![Colorado Community Partner Network and coordination workspace](images/scene-5-community-partner-network.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/State and Local Government_Scene5_with-CC.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

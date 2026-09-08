@@ -10,7 +10,10 @@ Oracle AI Database helps address these challenges by keeping vector search close
 
 Estimated Time: **10 minutes**
 
-![Quality and Capacity Signals page with semantic search controls and signal feed](images/scene-4-quality-and-capacity-signals.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/Healthcare/Seer Health_Scene-3_with-CC_.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 

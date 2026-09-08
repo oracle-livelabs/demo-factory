@@ -8,7 +8,10 @@ The agent proposes and explains an action. It does not silently reallocate capac
 
 Estimated Time: **10 minutes**
 
-![Public Service AI Agent Console for the Colorado operating decision](images/scene-10-public-service-ai-agent-console.png)
+<video controls width="100%">
+  <source src="https://c4u04.objectstorage.us-ashburn-1.oci.customer-oci.com/p/EcTjWk2IuZPZeNnD_fYMcgUhdNDIDA6rt9gaFj_WZMiL7VvxPBNMY60837hu5hga/n/c4u04/b/livelabsfiles/o/livestack/Videos/State-and-Local-Gov/State and Local Government_Scene10_with-CC.mp4">
+  Your browser does not support the video tag.
+</video>
 
 ### Objectives
 
