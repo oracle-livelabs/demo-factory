@@ -1,0 +1,2 @@
+inventory_id,product_id,center_id,quantity_on_hand,quantity_reserved,quantity_incoming,reorder_point,reorder_qty,last_restock_date,updated_at
+1,1,1,120,5,40,30,80,2026-04-05,2026-04-10T07:00:00Z

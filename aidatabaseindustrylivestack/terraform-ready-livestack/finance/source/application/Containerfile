@@ -1,0 +1,30 @@
+FROM docker.io/node:20-bookworm AS frontend-build
+
+WORKDIR /workspace/app/frontend
+
+COPY frontend/package*.json ./
+RUN npm ci
+
+COPY frontend/ ./
+RUN npm run build
+
+FROM docker.io/node:20-bookworm AS runtime
+
+WORKDIR /workspace/app
+
+ENV NODE_ENV=production \
+    PORT=3001
+
+COPY package*.json ./
+RUN npm ci --omit=dev && npm cache clean --force
+
+COPY backend ./backend
+COPY verification/demo-dataset ./verification/demo-dataset
+COPY verification/check-product-duality-view.js ./verification/check-product-duality-view.js
+COPY verification/check-spatial-nearest-function.js ./verification/check-spatial-nearest-function.js
+COPY verification/check-optimal-fulfillment.js ./verification/check-optimal-fulfillment.js
+COPY --from=frontend-build /workspace/app/frontend/dist ./frontend/dist
+
+EXPOSE 3001
+
+CMD ["npm", "start"]

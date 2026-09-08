@@ -1,0 +1,2 @@
+product_id,brand_id,sku,product_name,description,category,subcategory,unit_price,unit_cost,weight_kg,is_active,launch_date,tags,created_at,updated_at
+1,1,FIN-00001,Premium Checking Bundle,"Retail Banking offering from Meridian Trust Bank; tracked for suitability, exposure monitoring, operational risk, and client servicing.",Retail Banking,Checking,12.5,4.1,1,1,2024-09-01,"checking,deposit,consumer,fee-waiver",2026-04-01T08:00:00Z,2026-04-12T14:00:00Z

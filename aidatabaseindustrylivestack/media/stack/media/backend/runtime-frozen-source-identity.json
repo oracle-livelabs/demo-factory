@@ -26,14 +26,14 @@
   },
   "frontendBuild": {
     "schemaVersion": 1,
-    "sha256": "cfc09554e233eb1ea7e0e9b866eedbd559569bb465bc1b0a142c4350457914f9",
+    "sha256": "701c750c759633c9b677677ff9974e6d78282e0fec93dccf197aebadf27ba86c",
     "fileCount": 36,
-    "bytes": 753154
+    "bytes": 750290
   },
   "frontendBundle": {
-    "sha256": "9aeea8e24f51b237a2b65d388620420adb47c6f91e99020094c3c2f9a06a6121",
+    "sha256": "5f7f972e87ba5f1c3fcea1c897c696ecf2223e060023fa87d5a4e42ebb5d65f8",
     "fileCount": 8058,
-    "bytes": 110736891
+    "bytes": 110735061
   },
   "immutableRuntime": {
     "compose.yml": "3f35792517d27d1c221c76202bb30bd275f86e4cfa13a9f25a856022938e208d",

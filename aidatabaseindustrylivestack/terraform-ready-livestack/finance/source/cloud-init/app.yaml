@@ -1,0 +1,34 @@
+#cloud-config
+write_files:
+  - path: /opt/finance-livestack/runtime-bootstrap.env
+    permissions: "0600"
+    owner: root:root
+    content: |
+      APPLICATION_ARCHIVE_URL_B64=${application_archive_url_b64}
+      WALLET_ARCHIVE_URL_B64=${wallet_archive_url_b64}
+      BOOTSTRAP_STATUS_UPLOAD_URL_B64=${bootstrap_status_upload_url_b64}
+      API_KEY_PUBLIC_UPLOAD_URL_B64=${api_key_public_upload_url_b64}
+      API_KEY_ACTIVATION_URL_B64=${api_key_activation_url_b64}
+      ADB_ADMIN_PASSWORD_B64=${adb_admin_password_b64}
+      APPLICATION_PASSWORD_B64=${application_password_b64}
+      WALLET_PASSWORD_B64=${wallet_password_b64}
+      ADB_SERVICE_NAME_B64=${adb_service_name_b64}
+      MODEL_OBJECT_URI_B64=${model_object_uri_b64}
+      OCI_TENANCY_OCID_B64=${tenancy_ocid_b64}
+      OCI_USER_OCID_B64=${current_user_ocid_b64}
+      OCI_COMPARTMENT_OCID_B64=${compartment_ocid_b64}
+      OCI_GENAI_REGION_B64=${oci_genai_region_b64}
+      OCI_GENAI_MODEL_B64=${oci_genai_model_b64}
+      SELECT_AI_PROFILE_B64=${select_ai_profile_b64}
+      SELECT_AI_PRIMARY_AGENT_TEAM_B64=${select_ai_primary_team_b64}
+      SELECT_AI_AGENT_TEAMS_B64=${select_ai_agent_teams_b64}
+      DEPLOYMENT_ID=${deployment_id}
+      APPLICATION_PORT=${application_port}
+  - path: /usr/local/sbin/bootstrap-finance-livestack.sh
+    permissions: "0700"
+    owner: root:root
+    content: |
+      ${bootstrap_app_vm_script}
+
+runcmd:
+  - [bash, -o, pipefail, -c, "/usr/local/sbin/bootstrap-finance-livestack.sh 2>&1 | tee /var/log/finance-livestack-bootstrap.log"]

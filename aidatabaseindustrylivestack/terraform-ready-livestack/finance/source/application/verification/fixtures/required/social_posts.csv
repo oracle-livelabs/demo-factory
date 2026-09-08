@@ -1,0 +1,2 @@
+post_id,influencer_id,platform,external_post_id,post_text,posted_at,likes_count,shares_count,comments_count,views_count,sentiment_score,virality_score,detected_products,momentum_flag,processed_at,created_at
+1,1,instagram,fin_instagram_00000001,Meridian Trust Bank repriced Premium Checking Bundle after rate guidance changed; client suitability review recommended,2026-04-10T12:00:00Z,1200,300,45,45000,0.84,78,1,viral,2026-04-10T12:30:00Z,2026-04-10T12:00:00Z

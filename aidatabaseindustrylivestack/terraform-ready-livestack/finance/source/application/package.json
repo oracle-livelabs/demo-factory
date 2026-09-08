@@ -1,0 +1,48 @@
+{
+  "name": "financial-services-livestack",
+  "version": "1.0.0",
+  "description": "Financial Services Operations, Compliance Signals, and Smart Client Service - Oracle 26ai Converged Database Demo",
+  "main": "backend/server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "dev:backend": "nodemon backend/server.js",
+    "dev:frontend": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "verify:brand-colors": "node verification/check-brand-colors.js",
+    "verify:contrast": "node verification/check-contrast.js",
+    "verify:focus-semantics": "node verification/check-focus-semantics.js",
+    "verify:product-duality": "node verification/check-product-duality-view.js",
+    "verify:spatial-nearest": "node verification/check-spatial-nearest-function.js",
+    "verify:optimal-fulfillment": "node verification/check-optimal-fulfillment.js",
+    "verify:conversation-context": "node --test verification/conversation-context.test.js",
+    "verify:native-ai": "node --test verification/native-ai-service.test.js verification/native-ai-static-contract.test.js",
+    "test": "node --test verification/*.test.js",
+    "start": "node backend/server.js",
+    "start:prod": "NODE_ENV=production pm2 start backend/server.js --name financial-services"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.0",
+    "cors": "^2.8.5",
+    "csv-parse": "^6.2.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "multer": "^2.1.1",
+    "oracledb": "^6.7.0"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.1",
+    "nodemon": "^3.1.4"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

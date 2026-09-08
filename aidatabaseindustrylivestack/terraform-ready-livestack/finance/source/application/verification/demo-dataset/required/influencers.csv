@@ -1,0 +1,484 @@
+influencer_id,handle,display_name,platform,follower_count,engagement_rate,influence_score,niche,city,region,country,is_verified,created_at
+1,@sec_updates_01,Regulatory Intelligence Stream - SEC 01,instagram,29787,0.0419,71.62,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+2,@finra_watch_01,FINRA Monitoring Feed 01,tiktok,40474,0.0457,78.45,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+3,@fdic_bulletin_01,Regulatory Intelligence Stream - FDIC 01,twitter,289825,0.0381,84.35,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+4,@occ_riskdesk_01,Regulatory Intelligence Stream - OCC 01,youtube,4845,0.0496,69.43,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+5,@fed_ratewire_01,Regulatory Intelligence Stream - Federal Reserve 01,threads,8767,0.0365,62.32,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+6,@credit_pulse_01,Client Exposure Engine - Credit 01,instagram,8757,0.0618,73.6,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+7,@mortgage_signal_01,Client Exposure Engine - Mortgage 01,tiktok,82123,0.0767,100,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+8,@wealthdesk_01,Client Exposure Engine - Wealth 01,twitter,48455,0.0488,74.64,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+9,@payments_ops_01,Market Activity Monitor - Payments 01,youtube,9410,0.0775,79.81,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+10,@aml_watch_01,AML Surveillance Engine 01,threads,5314,0.0358,60.18,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+11,@kyc_queue_01,AML Surveillance Engine - KYC 01,instagram,1884,0.0335,59.83,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+12,@fraud_alerts_01,Fraud Detection Pipeline 01,tiktok,2955,0.0311,61.13,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+13,@liquidity_monitor_01,Liquidity Risk Monitor 01,twitter,62427,0.072,95.97,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+14,@capital_rules_01,Market Activity Monitor - Capital 01,youtube,6305,0.1018,98.65,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+15,@treasury_daily_01,Treasury Compliance Feed 01,threads,6623,0.0607,75.6,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+16,@branch_ops_01,Client Exposure Engine - Branch 01,instagram,21942,0.0745,96.91,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+17,@advisor_signal_01,Client Exposure Engine - Advisor 01,tiktok,1845,0.088,83.27,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+18,@portfolio_watch_01,Market Activity Monitor - Portfolio 01,twitter,9976,0.0765,85.02,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+19,@deposit_trends_01,Client Exposure Engine - Deposits 01,youtube,9123,0.0362,71.62,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+20,@loan_servicing_01,Client Exposure Engine - Lending 01,threads,9026,0.0951,93.79,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+21,@sec_updates_02,Regulatory Intelligence Stream - SEC 02,instagram,3774,0.0615,80.61,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+22,@finra_watch_02,FINRA Monitoring Feed 02,tiktok,83369,0.0622,90.24,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+23,@fdic_bulletin_02,Regulatory Intelligence Stream - FDIC 02,twitter,85062,0.0573,85.12,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+24,@occ_riskdesk_02,Regulatory Intelligence Stream - OCC 02,youtube,9133,0.0775,85.5,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+25,@fed_ratewire_02,Regulatory Intelligence Stream - Federal Reserve 02,threads,26237,0.0264,68.42,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+26,@credit_pulse_02,Client Exposure Engine - Credit 02,instagram,17305,0.0471,82.26,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+27,@mortgage_signal_02,Client Exposure Engine - Mortgage 02,tiktok,8926,0.1031,94.94,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+28,@wealthdesk_02,Client Exposure Engine - Wealth 02,twitter,37898,0.0655,90.3,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+29,@payments_ops_02,Market Activity Monitor - Payments 02,youtube,4482,0.1016,91.6,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+30,@aml_watch_02,AML Surveillance Engine 02,threads,63731,0.0519,81.88,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+31,@kyc_queue_02,AML Surveillance Engine - KYC 02,instagram,536083,0.0277,88.26,Payments,Nashville,Tennessee,US,1,2026-04-13T09:16:47Z
+32,@fraud_alerts_02,Fraud Detection Pipeline 02,tiktok,8576,0.1177,100,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+33,@liquidity_monitor_02,Liquidity Risk Monitor 02,twitter,7341,0.0926,89.01,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+34,@capital_rules_02,Market Activity Monitor - Capital 02,youtube,509575,0.0215,84.22,Fraud Operations,Atlanta,Georgia,US,1,2026-04-13T09:16:47Z
+35,@treasury_daily_02,Treasury Compliance Feed 02,threads,2336,0.032,60.49,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+36,@branch_ops_02,Client Exposure Engine - Branch 02,instagram,90248,0.0539,80.52,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+37,@advisor_signal_02,Client Exposure Engine - Advisor 02,tiktok,43754,0.0371,81.17,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+38,@portfolio_watch_02,Market Activity Monitor - Portfolio 02,twitter,71571,0.0657,90.66,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+39,@deposit_trends_02,Client Exposure Engine - Deposits 02,youtube,563253,0.0407,94.21,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+40,@loan_servicing_02,Client Exposure Engine - Lending 02,threads,27525,0.0475,72.77,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+41,@sec_updates_03,Regulatory Intelligence Stream - SEC 03,instagram,617113,0.0441,96.66,SEC,New York,New York,US,1,2026-04-13T09:16:47Z
+42,@finra_watch_03,FINRA Monitoring Feed 03,tiktok,11615,0.031,69.01,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+43,@fdic_bulletin_03,Regulatory Intelligence Stream - FDIC 03,twitter,5486,0.0944,87.07,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+44,@occ_riskdesk_03,Regulatory Intelligence Stream - OCC 03,youtube,68500,0.0706,91.8,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+45,@fed_ratewire_03,Regulatory Intelligence Stream - Federal Reserve 03,threads,13113440,0.01,83.84,Federal Reserve,Phoenix,Arizona,US,1,2026-04-13T09:16:47Z
+46,@credit_pulse_03,Client Exposure Engine - Credit 03,instagram,74785,0.0584,86.91,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+47,@mortgage_signal_03,Client Exposure Engine - Mortgage 03,tiktok,60707,0.0423,76.63,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+48,@wealthdesk_03,Client Exposure Engine - Wealth 03,twitter,9805,0.0647,84.17,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+49,@payments_ops_03,Market Activity Monitor - Payments 03,youtube,9843,0.074,89.37,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+50,@aml_watch_03,AML Surveillance Engine 03,threads,816891,0.0209,79.09,Cards,Austin,Texas,US,1,2026-04-13T09:16:47Z
+51,@kyc_queue_03,AML Surveillance Engine - KYC 03,instagram,4838,0.088,82.74,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+52,@fraud_alerts_03,Fraud Detection Pipeline 03,tiktok,12017,0.0512,74.88,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+53,@liquidity_monitor_03,Liquidity Risk Monitor 03,twitter,35610,0.0582,90.5,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+54,@capital_rules_03,Market Activity Monitor - Capital 03,youtube,65652,0.079,100,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+55,@treasury_daily_03,Treasury Compliance Feed 03,threads,6292,0.0387,71.86,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+56,@branch_ops_03,Client Exposure Engine - Branch 03,instagram,2430,0.0898,81.99,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+57,@advisor_signal_03,Client Exposure Engine - Advisor 03,tiktok,934165,0.0317,86.89,Treasury,Minneapolis,Minnesota,US,1,2026-04-13T09:16:47Z
+58,@portfolio_watch_03,Market Activity Monitor - Portfolio 03,twitter,4304,0.0673,74.41,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+59,@deposit_trends_03,Client Exposure Engine - Deposits 03,youtube,1725,0.0626,69.79,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+60,@loan_servicing_03,Client Exposure Engine - Lending 03,threads,62836,0.0564,78.66,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+61,@sec_updates_04,Regulatory Intelligence Stream - SEC 04,instagram,696723,0.0234,79.61,SEC,New York,New York,US,1,2026-04-13T09:16:47Z
+62,@finra_watch_04,FINRA Monitoring Feed 04,tiktok,725374,0.0257,88.88,FINRA,Los Angeles,California,US,1,2026-04-13T09:16:47Z
+63,@fdic_bulletin_04,Regulatory Intelligence Stream - FDIC 04,twitter,44952,0.0563,77.54,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+64,@occ_riskdesk_04,Regulatory Intelligence Stream - OCC 04,youtube,319361,0.028,74.74,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+65,@fed_ratewire_04,Regulatory Intelligence Stream - Federal Reserve 04,threads,5602,0.0388,60.54,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+66,@credit_pulse_04,Client Exposure Engine - Credit 04,instagram,7110,0.1153,100,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+67,@mortgage_signal_04,Client Exposure Engine - Mortgage 04,tiktok,7014,0.0837,89.64,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+68,@wealthdesk_04,Client Exposure Engine - Wealth 04,twitter,4793904,0.0155,81.19,Mortgage Lending,Seattle,Washington,US,1,2026-04-13T09:16:47Z
+69,@payments_ops_04,Market Activity Monitor - Payments 04,youtube,22221,0.0287,66.12,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+70,@aml_watch_04,AML Surveillance Engine 04,threads,93758,0.0417,87.56,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+71,@kyc_queue_04,AML Surveillance Engine - KYC 04,instagram,875656,0.0217,88.48,Payments,Nashville,Tennessee,US,1,2026-04-13T09:16:47Z
+72,@fraud_alerts_04,Fraud Detection Pipeline 04,tiktok,7898,0.085,87.16,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+73,@liquidity_monitor_04,Liquidity Risk Monitor 04,twitter,2234,0.0385,67.44,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+74,@capital_rules_04,Market Activity Monitor - Capital 04,youtube,97139,0.0454,88.16,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+75,@treasury_daily_04,Treasury Compliance Feed 04,threads,14434057,0.0154,97.91,Liquidity Risk,Dallas,Texas,US,1,2026-04-13T09:16:47Z
+76,@branch_ops_04,Client Exposure Engine - Branch 04,instagram,67907,0.036,76.32,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+77,@advisor_signal_04,Client Exposure Engine - Advisor 04,tiktok,6207,0.0675,75.57,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+78,@portfolio_watch_04,Market Activity Monitor - Portfolio 04,twitter,8857,0.0692,86.97,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+79,@deposit_trends_04,Client Exposure Engine - Deposits 04,youtube,10699,0.0673,86.5,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+80,@loan_servicing_04,Client Exposure Engine - Lending 04,threads,98266,0.0366,80.17,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+81,@sec_updates_05,Regulatory Intelligence Stream - SEC 05,instagram,9487,0.0717,89.28,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+82,@finra_watch_05,FINRA Monitoring Feed 05,tiktok,6852,0.0604,75.38,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+83,@fdic_bulletin_05,Regulatory Intelligence Stream - FDIC 05,twitter,4650,0.0497,70.27,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+84,@occ_riskdesk_05,Regulatory Intelligence Stream - OCC 05,youtube,15251,0.0782,86.63,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+85,@fed_ratewire_05,Regulatory Intelligence Stream - Federal Reserve 05,threads,2854,0.0862,84.05,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+86,@credit_pulse_05,Client Exposure Engine - Credit 05,instagram,3956,0.077,88.11,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+87,@mortgage_signal_05,Client Exposure Engine - Mortgage 05,tiktok,156670,0.0329,79.11,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+88,@wealthdesk_05,Client Exposure Engine - Wealth 05,twitter,2163,0.111,95.1,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+89,@payments_ops_05,Market Activity Monitor - Payments 05,youtube,85246,0.04,72.35,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+90,@aml_watch_05,AML Surveillance Engine 05,threads,92349,0.0389,73.85,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+91,@kyc_queue_05,AML Surveillance Engine - KYC 05,instagram,5177,0.0869,95.89,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+92,@fraud_alerts_05,Fraud Detection Pipeline 05,tiktok,9852,0.1129,97.49,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+93,@liquidity_monitor_05,Liquidity Risk Monitor 05,twitter,1417,0.0506,70.96,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+94,@capital_rules_05,Market Activity Monitor - Capital 05,youtube,5299,0.0875,88.81,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+95,@treasury_daily_05,Treasury Compliance Feed 05,threads,65292,0.0687,93.5,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+101,@branch_ops_05,Client Exposure Engine - Branch 05,instagram,73658,0.0517,83.61,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+102,@advisor_signal_05,Client Exposure Engine - Advisor 05,tiktok,4916,0.1162,100,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+103,@portfolio_watch_05,Market Activity Monitor - Portfolio 05,twitter,60145,0.0495,82.6,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+104,@deposit_trends_05,Client Exposure Engine - Deposits 05,youtube,32849,0.073,86.31,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+105,@loan_servicing_05,Client Exposure Engine - Lending 05,threads,2363,0.1179,100,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+106,@sec_updates_06,Regulatory Intelligence Stream - SEC 06,instagram,245920,0.0367,84.7,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+107,@finra_watch_06,FINRA Monitoring Feed 06,tiktok,9762,0.0823,88.13,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+108,@fdic_bulletin_06,Regulatory Intelligence Stream - FDIC 06,twitter,4217,0.0485,73.21,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+109,@occ_riskdesk_06,Regulatory Intelligence Stream - OCC 06,youtube,4704,0.1195,100,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+110,@fed_ratewire_06,Regulatory Intelligence Stream - Federal Reserve 06,threads,84601,0.0781,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+111,@credit_pulse_06,Client Exposure Engine - Credit 06,instagram,901538,0.0242,77.36,Interest Rates,San Francisco,California,US,1,2026-04-13T09:16:47Z
+112,@mortgage_signal_06,Client Exposure Engine - Mortgage 06,tiktok,1435,0.0704,81.28,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+113,@wealthdesk_06,Client Exposure Engine - Wealth 06,twitter,84089,0.0491,83.86,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+114,@payments_ops_06,Market Activity Monitor - Payments 06,youtube,89858,0.0749,91.43,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+115,@aml_watch_06,AML Surveillance Engine 06,threads,3431,0.0386,69.87,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+116,@kyc_queue_06,AML Surveillance Engine - KYC 06,instagram,39057,0.0548,79.46,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+117,@fraud_alerts_06,Fraud Detection Pipeline 06,tiktok,8048,0.1043,100,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+118,@liquidity_monitor_06,Liquidity Risk Monitor 06,twitter,7988,0.0688,87.07,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+119,@capital_rules_06,Market Activity Monitor - Capital 06,youtube,6754,0.1129,100,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+120,@treasury_daily_06,Treasury Compliance Feed 06,threads,250289,0.0333,76.21,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+121,@branch_ops_06,Client Exposure Engine - Branch 06,instagram,865261,0.0167,71.72,Capital Markets,San Diego,California,US,1,2026-04-13T09:16:47Z
+122,@advisor_signal_06,Client Exposure Engine - Advisor 06,tiktok,84982,0.0477,87.31,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+123,@portfolio_watch_06,Market Activity Monitor - Portfolio 06,twitter,68341,0.0603,91.51,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+124,@deposit_trends_06,Client Exposure Engine - Deposits 06,youtube,6828,0.1104,97.28,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+125,@loan_servicing_06,Client Exposure Engine - Lending 06,threads,754246,0.0386,89.21,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+126,@sec_updates_07,Regulatory Intelligence Stream - SEC 07,instagram,7136,0.1019,96.51,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+127,@finra_watch_07,FINRA Monitoring Feed 07,tiktok,81812,0.0498,88.26,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+128,@fdic_bulletin_07,Regulatory Intelligence Stream - FDIC 07,twitter,20073,0.0699,92.03,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+129,@occ_riskdesk_07,Regulatory Intelligence Stream - OCC 07,youtube,1668,0.0368,60.28,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+130,@fed_ratewire_07,Regulatory Intelligence Stream - Federal Reserve 07,threads,47675,0.0707,93.77,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+131,@credit_pulse_07,Client Exposure Engine - Credit 07,instagram,72439,0.0769,98.89,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+132,@mortgage_signal_07,Client Exposure Engine - Mortgage 07,tiktok,51330,0.0312,66.31,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+133,@wealthdesk_07,Client Exposure Engine - Wealth 07,twitter,43850,0.03,70.4,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+134,@payments_ops_07,Market Activity Monitor - Payments 07,youtube,64111,0.0691,97.82,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+135,@aml_watch_07,AML Surveillance Engine 07,threads,7956,0.039,68.87,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+136,@kyc_queue_07,AML Surveillance Engine - KYC 07,instagram,111378,0.03,75.48,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+137,@fraud_alerts_07,Fraud Detection Pipeline 07,tiktok,8309,0.0685,82.94,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+138,@liquidity_monitor_07,Liquidity Risk Monitor 07,twitter,2495,0.1025,92.12,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+139,@capital_rules_07,Market Activity Monitor - Capital 07,youtube,810707,0.0235,79.77,Fraud Operations,Atlanta,Georgia,US,1,2026-04-13T09:16:47Z
+140,@treasury_daily_07,Treasury Compliance Feed 07,threads,9857127,0.015,93.11,Liquidity Risk,Dallas,Texas,US,1,2026-04-13T09:16:47Z
+141,@branch_ops_07,Client Exposure Engine - Branch 07,instagram,520064,0.0163,72.9,Capital Markets,San Diego,California,US,1,2026-04-13T09:16:47Z
+142,@advisor_signal_07,Client Exposure Engine - Advisor 07,tiktok,9643,0.0843,90.43,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+143,@portfolio_watch_07,Market Activity Monitor - Portfolio 07,twitter,82395,0.0614,88.18,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+144,@deposit_trends_07,Client Exposure Engine - Deposits 07,youtube,4665,0.0526,63.96,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+145,@loan_servicing_07,Client Exposure Engine - Lending 07,threads,119177,0.0182,64.35,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+146,@sec_updates_08,Regulatory Intelligence Stream - SEC 08,instagram,5760,0.0791,92.22,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+147,@finra_watch_08,FINRA Monitoring Feed 08,tiktok,1710,0.1048,92.59,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+148,@fdic_bulletin_08,Regulatory Intelligence Stream - FDIC 08,twitter,9139,0.1056,97.22,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+149,@occ_riskdesk_08,Regulatory Intelligence Stream - OCC 08,youtube,5194,0.0985,93.43,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+150,@fed_ratewire_08,Regulatory Intelligence Stream - Federal Reserve 08,threads,6344,0.0359,65.31,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+151,@credit_pulse_08,Client Exposure Engine - Credit 08,instagram,9563,0.1139,100,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+152,@mortgage_signal_08,Client Exposure Engine - Mortgage 08,tiktok,5848,0.0401,67.96,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+153,@wealthdesk_08,Client Exposure Engine - Wealth 08,twitter,76624,0.0433,76.58,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+154,@payments_ops_08,Market Activity Monitor - Payments 08,youtube,5788,0.0739,88.28,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+155,@aml_watch_08,AML Surveillance Engine 08,threads,169138,0.0333,73.68,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+156,@kyc_queue_08,AML Surveillance Engine - KYC 08,instagram,2878,0.0503,60.43,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+157,@fraud_alerts_08,Fraud Detection Pipeline 08,tiktok,184973,0.0259,69.88,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+158,@liquidity_monitor_08,Liquidity Risk Monitor 08,twitter,1196,0.0689,73.11,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+159,@capital_rules_08,Market Activity Monitor - Capital 08,youtube,706439,0.0267,81.44,Fraud Operations,Atlanta,Georgia,US,1,2026-04-13T09:16:47Z
+160,@treasury_daily_08,Treasury Compliance Feed 08,threads,597559,0.0282,86.29,Liquidity Risk,Dallas,Texas,US,1,2026-04-13T09:16:47Z
+161,@branch_ops_08,Client Exposure Engine - Branch 08,instagram,1493,0.0405,53.19,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+162,@advisor_signal_08,Client Exposure Engine - Advisor 08,tiktok,2285,0.0659,70.08,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+163,@portfolio_watch_08,Market Activity Monitor - Portfolio 08,twitter,7386557,0.0215,96.47,Branch Operations,Detroit,Michigan,US,1,2026-04-13T09:16:47Z
+164,@deposit_trends_08,Client Exposure Engine - Deposits 08,youtube,2718,0.0373,63.59,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+165,@loan_servicing_08,Client Exposure Engine - Lending 08,threads,5144,0.0562,69.56,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+166,@sec_updates_09,Regulatory Intelligence Stream - SEC 09,instagram,89451,0.065,93.36,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+167,@finra_watch_09,FINRA Monitoring Feed 09,tiktok,90976,0.0703,90.35,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+168,@fdic_bulletin_09,Regulatory Intelligence Stream - FDIC 09,twitter,50566,0.0253,62.29,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+169,@occ_riskdesk_09,Regulatory Intelligence Stream - OCC 09,youtube,3355,0.1086,92.99,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+170,@fed_ratewire_09,Regulatory Intelligence Stream - Federal Reserve 09,threads,2909,0.1166,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+171,@credit_pulse_09,Client Exposure Engine - Credit 09,instagram,86899,0.0592,88.84,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+172,@mortgage_signal_09,Client Exposure Engine - Mortgage 09,tiktok,28555,0.0446,78.36,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+173,@wealthdesk_09,Client Exposure Engine - Wealth 09,twitter,2177,0.0878,78.61,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+174,@payments_ops_09,Market Activity Monitor - Payments 09,youtube,39296,0.0647,82.71,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+175,@aml_watch_09,AML Surveillance Engine 09,threads,32550,0.0302,72.4,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+176,@kyc_queue_09,AML Surveillance Engine - KYC 09,instagram,490373,0.0225,83.08,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+177,@fraud_alerts_09,Fraud Detection Pipeline 09,tiktok,5568,0.0873,91.63,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+178,@liquidity_monitor_09,Liquidity Risk Monitor 09,twitter,2494,0.0727,76.35,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+179,@capital_rules_09,Market Activity Monitor - Capital 09,youtube,3105,0.0325,59.52,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+180,@treasury_daily_09,Treasury Compliance Feed 09,threads,782810,0.0357,87.24,Liquidity Risk,Dallas,Texas,US,1,2026-04-13T09:16:47Z
+181,@branch_ops_09,Client Exposure Engine - Branch 09,instagram,25754,0.0437,79.91,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+182,@advisor_signal_09,Client Exposure Engine - Advisor 09,tiktok,186874,0.0355,75.27,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+183,@portfolio_watch_09,Market Activity Monitor - Portfolio 09,twitter,50165,0.0475,83.17,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+184,@deposit_trends_09,Client Exposure Engine - Deposits 09,youtube,71195,0.0661,89.66,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+185,@loan_servicing_09,Client Exposure Engine - Lending 09,threads,4367,0.0712,85.72,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+186,@sec_updates_10,Regulatory Intelligence Stream - SEC 10,instagram,2460,0.1092,88.69,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+187,@finra_watch_10,FINRA Monitoring Feed 10,tiktok,52375,0.0679,91.33,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+188,@fdic_bulletin_10,Regulatory Intelligence Stream - FDIC 10,twitter,83252,0.0656,90.18,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+189,@occ_riskdesk_10,Regulatory Intelligence Stream - OCC 10,youtube,81932,0.0633,90.81,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+190,@fed_ratewire_10,Regulatory Intelligence Stream - Federal Reserve 10,threads,444724,0.0255,81.11,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+191,@credit_pulse_10,Client Exposure Engine - Credit 10,instagram,2303,0.1172,96.19,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+192,@mortgage_signal_10,Client Exposure Engine - Mortgage 10,tiktok,137541,0.0217,71.21,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+193,@wealthdesk_10,Client Exposure Engine - Wealth 10,twitter,59271,0.0508,79.48,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+194,@payments_ops_10,Market Activity Monitor - Payments 10,youtube,5739,0.0809,93.27,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+195,@aml_watch_10,AML Surveillance Engine 10,threads,27744,0.0651,82.34,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+201,@kyc_queue_10,AML Surveillance Engine - KYC 10,instagram,79290,0.0799,100,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+202,@fraud_alerts_10,Fraud Detection Pipeline 10,tiktok,4215,0.0505,66.83,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+203,@liquidity_monitor_10,Liquidity Risk Monitor 10,twitter,7488,0.0427,65.99,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+204,@capital_rules_10,Market Activity Monitor - Capital 10,youtube,3230,0.0609,71.53,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+205,@treasury_daily_10,Treasury Compliance Feed 10,threads,5161709,0.0088,89.13,Liquidity Risk,Dallas,Texas,US,1,2026-04-13T09:16:47Z
+206,@branch_ops_10,Client Exposure Engine - Branch 10,instagram,5833,0.042,69.13,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+207,@advisor_signal_10,Client Exposure Engine - Advisor 10,tiktok,255801,0.0396,77.13,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+208,@portfolio_watch_10,Market Activity Monitor - Portfolio 10,twitter,818423,0.029,89.5,Branch Operations,Detroit,Michigan,US,1,2026-04-13T09:16:47Z
+209,@deposit_trends_10,Client Exposure Engine - Deposits 10,youtube,2197,0.0457,59.91,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+210,@loan_servicing_10,Client Exposure Engine - Lending 10,threads,978841,0.0189,88.2,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+211,@sec_updates_11,Regulatory Intelligence Stream - SEC 11,instagram,6398,0.0446,63.86,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+212,@finra_watch_11,FINRA Monitoring Feed 11,tiktok,1079,0.0332,52.82,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+213,@fdic_bulletin_11,Regulatory Intelligence Stream - FDIC 11,twitter,6583,0.0439,62.92,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+214,@occ_riskdesk_11,Regulatory Intelligence Stream - OCC 11,youtube,9832,0.0528,75.04,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+215,@fed_ratewire_11,Regulatory Intelligence Stream - Federal Reserve 11,threads,9319,0.0426,70.27,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+216,@credit_pulse_11,Client Exposure Engine - Credit 11,instagram,14826,0.0474,70.6,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+217,@mortgage_signal_11,Client Exposure Engine - Mortgage 11,tiktok,73437,0.0262,76.63,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+218,@wealthdesk_11,Client Exposure Engine - Wealth 11,twitter,4575,0.0778,80.35,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+219,@payments_ops_11,Market Activity Monitor - Payments 11,youtube,8690,0.1162,100,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+220,@aml_watch_11,AML Surveillance Engine 11,threads,9467,0.0772,83.91,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+221,@kyc_queue_11,AML Surveillance Engine - KYC 11,instagram,1984,0.0356,57.42,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+222,@fraud_alerts_11,Fraud Detection Pipeline 11,tiktok,8439,0.0593,72.49,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+223,@liquidity_monitor_11,Liquidity Risk Monitor 11,twitter,210156,0.0373,80.61,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+224,@capital_rules_11,Market Activity Monitor - Capital 11,youtube,9228,0.0374,71.03,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+225,@treasury_daily_11,Treasury Compliance Feed 11,threads,18590,0.0256,71.87,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+226,@branch_ops_11,Client Exposure Engine - Branch 11,instagram,14112,0.0268,68.39,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+227,@advisor_signal_11,Client Exposure Engine - Advisor 11,tiktok,4748,0.0826,81.99,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+228,@portfolio_watch_11,Market Activity Monitor - Portfolio 11,twitter,46296,0.0616,88.47,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+229,@deposit_trends_11,Client Exposure Engine - Deposits 11,youtube,91080,0.0592,82.04,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+230,@loan_servicing_11,Client Exposure Engine - Lending 11,threads,6385,0.1169,99.07,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+231,@sec_updates_12,Regulatory Intelligence Stream - SEC 12,instagram,62037,0.0606,93.36,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+232,@finra_watch_12,FINRA Monitoring Feed 12,tiktok,63273,0.0546,82.48,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+233,@fdic_bulletin_12,Regulatory Intelligence Stream - FDIC 12,twitter,81377,0.0425,83.99,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+234,@occ_riskdesk_12,Regulatory Intelligence Stream - OCC 12,youtube,50533,0.0798,98.55,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+235,@fed_ratewire_12,Regulatory Intelligence Stream - Federal Reserve 12,threads,4297643,0.0242,94.83,Federal Reserve,Phoenix,Arizona,US,1,2026-04-13T09:16:47Z
+236,@credit_pulse_12,Client Exposure Engine - Credit 12,instagram,2270,0.0888,90.13,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+237,@mortgage_signal_12,Client Exposure Engine - Mortgage 12,tiktok,99614,0.0648,92.77,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+238,@wealthdesk_12,Client Exposure Engine - Wealth 12,twitter,9452,0.1028,100,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+239,@payments_ops_12,Market Activity Monitor - Payments 12,youtube,7114,0.1052,100,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+240,@aml_watch_12,AML Surveillance Engine 12,threads,14460915,0.0201,88.6,Cards,Austin,Texas,US,1,2026-04-13T09:16:47Z
+241,@kyc_queue_12,AML Surveillance Engine - KYC 12,instagram,36186,0.0721,84.65,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+242,@fraud_alerts_12,Fraud Detection Pipeline 12,tiktok,58014,0.0557,87.98,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+251,@liquidity_monitor_12,Liquidity Risk Monitor 12,twitter,2480,0.0665,80.29,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+252,@capital_rules_12,Market Activity Monitor - Capital 12,youtube,1969,0.0962,91.62,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+253,@treasury_daily_12,Treasury Compliance Feed 12,threads,4211,0.0792,86.81,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+254,@branch_ops_12,Client Exposure Engine - Branch 12,instagram,1053,0.0488,65.41,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+255,@advisor_signal_12,Client Exposure Engine - Advisor 12,tiktok,169228,0.0388,74.68,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+256,@portfolio_watch_12,Market Activity Monitor - Portfolio 12,twitter,8508,0.0966,97.32,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+257,@deposit_trends_12,Client Exposure Engine - Deposits 12,youtube,3251,0.0438,67.05,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+258,@loan_servicing_12,Client Exposure Engine - Lending 12,threads,7848,0.0487,64.76,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+259,@sec_updates_13,Regulatory Intelligence Stream - SEC 13,instagram,43333,0.0482,72.54,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+260,@finra_watch_13,FINRA Monitoring Feed 13,tiktok,8021,0.0924,100,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+261,@fdic_bulletin_13,Regulatory Intelligence Stream - FDIC 13,twitter,626272,0.0264,83.06,FDIC,Chicago,Illinois,US,1,2026-04-13T09:16:47Z
+262,@occ_riskdesk_13,Regulatory Intelligence Stream - OCC 13,youtube,3617,0.0608,70.1,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+263,@fed_ratewire_13,Regulatory Intelligence Stream - Federal Reserve 13,threads,8045,0.1128,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+264,@credit_pulse_13,Client Exposure Engine - Credit 13,instagram,96547,0.0342,76.2,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+265,@mortgage_signal_13,Client Exposure Engine - Mortgage 13,tiktok,339661,0.0221,72.47,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+266,@wealthdesk_13,Client Exposure Engine - Wealth 13,twitter,2892,0.0893,81.68,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+267,@payments_ops_13,Market Activity Monitor - Payments 13,youtube,1578,0.0717,78.2,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+268,@aml_watch_13,AML Surveillance Engine 13,threads,8155,0.1014,100,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+269,@kyc_queue_13,AML Surveillance Engine - KYC 13,instagram,296216,0.0246,71.5,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+270,@fraud_alerts_13,Fraud Detection Pipeline 13,tiktok,25238,0.0482,74.64,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+271,@liquidity_monitor_13,Liquidity Risk Monitor 13,twitter,35355,0.0724,94.29,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+272,@capital_rules_13,Market Activity Monitor - Capital 13,youtube,2834,0.0921,88.4,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+273,@treasury_daily_13,Treasury Compliance Feed 13,threads,7036,0.1016,92.26,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+274,@branch_ops_13,Client Exposure Engine - Branch 13,instagram,763640,0.0237,78,Capital Markets,San Diego,California,US,1,2026-04-13T09:16:47Z
+275,@advisor_signal_13,Client Exposure Engine - Advisor 13,tiktok,6062,0.0817,90.06,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+276,@portfolio_watch_13,Market Activity Monitor - Portfolio 13,twitter,2753,0.1065,99.51,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+277,@deposit_trends_13,Client Exposure Engine - Deposits 13,youtube,6314,0.0603,80.18,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+278,@loan_servicing_13,Client Exposure Engine - Lending 13,threads,92039,0.0709,100,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+279,@sec_updates_14,Regulatory Intelligence Stream - SEC 14,instagram,14540,0.0733,86.45,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+280,@finra_watch_14,FINRA Monitoring Feed 14,tiktok,22119,0.0645,90.11,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+281,@fdic_bulletin_14,Regulatory Intelligence Stream - FDIC 14,twitter,5091,0.0367,56.83,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+282,@occ_riskdesk_14,Regulatory Intelligence Stream - OCC 14,youtube,3459,0.0614,66.56,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+283,@fed_ratewire_14,Regulatory Intelligence Stream - Federal Reserve 14,threads,35463,0.0607,79.59,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+284,@credit_pulse_14,Client Exposure Engine - Credit 14,instagram,7430,0.0852,88.95,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+285,@mortgage_signal_14,Client Exposure Engine - Mortgage 14,tiktok,1959,0.0597,71.28,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+286,@wealthdesk_14,Client Exposure Engine - Wealth 14,twitter,6266,0.0341,61.94,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+287,@payments_ops_14,Market Activity Monitor - Payments 14,youtube,6445,0.0466,64.91,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+288,@aml_watch_14,AML Surveillance Engine 14,threads,2787,0.06,72.57,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+289,@kyc_queue_14,AML Surveillance Engine - KYC 14,instagram,7137,0.1064,97.54,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+290,@fraud_alerts_14,Fraud Detection Pipeline 14,tiktok,8437,0.0805,86.52,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+291,@liquidity_monitor_14,Liquidity Risk Monitor 14,twitter,939813,0.0435,98.39,KYC,Boston,Massachusetts,US,1,2026-04-13T09:16:47Z
+292,@capital_rules_14,Market Activity Monitor - Capital 14,youtube,62239,0.0684,97.71,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+293,@treasury_daily_14,Treasury Compliance Feed 14,threads,42621,0.0468,85.4,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+294,@branch_ops_14,Client Exposure Engine - Branch 14,instagram,1405,0.0754,80.77,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+295,@advisor_signal_14,Client Exposure Engine - Advisor 14,tiktok,3182,0.0436,63.3,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+301,@portfolio_watch_14,Market Activity Monitor - Portfolio 14,twitter,3458048,0.007,77.83,Branch Operations,Detroit,Michigan,US,1,2026-04-13T09:16:47Z
+302,@deposit_trends_14,Client Exposure Engine - Deposits 14,youtube,4295973,0.0206,91.15,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+303,@loan_servicing_14,Client Exposure Engine - Lending 14,threads,8964,0.0596,75.95,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+304,@sec_updates_15,Regulatory Intelligence Stream - SEC 15,instagram,40615,0.0603,90.56,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+305,@finra_watch_15,FINRA Monitoring Feed 15,tiktok,2596,0.0507,70.71,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+306,@fdic_bulletin_15,Regulatory Intelligence Stream - FDIC 15,twitter,4591,0.1155,96.33,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+307,@occ_riskdesk_15,Regulatory Intelligence Stream - OCC 15,youtube,61995,0.0553,89.74,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+308,@fed_ratewire_15,Regulatory Intelligence Stream - Federal Reserve 15,threads,3140,0.0997,86.71,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+309,@credit_pulse_15,Client Exposure Engine - Credit 15,instagram,5008,0.0865,82.89,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+310,@mortgage_signal_15,Client Exposure Engine - Mortgage 15,tiktok,57153,0.0635,85.6,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+311,@wealthdesk_15,Client Exposure Engine - Wealth 15,twitter,96076,0.0599,93.27,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+312,@payments_ops_15,Market Activity Monitor - Payments 15,youtube,27122,0.0504,84.44,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+313,@aml_watch_15,AML Surveillance Engine 15,threads,84833,0.0568,86.39,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+314,@kyc_queue_15,AML Surveillance Engine - KYC 15,instagram,6435,0.0861,94.77,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+315,@fraud_alerts_15,Fraud Detection Pipeline 15,tiktok,2551,0.1131,100,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+316,@liquidity_monitor_15,Liquidity Risk Monitor 15,twitter,3923,0.0781,78.21,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+317,@capital_rules_15,Market Activity Monitor - Capital 15,youtube,7851,0.0685,77.65,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+318,@treasury_daily_15,Treasury Compliance Feed 15,threads,1061,0.0549,60.38,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+319,@branch_ops_15,Client Exposure Engine - Branch 15,instagram,9915,0.0415,66.59,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+320,@advisor_signal_15,Client Exposure Engine - Advisor 15,tiktok,60470,0.0321,74.46,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+321,@portfolio_watch_15,Market Activity Monitor - Portfolio 15,twitter,147700,0.0353,79.89,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+322,@deposit_trends_15,Client Exposure Engine - Deposits 15,youtube,725608,0.0357,81.6,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+323,@loan_servicing_15,Client Exposure Engine - Lending 15,threads,688268,0.0425,88.67,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+324,@sec_updates_16,Regulatory Intelligence Stream - SEC 16,instagram,1576,0.0683,77.09,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+325,@finra_watch_16,FINRA Monitoring Feed 16,tiktok,97421,0.0524,86.75,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+326,@fdic_bulletin_16,Regulatory Intelligence Stream - FDIC 16,twitter,7687,0.1113,100,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+327,@occ_riskdesk_16,Regulatory Intelligence Stream - OCC 16,youtube,3106,0.0347,55.79,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+328,@fed_ratewire_16,Regulatory Intelligence Stream - Federal Reserve 16,threads,882662,0.0214,77.25,Federal Reserve,Phoenix,Arizona,US,1,2026-04-13T09:16:47Z
+329,@credit_pulse_16,Client Exposure Engine - Credit 16,instagram,7648,0.05,67.63,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+330,@mortgage_signal_16,Client Exposure Engine - Mortgage 16,tiktok,3626,0.0847,83.59,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+331,@wealthdesk_16,Client Exposure Engine - Wealth 16,twitter,4606,0.0894,94.01,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+332,@payments_ops_16,Market Activity Monitor - Payments 16,youtube,1268,0.1154,100,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+333,@aml_watch_16,AML Surveillance Engine 16,threads,73237,0.0673,88.8,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+334,@kyc_queue_16,AML Surveillance Engine - KYC 16,instagram,248504,0.037,87.46,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+335,@fraud_alerts_16,Fraud Detection Pipeline 16,tiktok,8209,0.0867,97.74,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+336,@liquidity_monitor_16,Liquidity Risk Monitor 16,twitter,4492,0.1138,99.11,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+337,@capital_rules_16,Market Activity Monitor - Capital 16,youtube,1659,0.1174,100,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+338,@treasury_daily_16,Treasury Compliance Feed 16,threads,379830,0.0313,84.52,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+339,@branch_ops_16,Client Exposure Engine - Branch 16,instagram,8595,0.0359,71.88,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+340,@advisor_signal_16,Client Exposure Engine - Advisor 16,tiktok,6569046,0.0159,85.7,Treasury,Minneapolis,Minnesota,US,1,2026-04-13T09:16:47Z
+341,@portfolio_watch_16,Market Activity Monitor - Portfolio 16,twitter,65305,0.0338,80.13,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+342,@deposit_trends_16,Client Exposure Engine - Deposits 16,youtube,3638,0.1003,98.6,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+343,@loan_servicing_16,Client Exposure Engine - Lending 16,threads,706258,0.0351,86.45,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+344,@sec_updates_17,Regulatory Intelligence Stream - SEC 17,instagram,4371,0.0508,65.08,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+345,@finra_watch_17,FINRA Monitoring Feed 17,tiktok,5850,0.1181,100,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+346,@fdic_bulletin_17,Regulatory Intelligence Stream - FDIC 17,twitter,3046,0.0637,74.58,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+347,@occ_riskdesk_17,Regulatory Intelligence Stream - OCC 17,youtube,10341044,0.0076,83.13,OCC,Houston,Texas,US,1,2026-04-13T09:16:47Z
+348,@fed_ratewire_17,Regulatory Intelligence Stream - Federal Reserve 17,threads,2273,0.113,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+349,@credit_pulse_17,Client Exposure Engine - Credit 17,instagram,6130,0.0714,83.59,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+350,@mortgage_signal_17,Client Exposure Engine - Mortgage 17,tiktok,5023,0.1149,97.5,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+351,@wealthdesk_17,Client Exposure Engine - Wealth 17,twitter,6857,0.1041,91.25,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+352,@payments_ops_17,Market Activity Monitor - Payments 17,youtube,86646,0.0274,69.73,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+353,@aml_watch_17,AML Surveillance Engine 17,threads,6412,0.0782,87.4,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+354,@kyc_queue_17,AML Surveillance Engine - KYC 17,instagram,1641,0.045,59.42,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+355,@fraud_alerts_17,Fraud Detection Pipeline 17,tiktok,57351,0.0366,78.26,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+356,@liquidity_monitor_17,Liquidity Risk Monitor 17,twitter,93709,0.0425,87.81,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+357,@capital_rules_17,Market Activity Monitor - Capital 17,youtube,209800,0.02,81.17,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+358,@treasury_daily_17,Treasury Compliance Feed 17,threads,124157,0.0207,76,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+359,@branch_ops_17,Client Exposure Engine - Branch 17,instagram,60595,0.0786,97.95,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+360,@advisor_signal_17,Client Exposure Engine - Advisor 17,tiktok,540568,0.0368,93.96,Treasury,Minneapolis,Minnesota,US,1,2026-04-13T09:16:47Z
+361,@portfolio_watch_17,Market Activity Monitor - Portfolio 17,twitter,71249,0.0568,88.44,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+362,@deposit_trends_17,Client Exposure Engine - Deposits 17,youtube,31012,0.0334,72.1,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+363,@loan_servicing_17,Client Exposure Engine - Lending 17,threads,11729995,0.0156,93.16,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+364,@sec_updates_18,Regulatory Intelligence Stream - SEC 18,instagram,88466,0.0436,78.59,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+365,@finra_watch_18,FINRA Monitoring Feed 18,tiktok,18871,0.0651,88.61,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+366,@fdic_bulletin_18,Regulatory Intelligence Stream - FDIC 18,twitter,29519,0.0522,87.4,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+367,@occ_riskdesk_18,Regulatory Intelligence Stream - OCC 18,youtube,6006,0.0997,93.29,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+368,@fed_ratewire_18,Regulatory Intelligence Stream - Federal Reserve 18,threads,8331,0.1144,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+369,@credit_pulse_18,Client Exposure Engine - Credit 18,instagram,64567,0.0465,80.36,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+370,@mortgage_signal_18,Client Exposure Engine - Mortgage 18,tiktok,919215,0.0342,84.89,Credit Risk,Miami,Florida,US,1,2026-04-13T09:16:47Z
+371,@wealthdesk_18,Client Exposure Engine - Wealth 18,twitter,3541,0.0717,86.69,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+372,@payments_ops_18,Market Activity Monitor - Payments 18,youtube,28705,0.0661,84.22,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+373,@aml_watch_18,AML Surveillance Engine 18,threads,5966,0.1023,99.92,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+374,@kyc_queue_18,AML Surveillance Engine - KYC 18,instagram,75948,0.0635,93.51,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+375,@fraud_alerts_18,Fraud Detection Pipeline 18,tiktok,8257,0.1184,100,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+376,@liquidity_monitor_18,Liquidity Risk Monitor 18,twitter,17790,0.0259,57.18,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+377,@capital_rules_18,Market Activity Monitor - Capital 18,youtube,3269,0.1179,100,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+378,@treasury_daily_18,Treasury Compliance Feed 18,threads,3926,0.1109,97.96,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+379,@branch_ops_18,Client Exposure Engine - Branch 18,instagram,4525,0.0879,86.12,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+380,@advisor_signal_18,Client Exposure Engine - Advisor 18,tiktok,2349,0.038,59.5,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+381,@portfolio_watch_18,Market Activity Monitor - Portfolio 18,twitter,5170,0.0565,77.45,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+382,@deposit_trends_18,Client Exposure Engine - Deposits 18,youtube,202478,0.0167,76.5,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+383,@loan_servicing_18,Client Exposure Engine - Lending 18,threads,7084,0.0329,56.65,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+384,@sec_updates_19,Regulatory Intelligence Stream - SEC 19,instagram,276769,0.0439,84.88,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+385,@finra_watch_19,FINRA Monitoring Feed 19,tiktok,77591,0.06,82.75,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+386,@fdic_bulletin_19,Regulatory Intelligence Stream - FDIC 19,twitter,519168,0.0338,89.93,FDIC,Chicago,Illinois,US,1,2026-04-13T09:16:47Z
+387,@occ_riskdesk_19,Regulatory Intelligence Stream - OCC 19,youtube,39278,0.0582,90.58,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+388,@fed_ratewire_19,Regulatory Intelligence Stream - Federal Reserve 19,threads,2699,0.0593,68.07,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+389,@credit_pulse_19,Client Exposure Engine - Credit 19,instagram,9442,0.0385,61.22,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+390,@mortgage_signal_19,Client Exposure Engine - Mortgage 19,tiktok,16428,0.0277,63.07,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+391,@wealthdesk_19,Client Exposure Engine - Wealth 19,twitter,8808,0.1027,100,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+392,@payments_ops_19,Market Activity Monitor - Payments 19,youtube,1458,0.0817,74.37,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+393,@aml_watch_19,AML Surveillance Engine 19,threads,3720,0.0573,72.58,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+394,@kyc_queue_19,AML Surveillance Engine - KYC 19,instagram,3937,0.042,70.07,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+395,@fraud_alerts_19,Fraud Detection Pipeline 19,tiktok,4521,0.0783,86.4,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+401,@liquidity_monitor_19,Liquidity Risk Monitor 19,twitter,70065,0.0688,97.98,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+402,@capital_rules_19,Market Activity Monitor - Capital 19,youtube,76556,0.0456,81.9,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+403,@treasury_daily_19,Treasury Compliance Feed 19,threads,6451,0.117,100,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+404,@branch_ops_19,Client Exposure Engine - Branch 19,instagram,69278,0.076,93.23,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+405,@advisor_signal_19,Client Exposure Engine - Advisor 19,tiktok,4975,0.0842,80.73,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+406,@portfolio_watch_19,Market Activity Monitor - Portfolio 19,twitter,9472,0.0843,83.21,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+407,@deposit_trends_19,Client Exposure Engine - Deposits 19,youtube,1993,0.0376,59.5,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+408,@loan_servicing_19,Client Exposure Engine - Lending 19,threads,56546,0.0687,97.2,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+409,@sec_updates_20,Regulatory Intelligence Stream - SEC 20,instagram,6832,0.1187,100,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+410,@finra_watch_20,FINRA Monitoring Feed 20,tiktok,58797,0.031,71.39,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+411,@fdic_bulletin_20,Regulatory Intelligence Stream - FDIC 20,twitter,26803,0.0624,91.85,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+412,@occ_riskdesk_20,Regulatory Intelligence Stream - OCC 20,youtube,61915,0.0644,83.14,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+413,@fed_ratewire_20,Regulatory Intelligence Stream - Federal Reserve 20,threads,264343,0.0252,72.66,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+414,@credit_pulse_20,Client Exposure Engine - Credit 20,instagram,4755,0.1098,93.58,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+415,@mortgage_signal_20,Client Exposure Engine - Mortgage 20,tiktok,13347,0.0381,68.8,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+416,@wealthdesk_20,Client Exposure Engine - Wealth 20,twitter,89649,0.0393,76.12,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+417,@payments_ops_20,Market Activity Monitor - Payments 20,youtube,61765,0.031,67.07,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+418,@aml_watch_20,AML Surveillance Engine 20,threads,7256,0.0885,98.54,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+419,@kyc_queue_20,AML Surveillance Engine - KYC 20,instagram,1712,0.0895,83.41,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+420,@fraud_alerts_20,Fraud Detection Pipeline 20,tiktok,30662,0.044,75.03,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+421,@liquidity_monitor_20,Liquidity Risk Monitor 20,twitter,6870,0.1175,100,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+422,@capital_rules_20,Market Activity Monitor - Capital 20,youtube,12433622,0.0144,90.6,Fraud Operations,Atlanta,Georgia,US,1,2026-04-13T09:16:47Z
+423,@treasury_daily_20,Treasury Compliance Feed 20,threads,31121,0.0306,71.67,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+424,@branch_ops_20,Client Exposure Engine - Branch 20,instagram,77424,0.0354,80.16,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+425,@advisor_signal_20,Client Exposure Engine - Advisor 20,tiktok,9201,0.0663,76.93,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+426,@portfolio_watch_20,Market Activity Monitor - Portfolio 20,twitter,9368,0.0464,67.97,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+427,@deposit_trends_20,Client Exposure Engine - Deposits 20,youtube,937827,0.0307,90.26,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+428,@loan_servicing_20,Client Exposure Engine - Lending 20,threads,467075,0.0282,80.84,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+429,@sec_updates_21,Regulatory Intelligence Stream - SEC 21,instagram,7965,0.1169,100,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+430,@finra_watch_21,FINRA Monitoring Feed 21,tiktok,5153,0.0592,68.49,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+431,@fdic_bulletin_21,Regulatory Intelligence Stream - FDIC 21,twitter,1780,0.0698,78.35,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+432,@occ_riskdesk_21,Regulatory Intelligence Stream - OCC 21,youtube,9867,0.078,83,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+433,@fed_ratewire_21,Regulatory Intelligence Stream - Federal Reserve 21,threads,3299,0.115,100,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+434,@credit_pulse_21,Client Exposure Engine - Credit 21,instagram,8544,0.0906,98.73,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+435,@mortgage_signal_21,Client Exposure Engine - Mortgage 21,tiktok,631427,0.0177,71.63,Credit Risk,Miami,Florida,US,1,2026-04-13T09:16:47Z
+436,@wealthdesk_21,Client Exposure Engine - Wealth 21,twitter,1093247,0.0207,84.38,Mortgage Lending,Seattle,Washington,US,1,2026-04-13T09:16:47Z
+437,@payments_ops_21,Market Activity Monitor - Payments 21,youtube,33381,0.0519,87.6,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+438,@aml_watch_21,AML Surveillance Engine 21,threads,6685,0.1123,100,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+439,@kyc_queue_21,AML Surveillance Engine - KYC 21,instagram,918783,0.0389,96.84,Payments,Nashville,Tennessee,US,1,2026-04-13T09:16:47Z
+440,@fraud_alerts_21,Fraud Detection Pipeline 21,tiktok,99863,0.0775,100,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+441,@liquidity_monitor_21,Liquidity Risk Monitor 21,twitter,55779,0.068,94.94,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+442,@capital_rules_21,Market Activity Monitor - Capital 21,youtube,73181,0.0566,79.59,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+443,@treasury_daily_21,Treasury Compliance Feed 21,threads,40383,0.0521,86.26,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+444,@branch_ops_21,Client Exposure Engine - Branch 21,instagram,7328,0.1009,100,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+445,@advisor_signal_21,Client Exposure Engine - Advisor 21,tiktok,4297,0.0341,68.29,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+446,@portfolio_watch_21,Market Activity Monitor - Portfolio 21,twitter,587476,0.0253,87.29,Branch Operations,Detroit,Michigan,US,1,2026-04-13T09:16:47Z
+447,@deposit_trends_21,Client Exposure Engine - Deposits 21,youtube,4405032,0.0132,81.26,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+448,@loan_servicing_21,Client Exposure Engine - Lending 21,threads,93991,0.026,74.42,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+449,@sec_updates_22,Regulatory Intelligence Stream - SEC 22,instagram,75488,0.079,100,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+450,@finra_watch_22,FINRA Monitoring Feed 22,tiktok,7996,0.0802,91.54,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+451,@fdic_bulletin_22,Regulatory Intelligence Stream - FDIC 22,twitter,7428,0.0312,62.48,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z
+452,@occ_riskdesk_22,Regulatory Intelligence Stream - OCC 22,youtube,509830,0.0168,77.79,OCC,Houston,Texas,US,1,2026-04-13T09:16:47Z
+453,@fed_ratewire_22,Regulatory Intelligence Stream - Federal Reserve 22,threads,2521,0.0316,52.82,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+454,@credit_pulse_22,Client Exposure Engine - Credit 22,instagram,863390,0.016,75.5,Interest Rates,San Francisco,California,US,1,2026-04-13T09:16:47Z
+455,@mortgage_signal_22,Client Exposure Engine - Mortgage 22,tiktok,2669,0.0972,93.59,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+456,@wealthdesk_22,Client Exposure Engine - Wealth 22,twitter,24913,0.0666,91.95,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+457,@payments_ops_22,Market Activity Monitor - Payments 22,youtube,1755,0.095,89.76,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+458,@aml_watch_22,AML Surveillance Engine 22,threads,5244,0.0347,62.07,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+459,@kyc_queue_22,AML Surveillance Engine - KYC 22,instagram,95463,0.0552,91.58,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+460,@fraud_alerts_22,Fraud Detection Pipeline 22,tiktok,35671,0.0283,70.17,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+461,@liquidity_monitor_22,Liquidity Risk Monitor 22,twitter,93250,0.0367,73.75,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+462,@capital_rules_22,Market Activity Monitor - Capital 22,youtube,1224,0.11,98.92,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+463,@treasury_daily_22,Treasury Compliance Feed 22,threads,1736,0.0588,63.01,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+464,@branch_ops_22,Client Exposure Engine - Branch 22,instagram,6074,0.0422,64.11,Capital Markets,San Diego,California,US,0,2026-04-13T09:16:47Z
+465,@advisor_signal_22,Client Exposure Engine - Advisor 22,tiktok,43532,0.0498,85.57,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+466,@portfolio_watch_22,Market Activity Monitor - Portfolio 22,twitter,8926,0.0308,69.91,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+467,@deposit_trends_22,Client Exposure Engine - Deposits 22,youtube,74381,0.0523,91.36,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+468,@loan_servicing_22,Client Exposure Engine - Lending 22,threads,97840,0.0267,78.85,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+469,@sec_updates_23,Regulatory Intelligence Stream - SEC 23,instagram,5798,0.1064,94.46,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+470,@finra_watch_23,FINRA Monitoring Feed 23,tiktok,2959,0.0568,73.31,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+471,@fdic_bulletin_23,Regulatory Intelligence Stream - FDIC 23,twitter,6226785,0.0232,93.13,FDIC,Chicago,Illinois,US,1,2026-04-13T09:16:47Z
+472,@occ_riskdesk_23,Regulatory Intelligence Stream - OCC 23,youtube,5959,0.0398,58.49,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+473,@fed_ratewire_23,Regulatory Intelligence Stream - Federal Reserve 23,threads,17980,0.0773,95.04,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+474,@credit_pulse_23,Client Exposure Engine - Credit 23,instagram,40859,0.0359,79.59,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+475,@mortgage_signal_23,Client Exposure Engine - Mortgage 23,tiktok,38292,0.0399,76.16,Credit Risk,Miami,Florida,US,0,2026-04-13T09:16:47Z
+476,@wealthdesk_23,Client Exposure Engine - Wealth 23,twitter,9120,0.0568,69.63,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+477,@payments_ops_23,Market Activity Monitor - Payments 23,youtube,2600,0.1177,100,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+478,@aml_watch_23,AML Surveillance Engine 23,threads,9037,0.1093,100,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+479,@kyc_queue_23,AML Surveillance Engine - KYC 23,instagram,13373,0.0381,76.14,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+480,@fraud_alerts_23,Fraud Detection Pipeline 23,tiktok,1380,0.0919,79.82,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+481,@liquidity_monitor_23,Liquidity Risk Monitor 23,twitter,284343,0.0277,78.44,KYC,Boston,Massachusetts,US,0,2026-04-13T09:16:47Z
+482,@capital_rules_23,Market Activity Monitor - Capital 23,youtube,159739,0.0216,78.75,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+483,@treasury_daily_23,Treasury Compliance Feed 23,threads,57195,0.0797,100,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+484,@branch_ops_23,Client Exposure Engine - Branch 23,instagram,750284,0.023,84.47,Capital Markets,San Diego,California,US,1,2026-04-13T09:16:47Z
+485,@advisor_signal_23,Client Exposure Engine - Advisor 23,tiktok,5815,0.0498,70.89,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+486,@portfolio_watch_23,Market Activity Monitor - Portfolio 23,twitter,3015,0.0647,73.5,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+487,@deposit_trends_23,Client Exposure Engine - Deposits 23,youtube,9434170,0.0135,95.14,Advisor Desk,Las Vegas,Nevada,US,1,2026-04-13T09:16:47Z
+488,@loan_servicing_23,Client Exposure Engine - Lending 23,threads,13529171,0.0231,100,Portfolio Strategy,Brooklyn,New York,US,1,2026-04-13T09:16:47Z
+489,@sec_updates_24,Regulatory Intelligence Stream - SEC 24,instagram,9218,0.0622,85.1,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+490,@finra_watch_24,FINRA Monitoring Feed 24,tiktok,859551,0.0291,87.65,FINRA,Los Angeles,California,US,1,2026-04-13T09:16:47Z
+491,@fdic_bulletin_24,Regulatory Intelligence Stream - FDIC 24,twitter,721604,0.0346,83.1,FDIC,Chicago,Illinois,US,1,2026-04-13T09:16:47Z
+501,@occ_riskdesk_24,Regulatory Intelligence Stream - OCC 24,youtube,78376,0.0479,78.14,OCC,Houston,Texas,US,0,2026-04-13T09:16:47Z
+502,@fed_ratewire_24,Regulatory Intelligence Stream - Federal Reserve 24,threads,5117,0.046,67.17,Federal Reserve,Phoenix,Arizona,US,0,2026-04-13T09:16:47Z
+503,@credit_pulse_24,Client Exposure Engine - Credit 24,instagram,70818,0.0384,78.47,Interest Rates,San Francisco,California,US,0,2026-04-13T09:16:47Z
+504,@mortgage_signal_24,Client Exposure Engine - Mortgage 24,tiktok,981743,0.0417,91.7,Credit Risk,Miami,Florida,US,1,2026-04-13T09:16:47Z
+505,@wealthdesk_24,Client Exposure Engine - Wealth 24,twitter,52089,0.0532,80.5,Mortgage Lending,Seattle,Washington,US,0,2026-04-13T09:16:47Z
+506,@payments_ops_24,Market Activity Monitor - Payments 24,youtube,5084,0.1009,96.89,Wealth Management,Denver,Colorado,US,0,2026-04-13T09:16:47Z
+507,@aml_watch_24,AML Surveillance Engine 24,threads,8071,0.0616,77.88,Cards,Austin,Texas,US,0,2026-04-13T09:16:47Z
+508,@kyc_queue_24,AML Surveillance Engine - KYC 24,instagram,53615,0.0765,89.94,Payments,Nashville,Tennessee,US,0,2026-04-13T09:16:47Z
+509,@fraud_alerts_24,Fraud Detection Pipeline 24,tiktok,39662,0.0321,66.56,AML,Portland,Oregon,US,0,2026-04-13T09:16:47Z
+510,@liquidity_monitor_24,Liquidity Risk Monitor 24,twitter,695453,0.0169,80.72,KYC,Boston,Massachusetts,US,1,2026-04-13T09:16:47Z
+511,@capital_rules_24,Market Activity Monitor - Capital 24,youtube,7900,0.0456,64.6,Fraud Operations,Atlanta,Georgia,US,0,2026-04-13T09:16:47Z
+512,@treasury_daily_24,Treasury Compliance Feed 24,threads,43517,0.0291,64.06,Liquidity Risk,Dallas,Texas,US,0,2026-04-13T09:16:47Z
+513,@branch_ops_24,Client Exposure Engine - Branch 24,instagram,11033944,0.0217,100,Capital Markets,San Diego,California,US,1,2026-04-13T09:16:47Z
+514,@advisor_signal_24,Client Exposure Engine - Advisor 24,tiktok,6465,0.0649,75.01,Treasury,Minneapolis,Minnesota,US,0,2026-04-13T09:16:47Z
+515,@portfolio_watch_24,Market Activity Monitor - Portfolio 24,twitter,5296,0.0951,91.14,Branch Operations,Detroit,Michigan,US,0,2026-04-13T09:16:47Z
+516,@deposit_trends_24,Client Exposure Engine - Deposits 24,youtube,8708,0.0663,77.72,Advisor Desk,Las Vegas,Nevada,US,0,2026-04-13T09:16:47Z
+517,@loan_servicing_24,Client Exposure Engine - Lending 24,threads,7474,0.0332,61.64,Portfolio Strategy,Brooklyn,New York,US,0,2026-04-13T09:16:47Z
+518,@sec_updates_25,Regulatory Intelligence Stream - SEC 25,instagram,25893,0.0381,75.48,SEC,New York,New York,US,0,2026-04-13T09:16:47Z
+519,@finra_watch_25,FINRA Monitoring Feed 25,tiktok,9968,0.0966,96.72,FINRA,Los Angeles,California,US,0,2026-04-13T09:16:47Z
+520,@fdic_bulletin_25,Regulatory Intelligence Stream - FDIC 25,twitter,9217,0.048,72.18,FDIC,Chicago,Illinois,US,0,2026-04-13T09:16:47Z

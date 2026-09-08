@@ -1,0 +1,51 @@
+brand_id,brand_name,brand_slug,brand_category,headquarters_city,headquarters_lat,headquarters_lon,founded_year,annual_revenue,social_tier,created_at,updated_at
+1,Meridian Trust Bank,meridiantrust,Retail Banking,Houston,29.7604,-95.3698,1998,245000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+2,Horizon Capital,horizoncapital,Wealth Management,Newark,40.7357,-74.1724,2004,186000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+3,Clearwater Credit Union,clearwatercu,Consumer Banking,Chicago,41.8781,-87.6298,1987,132000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+4,NorthBridge Investments,northbridgeinvest,Brokerage,Detroit,42.3314,-83.0458,1992,221000000,luxury,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+5,Granite Wealth,granitewealth,Private Banking,Columbus,39.9612,-82.9988,2001,98000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+6,Harvest Commercial Bank,harvestcommercial,Commercial Banking,Des Moines,41.5868,-93.625,1979,154000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+7,VoltPay Financial,voltpay,Payments,Reno,39.5296,-119.8138,2016,91000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+8,SecureLedger Compliance,secureledger,Risk and Compliance,Boston,42.3601,-71.0589,2011,43000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+9,Civic National Bank,civicnational,Retail Banking,Cleveland,41.4993,-81.6944,1968,275000000,luxury,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+10,Greenline Asset Management,greenlineasset,Sustainable Investing,Portland,45.5152,-122.6784,2018,39000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+11,PrimeCard Services,primecard,Credit Cards,Charlotte,35.2271,-80.8431,2007,76000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+12,Catalyst Insurance Group,catalystinsurance,Insurance,Tulsa,36.154,-95.9928,1996,117000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+13,Northern Advisory,northernadvisory,Financial Advisory,Minneapolis,44.9778,-93.265,2005,52000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+14,Gulf Coast Treasury,gulfcoasttreasury,Treasury Services,Baton Rouge,30.4515,-91.1871,1974,203000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+15,Midwest Mortgage Partners,midwestmortgage,Mortgage Lending,Indianapolis,39.7684,-86.1581,1989,88000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+16,Pacific Payments Network,pacificpayments,Payments,Los Angeles,34.0522,-118.2437,1994,143000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+17,Purity AML Labs,purityaml,Financial Crime,San Jose,37.3382,-121.8863,2012,69000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+18,RouteOne Servicing,routeoneservicing,Loan Servicing,Memphis,35.1495,-90.049,2009,58000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+19,Waterline Municipal Finance,waterlinefinance,Public Finance,Milwaukee,43.0389,-87.9065,2003,74000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+20,BioMed Benefits Finance,biomedbenefits,Benefits Finance,San Diego,32.7157,-117.1611,2015,46000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+21,ElectraPay,electrapay,Digital Wallets,Phoenix,33.4484,-112.074,2019,34000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+22,RecycleCredit Exchange,recyclecredit,Green Finance,Seattle,47.6062,-122.3321,2021,21000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+23,RiskDesk Analytics,riskdesk,Risk Intelligence,Denver,39.7392,-104.9903,2014,18000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+24,PharmaPay Receivables,pharmapay,Receivables Finance,Philadelphia,39.9526,-75.1652,1999,112000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+25,CleanRate Lending,cleanrate,Consumer Lending,Cincinnati,39.1031,-84.512,2008,65000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+26,BridgeLine Capital,bridgelinecapital,Capital Markets,Atlanta,33.749,-84.388,1991,126000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+27,Solvency Risk Advisors,solvencyrisk,Risk Advisory,Dallas,32.7767,-96.797,2013,47000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+28,FinePoint Direct,finepointdirect,Digital Banking,Raleigh,35.7796,-78.6382,2006,82000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+29,Portside Trade Finance,portsidetrade,Trade Finance,Savannah,32.0809,-81.0912,1985,157000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+30,AltYield Alternative Credit,altyieldcredit,Private Credit,Kansas City,39.0997,-94.5786,1997,93000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+31,PurePAC Portfolio Services,purepacportfolio,Portfolio Services,St. Louis,38.627,-90.1994,1982,138000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+32,Silicon Valley Wealth,siliconwealth,Wealth Management,Akron,41.0814,-81.519,2002,71000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+33,CarbonActive Finance,carbonactivefinance,Carbon Markets,Pittsburgh,40.4406,-79.9959,1978,99000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+34,FraudGuard Operations,fraudguardops,Fraud Operations,Tampa,27.9506,-82.4572,1995,61000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+35,MetaTrust Custody,metatrustcustody,Custody,Baltimore,39.2904,-76.6122,2000,55000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+36,Coastal Perimeter Bank,coastalperimeter,Regional Banking,Wilmington,34.2257,-77.9447,1993,104000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+37,CivicSure Insurance,civicsureinsurance,Insurance,Nashville,36.1627,-86.7816,2006,57000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+38,IPA Direct Finance,ipadirectfinance,Specialty Finance,San Antonio,29.4241,-98.4936,1990,118000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+39,ApexOne Capital,apexonecapital,Private Equity,Louisville,38.2527,-85.7585,2004,67000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+40,Propel Pension Strategies,propelpension,Retirement,Omaha,41.2565,-95.9345,1988,149000000,premium,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+41,Continuity Risk Advisors,continuityrisk,Operational Risk,New Orleans,29.9511,-90.0715,2001,59000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+42,BatteryStreet FinTech Watch,batterystreetwatch,FinTech Intelligence,Austin,30.2672,-97.7431,2020,26000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+43,RegWatch Capital,regwatchcapital,Regulatory Intelligence,Washington,38.9072,-77.0369,2017,31000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+44,SEC Updates Desk,secupdates,Regulatory Intelligence,Washington,38.9072,-77.0369,2010,44000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+45,MarketPulse Signals,marketpulse,Market Data,Long Beach,33.7701,-118.1937,2018,29000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+46,BranchOps,branchops,Branch Operations,Las Vegas,36.1699,-115.1398,2012,51000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+47,PortfolioDesk,portfoliodesk,Portfolio Signals,Cleveland,41.4993,-81.6944,2016,37000000,emerging,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+48,LedgerGrade Connect,ledgergradeconnect,Data Services,Salt Lake City,40.7608,-111.891,2009,48000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+49,SpecFinance Exchange,specfinanceexchange,Capital Markets,Miami,25.7617,-80.1918,2015,63000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z
+50,NorthStar Mortgage,northstarmortgage,Mortgage Lending,Fargo,46.8772,-96.7898,2008,54000000,standard,2026-04-13T09:16:47Z,2026-04-13T09:16:47Z

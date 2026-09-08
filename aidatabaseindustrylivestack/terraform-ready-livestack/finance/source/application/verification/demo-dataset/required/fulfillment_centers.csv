@@ -1,0 +1,31 @@
+center_id,center_name,center_type,address_line1,city,state_province,postal_code,country,latitude,longitude,capacity_units,current_load_pct,is_active,operating_hours,created_at
+1,Edison Wealth Service Center,Regional Processing,100 Financial Services Way,Edison,New Jersey,08817,US,40.5187,-74.4121,500000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+2,Ontario Loan Operations Hub,Enterprise Operations,101 Financial Services Way,Ontario,California,91761,US,34.0633,-117.6509,750000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+3,Joliet Midwest Risk Desk,Regional Processing,102 Financial Services Way,Joliet,Illinois,60435,US,41.525,-88.0817,400000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+4,Lancaster Treasury Service Center,Enterprise Operations,103 Financial Services Way,Lancaster,Texas,75134,US,32.5921,-96.7561,350000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+5,Union City Southeast Branch Hub,Regional Processing,104 Financial Services Way,Union City,Georgia,30291,US,33.5871,-84.5421,450000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+6,Kent Pacific Client Center,Enterprise Operations,105 Financial Services Way,Kent,Washington,98032,US,47.3809,-122.2348,300000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+7,Hialeah Trade Finance Desk,Regional Processing,106 Financial Services Way,Hialeah,Florida,33012,US,25.8576,-80.2781,250000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+8,Aurora Mountain West Advisory Hub,Enterprise Operations,107 Financial Services Way,Aurora,Colorado,80011,US,39.7294,-104.8319,200000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+9,Goodyear Desert Retail Branch,Enterprise Operations,108 Financial Services Way,Goodyear,Arizona,85338,US,33.4353,-112.3577,280000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+10,Fall River Northeast Service Hub,Regional Processing,109 Financial Services Way,Fall River,Massachusetts,02720,US,41.7015,-71.155,220000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+11,Shakopee North Central Operations,Enterprise Operations,110 Financial Services Way,Shakopee,Minnesota,55379,US,44.7974,-93.5272,180000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+12,Troutdale Pacific Micro Branch,Branch Services,111 Financial Services Way,Troutdale,Oregon,97060,US,45.539,-122.3872,80000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+13,Lebanon Central Banking Center,Enterprise Operations,112 Financial Services Way,Lebanon,Tennessee,37087,US,36.2081,-86.2911,250000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+14,Fremont Bay Area Advisory Office,Branch Services,113 Financial Services Way,Fremont,California,94538,US,37.5485,-121.9886,120000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+15,Romulus Great Lakes Mortgage Hub,Enterprise Operations,114 Financial Services Way,Romulus,Michigan,48174,US,42.2223,-83.3963,200000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+16,Middletown Mid-Atlantic Branch Hub,Regional Processing,115 Financial Services Way,Middletown,Delaware,19709,US,39.4496,-75.7163,350000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+17,Missouri City Gulf Coast Treasury Center,Enterprise Operations,116 Financial Services Way,Missouri City,Texas,77459,US,29.6186,-95.5377,300000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+18,West Jordan Mountain Client Center,Enterprise Operations,117 Financial Services Way,West Jordan,Utah,84084,US,40.6097,-111.9391,180000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+19,Concord Southeast Micro Branch,Branch Services,118 Financial Services Way,Concord,North Carolina,28027,US,35.4088,-80.5795,100000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+20,Plainfield Heartland Banking Hub,Enterprise Operations,119 Financial Services Way,Plainfield,Indiana,46168,US,39.7043,-86.3994,250000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+21,North Las Vegas West Service Center,Enterprise Operations,120 Financial Services Way,North Las Vegas,Nevada,89030,US,36.1989,-115.1175,200000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+22,Edwardsville Central Operations Site,Regional Processing,121 Financial Services Way,Edwardsville,Kansas,66111,US,39.0614,-94.8193,320000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+23,Etna Midwest Specialty Finance Desk,Enterprise Operations,122 Financial Services Way,Etna,Ohio,43018,US,39.9576,-82.6818,220000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+24,Sparks West Coast Risk Hub,Enterprise Operations,123 Financial Services Way,Sparks,Nevada,89431,US,39.5349,-119.7527,280000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+25,Brandon Florida Micro Branch,Branch Services,124 Financial Services Way,Brandon,Florida,33510,US,27.9378,-82.2859,90000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+26,Aberdeen East Coast Banking Center,Enterprise Operations,125 Financial Services Way,Aberdeen,Maryland,21001,US,39.5096,-76.1641,240000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+27,New Braunfels South Texas Branch,Branch Services,126 Financial Services Way,New Braunfels,Texas,78130,US,29.703,-98.1245,100000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+28,Olive Branch Memphis Service Site,Regional Processing,127 Financial Services Way,Olive Branch,Mississippi,38654,US,34.9618,-89.8295,400000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+29,Kapolei Pacific Island Branch,Branch Services,128 Financial Services Way,Kapolei,Hawaii,96707,US,21.335,-158.0581,50000,0,1,08:00-18:00,2026-04-13T09:16:47Z
+30,Anchorage Alaska Advisory Office,Branch Services,129 Financial Services Way,Anchorage,Alaska,99501,US,61.2181,-149.9003,40000,0,1,08:00-18:00,2026-04-13T09:16:47Z

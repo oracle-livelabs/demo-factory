@@ -1,0 +1,35 @@
+services:
+  app:
+    image: localhost/full-livestack-finance-app:1.0
+    build:
+      context: .
+      dockerfile: Containerfile
+    hostname: finance-app
+    env_file:
+      - ../runtime/finance.env
+    environment:
+      SELECT_AI_PROFILE: ${SELECT_AI_PROFILE:-FINANCE_SELECTAI_V1}
+      OCI_GENAI_REGION: ${OCI_GENAI_REGION:-us-chicago-1}
+      OCI_GENAI_MODEL: ${OCI_GENAI_MODEL:-cohere.command-a-03-2025}
+      SELECT_AI_PRIMARY_AGENT_TEAM: ${SELECT_AI_PRIMARY_AGENT_TEAM:-FINANCE_OPERATIONS_TEAM}
+      SELECT_AI_AGENT_TEAMS: ${SELECT_AI_AGENT_TEAMS:-FINANCE_OPERATIONS_TEAM,SOCIAL_TREND_TEAM,FULFILLMENT_TEAM,COMMERCE_TEAM}
+      SELECT_AI_CALL_TIMEOUT_MS: ${SELECT_AI_CALL_TIMEOUT_MS:-180000}
+      SELECT_AI_AGENT_CALL_TIMEOUT_MS: ${SELECT_AI_AGENT_CALL_TIMEOUT_MS:-300000}
+      SELECT_AI_AGENT_STATE_CALL_TIMEOUT_MS: ${SELECT_AI_AGENT_STATE_CALL_TIMEOUT_MS:-30000}
+    ports:
+      - "8505:3001"
+    volumes:
+      - ../runtime/wallet:/opt/oracle/wallet:ro,Z
+    healthcheck:
+      test: ["CMD-SHELL", "node -e \"require('http').get('http://127.0.0.1:3001/api/health', (res) => process.exit(res.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))\""]
+      interval: 15s
+      timeout: 5s
+      retries: 40
+      start_period: 180s
+    networks:
+      - finance
+    restart: unless-stopped
+
+networks:
+  finance:
+    name: full-livestack-finance
