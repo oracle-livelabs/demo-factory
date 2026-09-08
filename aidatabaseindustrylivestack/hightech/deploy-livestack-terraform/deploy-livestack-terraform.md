@@ -8,6 +8,10 @@ The Terraform package creates the network, an Oracle Linux application VM, a pri
 
 This is an unauthenticated demonstration deployment. Restrict access to trusted IPv4 CIDRs and do not use sensitive production data.
 
+Ready to deploy? Select **Deploy to Oracle Cloud** below. For detailed deployment instructions, check the tasks below.
+
+<a href="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/hightech/hightech-livestack-terraform.zip" target="_blank" rel="noopener" style="display: inline-flex; box-sizing: border-box; width: 207px; height: 34px; align-items: center; padding: 0 12px; background: #312d2a; border: 0; border-radius: 2px; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; text-decoration: none;"><span aria-hidden="true" style="box-sizing: border-box; display: inline-block; width: 20px; height: 13px; margin-right: 8px; border: 3px solid #e64a2e; border-radius: 999px;"></span><span>Deploy to Oracle Cloud</span></a>
+
 Estimated time: **45-90 minutes**, including database provisioning and application bootstrap.
 
 ### Objectives
@@ -55,7 +59,7 @@ The diagram below shows the main deployment and runtime paths.
 
 2. Select the following button to open the stack-creation page with the High Tech Terraform package already selected:
 
-    <a href="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/hightech/hightech-livestack-terraform.zip" target="_blank" rel="noopener" style="display: inline-block; padding: 8px 14px; background: #312d2a; border: 1px solid #312d2a; border-radius: 3px; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px; font-weight: 600; line-height: 20px; text-decoration: none;">Deploy to Oracle Cloud</a>
+    <a href="https://cloud.oracle.com/resourcemanager/stacks/create?zipUrl=https://github.com/oracle-livelabs/livestack/raw/refs/heads/main/aidatabaseindustrylivestack/terraform-ready-livestack/hightech/hightech-livestack-terraform.zip" target="_blank" rel="noopener" style="display: inline-block; padding: 7px 12px; background: #312d2a; border: 1px solid #312d2a; border-radius: 2px; color: #ffffff; font-family: Arial, sans-serif; font-size: 14px; font-weight: 400; line-height: 20px; text-decoration: none;"><span aria-hidden="true" style="box-sizing: border-box; display: inline-block; width: 20px; height: 13px; margin-right: 8px; border: 3px solid #e64a2e; border-radius: 999px; vertical-align: -2px;"></span><span>Deploy to Oracle Cloud</span></a>
 
 3. On the **Create stack** page, confirm that the **Package URL** identifies `hightech-livestack-terraform.zip`. No local download or ZIP upload is required.
 
